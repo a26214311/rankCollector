@@ -58,7 +58,7 @@ public class Api extends HttpServlet
 		  System.out.println(234);
 	  }
 		
-	  public static String handleData(String path,Map<String, String[]> data,final HttpServletRequest req, final HttpServletResponse resp)throws Exception{
+	  public static String handleData(String path,Map<String, String[]> data,HttpServletRequest req, HttpServletResponse resp)throws Exception{
 		String ret = "{\"r\":100}";
 		System.out.println(path);
 		System.out.println(data);
