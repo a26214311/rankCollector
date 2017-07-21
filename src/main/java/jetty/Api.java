@@ -21,7 +21,7 @@ public class Api extends HttpServlet
 {
 	
 	  static{
-		  System.out.print("star1111111111111111111111111111111111111t");
+		  System.out.print("芙兰baka233");
 	  }
 	  
 	  @Override 
@@ -30,7 +30,6 @@ public class Api extends HttpServlet
 			String path = pathinfo.substring(1);
 			String queryString = req.getQueryString();
 			Map<String, String[]> data = new HashMap<>();
-			req.setCharacterEncoding("UTF-8");  
 			if(queryString!=null){
 				data = ApiUtil.getParamsMap(queryString, "utf-8");
 			}
@@ -41,11 +40,10 @@ public class Api extends HttpServlet
 				System.out.println(queryString);
 				System.out.println(ret);
 				System.out.println("==============");
-//				OutputStream output = null;
-//				output = response.getOutputStream();
-//				IOUtils.write(ret.getBytes("utf-8"), output);
-//				output.flush();
-				response.getOutputStream().print(ret);
+				OutputStream output = null;
+				output = response.getOutputStream();
+				IOUtils.write(ret.getBytes("utf-8"), output);
+				output.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.getOutputStream().print("error");
@@ -76,7 +74,6 @@ public class Api extends HttpServlet
 			ret = "will run rank";
 		}
 		if(path.equals("seek")){
-			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/plain");
 			ret = Search.seekByName(data);
 		}
