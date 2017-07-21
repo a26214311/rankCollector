@@ -41,10 +41,11 @@ public class Api extends HttpServlet
 				System.out.println(queryString);
 				System.out.println(ret);
 				System.out.println("==============");
-				OutputStream output = null;
-				output = response.getOutputStream();
-				IOUtils.write(ret.getBytes("utf-8"), output);
-				output.flush();
+//				OutputStream output = null;
+//				output = response.getOutputStream();
+//				IOUtils.write(ret.getBytes("utf-8"), output);
+//				output.flush();
+				response.getOutputStream().print(ret);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.getOutputStream().print("error");
