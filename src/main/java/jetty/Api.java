@@ -38,8 +38,7 @@ public class Api extends HttpServlet
 				System.out.println("==============");
 				System.out.println(path);
 				System.out.println(queryString);
-				System.out.println(ret);
-				System.out.println("==============");
+				System.out.println("==============\n");
 				OutputStream output = null;
 				output = response.getOutputStream();
 				IOUtils.write(ret.getBytes("utf-8"), output);

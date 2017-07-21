@@ -31,7 +31,6 @@ public class Search {
 		int server = Integer.valueOf(data.get("server")[0]);
 		String token = TimerTask.getToken(server);
 		String ret = searchByName(name, token, server);
-		System.out.print("baka芙兰");
 		return name+"\n当前战果值："+ret+"\n"+"";
 	}
 	
