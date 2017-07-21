@@ -5,11 +5,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
 import lib.TimerTask;
 import senka.Calculator;
 import senka.Search;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +35,15 @@ public class Api extends HttpServlet
 			}
 			try {
 				String ret = handleData(path, data, req, response);
-				response.getOutputStream().print(ret);
+				System.out.println("==============");
+				System.out.println(path);
+				System.out.println(queryString);
+				System.out.println(ret);
+				System.out.println("==============");
+				OutputStream output = null;
+				output = response.getOutputStream();
+				IOUtils.write(ret.getBytes("utf-8"), output);
+				output.flush();
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.getOutputStream().print("error");
