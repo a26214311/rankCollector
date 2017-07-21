@@ -30,6 +30,7 @@ public class Api extends HttpServlet
 			String path = pathinfo.substring(1);
 			String queryString = req.getQueryString();
 			Map<String, String[]> data = new HashMap<>();
+			req.setCharacterEncoding("UTF-8");  
 			if(queryString!=null){
 				data = ApiUtil.getParamsMap(queryString, "utf-8");
 			}
