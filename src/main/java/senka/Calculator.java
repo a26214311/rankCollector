@@ -223,7 +223,7 @@ public class Calculator {
 					Date firstts = new Date(0);
 					if(firstExpData!=null){
 						firstexp = Integer.valueOf(firstExpData.get("d").toString());
-						Date firstts = (Date)firstExpData.get("ts");
+						firstts = (Date)firstExpData.get("ts");
 					}
 					int baseexp = Integer.valueOf(baseExpData.get("d").toString());
 					Date basets = (Date)baseExpData.get("ts");
