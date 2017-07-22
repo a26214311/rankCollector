@@ -22,6 +22,7 @@ public class Api extends HttpServlet
 	
 	  static{
 		  System.out.print("芙兰baka233");
+		  TimerTask.init();
 	  }
 	  
 	  @Override 
