@@ -81,6 +81,7 @@ public class Search {
 		int pointer1 = 0;
 		int pointer2 = 0;
 		JSONObject front = null;
+		long nowno = Util.getRankDateNo(now);
 		while(pointer1<explist.size()&&pointer2<senkalist.size()){
 			DBObject expdata = (DBObject)explist.get(pointer1);
 			DBObject senkadata = (DBObject)senkalist.get(pointer2);
@@ -135,6 +136,7 @@ public class Search {
 				pointer1++;
 			}
 		}
+		
 		JSONObject jd = getNowExp(Integer.valueOf(id), token, server);
 		JSONArray deck = jd.getJSONArray("deck");
 		int nowexp = jd.getInt("exp");
