@@ -127,7 +127,7 @@ public class Collector {
 		long searchBefore = 60000000L;
 		boolean monthinit = false;
 		if(now.getDate()==1&&now.getHours()<3){
-			searchBefore = 86400000L*9;
+			searchBefore = 86400000L*28;
 			monthinit=true;
 		}
 		int rankNo = Util.getRankDateNo(now);

@@ -80,41 +80,7 @@ public class TimerTask {
 				}
 			}
 		}, left3, 3600, TimeUnit.SECONDS);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		System.out.println("--------------------------------");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
 	
