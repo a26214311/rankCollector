@@ -219,9 +219,16 @@ public class Calculator {
 					DBObject firstExpData  = getFirstExpData(explist);
 					DBObject baseExpData = getBaseExpData(explist);
 					DBObject frontExpData = getFrontExpData(explist);
-
-					int firstexp = Integer.valueOf(firstExpData.get("d").toString());
-					Date firstts = (Date)firstExpData.get("ts");
+					int firstexp = 0;
+					Date firstts = new Date(0);
+					if(firstExpData!=null){
+						firstexp = Integer.valueOf(firstExpData.get("d").toString());
+						firstts = (Date)firstExpData.get("ts");
+					}else{
+						System.out.println(name);
+						System.out.println(explist);
+						continue;	
+					}
 					int baseexp = Integer.valueOf(baseExpData.get("d").toString());
 					Date basets = (Date)baseExpData.get("ts");
 					int subbase = (firstexp-baseexp)*7/10000;

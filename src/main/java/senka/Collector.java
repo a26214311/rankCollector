@@ -186,8 +186,8 @@ public class Collector {
 	
 	
 	public static int save(JSONObject j,String server)throws Exception{
-		String result = j.getString("api_result_msg");
-		if(result.equals("成功")){
+		int resultCode = j.getInt("api_result");
+		if(resultCode==1){
 			Date now = new Date();
 			JSONObject data = j.getJSONObject("api_data");
 			String name = data.getString("api_nickname");
