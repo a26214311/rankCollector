@@ -767,7 +767,7 @@ public class Calculator {
 	
 	public static boolean isExpKeyTs(Date dat){
 		if(1501497567792L-dat.getTime()<1200000&&1501497567792L-dat.getTime()>0){
-			return true	
+			return true;	
 		}
 		Date  n1 = new Date(dat.getTime()+(dat.getTimezoneOffset()+480)*60000);
 		int left = (int)(43200000-(n1.getTime()-18000000)%43200000)/1000;
