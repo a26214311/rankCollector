@@ -54,13 +54,13 @@
 
         }
         if(!last){
-          fetchFromServer(callback);
+          fetchFromServer(server,callback);
         }else{
           var now = new Date();
-          fetchFromServer(callback);
+          fetchFromServer(server,callback);
         }
       }else{
-        fetchFromServer(function(){})
+        fetchFromServer(server,function(){})
       }
     }
   }
