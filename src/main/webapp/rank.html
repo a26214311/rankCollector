@@ -48,12 +48,12 @@
     if(server==0){
       return;
     }else{
-      if(localStorage){
-        console.log('fetch server:'+server)
-        fetchFromServer(server,function(){});
-      }else{
-        fetchFromServer(server,function(){})
-      }
+      var url = '/api/calrank?server='+server;
+      $.get(url,function(response,status){
+        var data = eval("("+response+")");
+        u=data;
+        forecast();
+      })
     }
   }
 
