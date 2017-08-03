@@ -25,7 +25,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateZ(19, 6);
+			calculateRank(19);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -262,6 +262,7 @@ public class Calculator {
 					}
 					if(expfrom>firstts.getTime()){
 						expfrom=firstts.getTime();
+						System.out.println(id+":"+new Date(expfrom));
 					}
 					if(expto<latestts.getTime()){
 						expto=latestts.getTime();
