@@ -50,7 +50,7 @@
     }else{
       if(localStorage){
         console.log('fetch server:'+server)
-        fetchFromServer(server,callback);
+        fetchFromServer(server,function(){});
       }else{
         fetchFromServer(server,function(){})
       }
