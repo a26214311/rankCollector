@@ -394,7 +394,11 @@ public class Calculator {
 			DBObject expdata = (DBObject)explist.get(i);
 			Date ts = (Date)expdata.get("ts");
 			if(ts.getMonth()==now.getMonth()){
-				return expdata;
+				if(ts.getDate()==1&&ts.getHours()<1){
+					
+				}else{
+					return expdata;
+				}
 			}
 		}
 		return null;
