@@ -174,6 +174,8 @@ public class Collector {
 				}
 			}
 			System.out.println("all:"+all);
+			Calculator.calculateTask(server);
+			System.out.println("finish:"+server);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally{

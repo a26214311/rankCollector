@@ -48,13 +48,30 @@
     if(server==0){
       return;
     }else{
-      var url = '/api/calrank?server='+server;
-      $.get(url,function(response,status){
-        var data = eval("("+response+")");
-        u=data;
-        forecast();
-      })
+      if(localStorage){
+        var last = localStorage.getItem("ts");
+        var callback = function(){
+
+        }
+        if(!last){
+          fetchFromServer(callback);
+        }else{
+          var now = new Date();
+        }
+      }else{
+        fetchFromServer(function(){})
+      }
     }
+  }
+
+  function fetchFromServer(callback){
+    var url = '/api/calrank?server='+server;
+    $.get(url,function(response,status){
+      var data = eval("("+response+")");
+      u=data;
+      forecast();
+      callback();
+    })
   }
 
   function forecast(){

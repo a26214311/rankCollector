@@ -25,7 +25,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank(8);
+			calculateZ(19, 6);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,12 +35,31 @@ public class Calculator {
 		return "";
 	}
 	
+	public static String calculateTask(int server){
+		JSONObject j = calculateRank(server);
+		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
+		BasicDBObject save = new BasicDBObject();
+		save.append("_id", server);
+		save.append("d", j.toString());
+		save.append("ts", new Date());
+		cl_calculate_result.save(save);
+		return j.toString();
+	}
+	
+	public static String getRank(int server){
+		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
+		DBObject rankData = cl_calculate_result.findOne(new BasicDBObject("_id",server));
+		if(rankData==null){
+			return calculateTask(server);
+		}else{
+			return rankData.get("d").toString();
+		}
+	}
+	
 	
 	public static String calculator(Map<String, String[]> data)throws Exception{
 		int server = Integer.valueOf(data.get("server")[0]);
-		JSONObject j = calculateRank(server);
-		j.put("r", 0);
-		return j.toString();
+		return getRank(server);
 	}
 
 	public static JSONObject calculateRank(int server){
@@ -746,7 +765,6 @@ public class Calculator {
 								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
 						}
-						
 					}else{
 						
 					}
@@ -766,6 +784,9 @@ public class Calculator {
 	
 	
 	public static boolean isExpKeyTs(Date dat){
+		if(1501497567792L-dat.getTime()<1200000&&1501497567792L-dat.getTime()>0){
+			return true;	
+		}
 		Date  n1 = new Date(dat.getTime()+(dat.getTimezoneOffset()+480)*60000);
 		int left = (int)(43200000-(n1.getTime()-18000000)%43200000)/1000;
 		if(left<1200||left>43200-1200){
