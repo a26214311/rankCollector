@@ -49,16 +49,8 @@
       return;
     }else{
       if(localStorage){
-        var last = localStorage.getItem("ts");
-        var callback = function(){
-
-        }
-        if(!last){
-          fetchFromServer(server,callback);
-        }else{
-          var now = new Date();
-          fetchFromServer(server,callback);
-        }
+        console.log('fetch server:'+server)
+        fetchFromServer(server,callback);
       }else{
         fetchFromServer(server,function(){})
       }
