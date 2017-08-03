@@ -57,6 +57,7 @@
           fetchFromServer(callback);
         }else{
           var now = new Date();
+          fetchFromServer(callback);
         }
       }else{
         fetchFromServer(function(){})
@@ -64,7 +65,7 @@
     }
   }
 
-  function fetchFromServer(callback){
+  function fetchFromServer(server,callback){
     var url = '/api/calrank?server='+server;
     $.get(url,function(response,status){
       var data = eval("("+response+")");
