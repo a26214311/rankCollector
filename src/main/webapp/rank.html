@@ -48,16 +48,40 @@
     if(server==0){
       return;
     }else{
-      var url = '/api/calrank?server='+server;
-      $.get(url,function(response,status){
-        var data = eval("("+response+")");
-        u=data;
-        forecast();
-      })
+      if(localStorage){
+        var then = localStorage.getItem("ts");
+        var callback = function(){
+          var rankts = new Date(u.ts);
+          localStorage.setItem("ts",rankts)
+          localStorage.setItem("rank",JSON.stringify(u));
+        }
+        if(then){
+          var now = new Date();
+          var month = now.getMonth();
+          var date = now.getDate();
+          var sub = now.getTime()-new Date(then).getTime();
+          if(date<monthOfDay[month]){
+            if(getDateNo(now)==getDateNo(thents)&&getRankDateNo(now)==getRankDateNo(then)&&sub>60000){
+              var ustr = localStorage.getItem("rank");
+              u =eval("("+ustr+")");
+              forecast();
+            }else{
+              fetchFromServer(server,callback);
+            }
+          }else{
+            fetchFromServer(server,callback);
+          }
+        }else{
+          fetchFromServer(server,callback);
+        }
+      }else{
+        fetchFromServer(server,function(){});
+      }
     }
   }
 
   function fetchFromServer(server,callback){
+    console.log('will fetch from server');
     var url = '/api/calrank?server='+server;
     $.get(url,function(response,status){
       var data = eval("("+response+")");
