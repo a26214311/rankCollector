@@ -61,7 +61,7 @@
           var date = now.getDate();
           var sub = now.getTime()-new Date(then).getTime();
           if(date<monthOfDay[month]){
-            if(getDateNo(now)==getDateNo(thents)&&getRankDateNo(now)==getRankDateNo(then)&&sub>60000){
+            if(getDateNo(now)==getDateNo(then)&&getRankDateNo(now)==getRankDateNo(then)&&sub>60000){
               var ustr = localStorage.getItem("rank");
               u =eval("("+ustr+")");
               forecast();
