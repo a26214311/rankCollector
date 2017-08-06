@@ -74,6 +74,7 @@ public class Api extends HttpServlet
 			ret = "will run rank";
 		}
 		if(path.equals("seek")){
+			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/plain");
 			ret = Search.seekByName(data);
 		}
