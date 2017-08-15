@@ -117,6 +117,15 @@ public class TimerTask {
 				}
 			}
 		}).start();		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token18 = getToken(18);
+				if(token18.length()>2){
+					Collector.collectByLastSenka(token18, 18);
+				}
+			}
+		}).start();		
 	}
 	
 
@@ -159,6 +168,21 @@ public class TimerTask {
 					if(token16.length()>2){
 						Rank.runRankTask(token16, 16, id16);
 						Collector.collectByLastSenka(token16, 16);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					String token18 = getToken(18);
+					if(token18.length()>2){
+						Rank.runRankTask(token18, 18, id18);
+						Collector.collectByLastSenka(token18, 18);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
