@@ -606,8 +606,12 @@ public class Calculator {
 			
 			
 			DBObject baseExpData = getBaseExpData(expL);
-			int baseexp = Integer.valueOf(baseExpData.get("d").toString());
-			Date basets = (Date)baseExpData.get("ts");
+			int baseexp = 0;
+			Date basets = new Date();
+			if(baseExpData!=null){
+				baseexp = Integer.valueOf(baseExpData.get("d").toString());
+				basets = (Date)baseExpData.get("ts");
+			}
 			int subbase = (firstexp-baseexp)*7/10000;
 			
 			
