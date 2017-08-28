@@ -165,7 +165,7 @@
       var month = now.getMonth();
       var h = '统计时间：' + new Date(data.ts).toLocaleString();
       h = h + '<table class="table table-bordered table-striped table-hover">';
-      h = h + '<thead style="position: fixed"><td class="sort-disable">排名(当前/榜单)</td><td class="sort-disable"></td>';
+      h = h + '<thead style="position: fixed;top:0px"><td class="sort-disable">排名(当前/榜单)</td><td class="sort-disable"></td>';
       h = h + '<td class="sort-sub"><div onclick="sortby(0);">当前'+(sorttype==0?'↓':'')+'</div></td>';
       h = h + '<td class="sort-sub"><div onclick="sortby(3);">最大'+(sorttype==3?'↓':'')+'</div></td>';
       h = h + '<td class="sort-sub"><div onclick="sortby(4);">最小'+(sorttype==4?'↓':'')+'</div></td>';
