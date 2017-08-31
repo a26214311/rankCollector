@@ -403,7 +403,10 @@
             }
           }
         }
-
+        if(senka.max<senka.senka){
+          senka.max=senka.senka;
+          senka.min=senka.senka;
+        }
         var max = senka.max;
         var min = senka.min;
         if(max==min){
