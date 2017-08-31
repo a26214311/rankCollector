@@ -181,11 +181,10 @@
           if(z>=0){
             zcleared=350;
           }
-          if(now.getDate()==monthOfDay[now.getMonth()]){
-            if(senka.ex>1025&&senka.ex<1035){
-              console.log(senka);
-              zcleared=350;
-            }
+        }
+        if(now.getDate()==monthOfDay[now.getMonth()]&&now.getHours()>=14){
+          if(senka.ex>1025&&senka.ex<1035){
+            zcleared=350;
           }
         }
         h = h + '<tr>';
