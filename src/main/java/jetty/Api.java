@@ -11,8 +11,14 @@ import lib.TimerTask;
 import senka.Calculator;
 import senka.Search;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,6 +97,49 @@ public class Api extends HttpServlet
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			ret = Calculator.calculator(data);
 		}
+		if(path.equals("rank.html")){
+			byte[] rk = toByteArray2("src/main/webapp/rank.html");
+			resp.setContentType("text/html");
+			ret = new String(rk);
+		}
 		return ret;
 	  }
+	  
+		public static byte[] toByteArray2(String filename) throws IOException {  
+			  
+		        File f = new File(filename);  
+		        if (!f.exists()) {  
+		            throw new FileNotFoundException(filename);  
+		        }  
+		  
+		        FileChannel channel = null;  
+		        FileInputStream fs = null;  
+		        try {  
+		            fs = new FileInputStream(f);  
+		            channel = fs.getChannel();
+		            ByteBuffer byteBuffer = ByteBuffer.allocate((int) channel.size());  
+		            while ((channel.read(byteBuffer)) > 0) {  
+		                // do nothing  
+		                // System.out.println("reading");  
+		            }  
+		            return byteBuffer.array();  
+		        } catch (IOException e) {  
+		            e.printStackTrace();  
+		            throw e;  
+		        } finally {  
+		            try {  
+		                channel.close();  
+		            } catch (IOException e) {  
+		                e.printStackTrace();  
+		            }  
+		            try {  
+		                fs.close();  
+		            } catch (IOException e) {  
+		                e.printStackTrace();  
+		            }  
+		        }  
+		    }  
+	  
+	  
+	  
 }
