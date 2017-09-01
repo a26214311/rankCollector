@@ -53,7 +53,7 @@ public class Collector {
 			final int from = Integer.valueOf(data.get("from")[0]); 
 			final int to = Integer.valueOf(data.get("to")[0]); 
 			final int thread = Integer.valueOf(data.get("thread")[0]); 
-			if(from<700000||to-from>500000||thread>8){
+			if(from<700000||to-from>500000||thread>20){
 				return;
 			}else{
 				for(int i=0;i<thread;i++){
