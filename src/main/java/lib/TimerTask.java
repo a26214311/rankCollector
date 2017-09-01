@@ -18,16 +18,19 @@ public class TimerTask {
 	public static int id19 = 19154349;
 	public static int id16 = 16118483;
 	public static int id18 = 18158245;
+	public static int id15 = 15155022;
 	private static String user8 = "1127805853@qq.com";
 	private static String user19 = "bot1@rewards.msharebox.com";
 	private static String user20 = "bot2@rewards.msharebox.com";
 	private static String user18 = "bot3@rewards.msharebox.com";
 	private static String user16 = "bot4@rewards.msharebox.com";
+	private static String user15 = "bot5@rewards.msharebox.com";
 	private static String pass8 = "9876543210";
 	private static String pass19 = "9876543210";
 	private static String pass20 = "9876543210";
 	private static String pass18 = "9876543210";
 	private static String pass16 = "9876543210";
+	private static String pass15 = "9876543210";
 	
 	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
@@ -231,6 +234,8 @@ public class TimerTask {
 			token=Login.login(user20,pass20);
 		}else if(server==16){
 			token=Login.login(user16,pass16);
+		}else if(server==15){
+			token=Login.login(user15,pass15);
 		}
 		return token;
 	}
