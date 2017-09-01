@@ -64,7 +64,7 @@ public class TimerTask {
 		
 		
 		
-		int left3 = (int)(3600000-(now.getTime()+60000*3)%3600000)/1000;
+		int left3 = (int)(3600000-(now.getTime()+60000*2)%3600000)/1000;
 		System.out.println("--------------------------------");
 		System.out.println("will do hourly task after "+left3/60+"minutes");
 		ScheduledThreadPoolExecutor stpe3 = new ScheduledThreadPoolExecutor(15);
