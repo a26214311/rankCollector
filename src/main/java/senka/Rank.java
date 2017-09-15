@@ -20,7 +20,7 @@ public class Rank {
 	public static void main(String[] args) {
 		System.out.println("start1");
 		try {
-			Rank.runRankTask("65c3205878d7b952b9a26fbd84acdf59b3d0c1e5", 18, TimerTask.id18);
+			Rank.runRankTask("b044e3c459c0be63f542df8664b54985370e0b43", 18, TimerTask.id18);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,6 +72,7 @@ public class Rank {
 		DBObject uData = cl_u_senka.findOne(query);
 		ArrayList<JSONObject> tdata = new ArrayList<>();
 		int ma;
+		System.out.println(123);
 		if(uData==null){
 			for(int i=1;i<100;i++){
 				String param = "api%5Fpageno="+i+"&api%5Fverno=1&api%5Franking="+ranking+"&api%5Ftoken="+token;
@@ -87,6 +88,7 @@ public class Rank {
 		}else{
 			String t1 = uData.get("d").toString();
 			JSONArray j2 = new JSONArray(t1);
+			System.out.println(j2);
 			for(int i=0;i<j2.length();i++){
 				tdata.add(j2.getJSONObject(i));
 			}

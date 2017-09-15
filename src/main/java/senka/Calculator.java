@@ -25,7 +25,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank(19);
+			calculateRank(18);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,12 +44,23 @@ public class Lib {
 		 System.out.println(urlStr);
 		 System.out.println(param);
 	         URL url = new URL(urlStr);
-	         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			
+	         Proxy proxy=new Proxy(Proxy.Type.SOCKS,new InetSocketAddress("192.168.17.62",9090));
+		        
+	         HttpURLConnection conn;
+	         if(server==18){
+	        	 conn = (HttpURLConnection)url.openConnection(proxy);
+	         }else{
+	        	 conn = (HttpURLConnection)url.openConnection();
+	         }
 	         conn.setRequestMethod("POST");
 	         conn.setConnectTimeout(10000);
 	         conn.setReadTimeout(12000);
 	         conn.setDoInput(true);
 	         conn.setDoOutput(true);
+	         if(server==18){
+	        	 
+	         }
 	         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
 	         conn.setRequestProperty("X-Powered-By","PHP/5.3.3");
 	         conn.setRequestProperty("Accept-Language","zh-CN,zh;q=0.8");
