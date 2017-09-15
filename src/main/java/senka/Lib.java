@@ -49,7 +49,7 @@ public class Lib {
 		        
 	         HttpURLConnection conn;
 	         if(server==18){
-	        	 conn = (HttpURLConnection)url.openConnection(proxy);
+	        	 conn = (HttpURLConnection)url.openConnection();
 	         }else{
 	        	 conn = (HttpURLConnection)url.openConnection();
 	         }
