@@ -37,16 +37,19 @@ public class Calculator {
 	
 	public static String calculateTask(int server){
 		JSONObject j = calculateRank(server);
-		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
-		BasicDBObject save = new BasicDBObject();
-		save.append("_id", server);
-		save.append("d", j.toString());
-		save.append("ts", new Date());
-		cl_calculate_result.save(save);
+//		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
+//		BasicDBObject save = new BasicDBObject();
+//		save.append("_id", server);
+//		save.append("d", j.toString());
+//		save.append("ts", new Date());
+//		cl_calculate_result.save(save);
 		return j.toString();
 	}
 	
+	private static Map<Integer, String> rankCache = new HashMap<>();
+	
 	public static String getRank(int server){
+		/*
 		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
 		DBObject rankData = cl_calculate_result.findOne(new BasicDBObject("_id",server));
 		if(rankData==null){
@@ -54,6 +57,16 @@ public class Calculator {
 		}else{
 			return rankData.get("d").toString();
 		}
+		*/
+		String cache = rankCache.get(server);
+		if(cache==null){
+			cache = calculateTask(server);
+			rankCache.put(server,cache);
+			return cache;
+		}else{
+			return cache;
+		}
+		
 	}
 	
 	
