@@ -60,10 +60,12 @@ public class Calculator {
 		*/
 		String cache = rankCache.get(server);
 		if(cache==null){
+			System.out.println("cache miss,will calculate");
 			cache = calculateTask(server);
 			rankCache.put(server,cache);
 			return cache;
 		}else{
+			System.out.println("cache found");
 			return cache;
 		}
 		
