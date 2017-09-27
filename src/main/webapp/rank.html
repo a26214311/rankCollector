@@ -34,6 +34,7 @@
     <option value="18">岩川基地</option>
     <option value="19">佐伯湾泊地</option>
   </select>
+  <input id="ignorez" type="checkbox" />忽略未完成的Z
   <button type="button" class="btn btn-primary" onclick="search();">查询</button>
 </div>
 <div id="forecast" style="max-width: 800px">
@@ -48,6 +49,7 @@
   var u;
   function search(){
     var server = $('#server').val();
+    var ignore = $('#ignorez').checked;
     if(server==0){
       return;
     }else{
@@ -67,45 +69,45 @@
             if(getDateNo(now)==getDateNo(then)&&getRankDateNo(now)==getRankDateNo(then)&&sub>60000){
               var ustr = localStorage.getItem("rank"+server);
               u =eval("("+ustr+")");
-              forecast();
+              forecast(ignore);
             }else{
-              fetchFromServer(server,callback);
+              fetchFromServer(server,callback,ignore);
             }
           }else{
-            fetchFromServer(server,callback);
+            fetchFromServer(server,callback,ignore);
           }
         }else{
-          fetchFromServer(server,callback);
+          fetchFromServer(server,callback,ignore);
         }
       }else{
-        fetchFromServer(server,function(){});
+        fetchFromServer(server,function(){},ignore);
       }
     }
   }
 
-  function fetchFromServer(server,callback){
+  function fetchFromServer(server,callback,ignore){
     console.log('will fetch from server');
     var url = '/api/calrank?server='+server;
     $.get(url,function(response,status){
       var data = eval("("+response+")");
       u=data;
-      forecast();
+      forecast(ignore);
       callback();
     })
   }
 
-  function forecast(){
+  function forecast(ignore){
     var bsenka5 = u.tail[5];
     var bsenka20 = u.tail[20];
     var bsenka100 = u.tail[100];
     var bsenka500 = u.tail[500];
-    sortby(0);
+    sortby(0,ignore);
     var qsenka5 = u.d[4].senka;
     var qsenka20 = u.d[19].senka;
     var qsenka100 = u.d[99].senka;
     var qsenka500 = u.d[499].senka;
-    sortby(3);
-    generateTable(3);
+    sortby(3,ignore);
+    generateTable(3,ignore);
     var senka5 = u.d[4].max;
     var senka20 = u.d[19].max;
     var senka100 = u.d[99].max;
@@ -135,7 +137,7 @@
     $('#forecast').html(h);
   }
 
-  function sortby(type){
+  function sortby(type,ignore){
     u.d.sort(function(a,b){
       if(type==0){
         return b.senka-a.senka;
@@ -149,10 +151,10 @@
         return b.min-a.min;
       }
     });
-    generateTable(type);
+    generateTable(type,ignore);
   }
 
-  function generateTable(sorttype){
+  function generateTable(sorttype,ignore){
     var data = u;
     var result = data.r;
     if(true) {
@@ -183,7 +185,7 @@
             zcleared=350;
           }
         }
-        if(now.getDate()==monthOfDay[now.getMonth()]&&now.getHours()>=14){
+        if(ignore||(now.getDate()==monthOfDay[now.getMonth()]&&now.getHours()>=14)){
           if(senka.ex>1025&&senka.ex<1035){
             zcleared=350;
           }
