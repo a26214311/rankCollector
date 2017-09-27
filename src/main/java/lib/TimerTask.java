@@ -238,6 +238,8 @@ public class TimerTask {
 				token = login(server);
 				if(token.length()>2&&token.length()<100){
 					cl_token.save(new BasicDBObject("_id",server).append("token", token).append("ts", now));
+				}else{
+					token = tokenData.get("token").toString();
 				}
 			}else{
 				token = tokenData.get("token").toString();

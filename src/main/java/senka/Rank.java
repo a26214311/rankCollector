@@ -20,7 +20,7 @@ public class Rank {
 	public static void main(String[] args) {
 		System.out.println("start1");
 		try {
-			Rank.runRankTask("b044e3c459c0be63f542df8664b54985370e0b43", 18, TimerTask.id18);
+			Rank.runRankTask("20bce434daeb3cd9461fd96f1d873de16051d396", 19, TimerTask.id19);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
