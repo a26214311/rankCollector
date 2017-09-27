@@ -181,7 +181,7 @@
         var senka = data.d[i];
         var z = data.d[i].z;
         var zcleared=0;
-        if(Math.floor(((month+1)/3))==Math.floor(((z+1)/3))){
+        if(Math.floor(month/3)==Math.floor(z/3)){
           if(z>=0){
             zcleared=350;
           }
