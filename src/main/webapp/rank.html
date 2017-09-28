@@ -181,6 +181,8 @@
         var senka = data.d[i];
         var z = data.d[i].z;
         var zcleared=0;
+        var expfrom = senka.expfrom;
+        var expto = senka.expto;
         if(Math.floor((month+1)/3)==Math.floor((z+1)/3)){
           if(z>=0){
             zcleared=350;
@@ -195,6 +197,10 @@
             zcleared=350;
             z=-1;
           }
+          if (Math.abs(expfrom - zexfrom) < 1200000 && Math.abs(expto - zexto) < 1200000 &&senka.ex<950) {
+            zcleared=350;
+            z=-1;
+          }
         }
         h = h + '<tr>';
         if (i == 5 || i == 20 || i == 100 || i == 500) {
@@ -206,8 +212,7 @@
         h = h + '<td>' + senka.senka + '</td>';
 
         var subsenkastr = senka.subsenka;
-        var expfrom = senka.expfrom;
-        var expto = senka.expto;
+
         var basets = senka.basets;
 
         if (Math.abs(expfrom - zexpfrom) > 1200000 || Math.abs(expto - zexpto) > 1200000) {
