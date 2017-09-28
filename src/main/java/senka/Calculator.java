@@ -25,7 +25,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank(18);
+			calculateRank(8);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,6 +162,7 @@ public class Calculator {
 					
 				}
 			}
+				
 			dbc2 = cl_senka.find(new BasicDBObject("_id",new BasicDBObject("$in",dbl)));
 			long exfrom = 1999123456789L;
 			long exto = 0L;
@@ -172,6 +173,8 @@ public class Calculator {
 				DBObject userData = (DBObject) dbc2.next();
 				int id = Integer.valueOf(userData.get("_id").toString());
 				String name = userData.get("name").toString();
+
+				
 				DBObject senkaData = id2senka.get(id);
 				Object ido = senkaData.get("id");
 				Object co = senkaData.get("c");
@@ -234,6 +237,10 @@ public class Calculator {
 							pointer2++;
 						}
 					}
+				}
+				if(name.equals("ヘスペラス")){
+					System.out.println(1111231);
+					System.out.println(pairlist);
 				}
 
 				if(drop==0){

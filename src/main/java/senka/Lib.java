@@ -39,44 +39,56 @@ public class Lib {
 		ips.add(        "203.104.209.102");
 	}
 	
+	
+	private static int retryc = 0;
 	 public static String  ApiPost(String path,String param,String token,int server) throws Exception{
-		 String urlStr ="http://"+ips.get(server)+path;
-		 System.out.println(urlStr);
-		 System.out.println(param);
-	         URL url = new URL(urlStr);
-			
-	         Proxy proxy=new Proxy(Proxy.Type.SOCKS,new InetSocketAddress("192.168.17.62",9090));
-		        
-	         HttpURLConnection conn;
-	         if(server==18){
-	        	 conn = (HttpURLConnection)url.openConnection();
-	         }else{
-	        	 conn = (HttpURLConnection)url.openConnection();
-	         }
-	         conn.setRequestMethod("POST");
-	         conn.setConnectTimeout(10000);
-	         conn.setReadTimeout(12000);
-	         conn.setDoInput(true);
-	         conn.setDoOutput(true);
-	         if(server==18){
-	        	 
-	         }
-	         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-	         conn.setRequestProperty("X-Powered-By","PHP/5.3.3");
-	         conn.setRequestProperty("Accept-Language","zh-CN,zh;q=0.8");
-	         conn.setRequestProperty("Referer","http://"+ips.get(server)+"/kcs/mainD2.swf?api_token="+token+"&api_starttime="+new Date().getTime()+"/[[DYNAMIC]]/1");
-	         conn.setRequestProperty("User-Agent","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36");
-	         conn.setRequestProperty("X-Requested-With","ShockwaveFlash/25.0.0.171");
-	         OutputStream os = conn.getOutputStream();     
-	         os.write(param.toString().getBytes("utf-8"));     
-	         os.close();         
-	         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	         String line ;
-	         String result ="";
-	         while( (line =br.readLine()) != null ){
-	             result += line;
-	         }
-	         br.close();
-	         return result;
+		 try {
+			 String urlStr ="http://"+ips.get(server)+path;
+			 System.out.println(urlStr);
+			 System.out.println(param);
+		         URL url = new URL(urlStr);
+				
+		         HttpURLConnection conn;
+		         if(server==18){
+		        	 conn = (HttpURLConnection)url.openConnection();
+		         }else{
+		        	 conn = (HttpURLConnection)url.openConnection();
+		         }
+		         conn.setRequestMethod("POST");
+		         conn.setConnectTimeout(10000);
+		         conn.setReadTimeout(12000);
+		         conn.setDoInput(true);
+		         conn.setDoOutput(true);
+		         if(server==18){
+		        	 
+		         }
+		         conn.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+		         conn.setRequestProperty("X-Powered-By","PHP/5.3.3");
+		         conn.setRequestProperty("Accept-Language","zh-CN,zh;q=0.8");
+		         conn.setRequestProperty("Referer","http://"+ips.get(server)+"/kcs/mainD2.swf?api_token="+token+"&api_starttime="+new Date().getTime()+"/[[DYNAMIC]]/1");
+		         conn.setRequestProperty("User-Agent","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36");
+		         conn.setRequestProperty("X-Requested-With","ShockwaveFlash/25.0.0.171");
+		         OutputStream os = conn.getOutputStream();     
+		         os.write(param.toString().getBytes("utf-8"));     
+		         os.close();         
+		         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		         String line ;
+		         String result ="";
+		         while( (line =br.readLine()) != null ){
+		             result += line;
+		         }
+		         br.close();
+		         retryc = 0;
+		         return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			retryc++;
+			if(retryc>2){
+				throw new Exception();
+			}else{
+				return ApiPost(path,param,token,server);
+			}
+		}
+
      }
 }
