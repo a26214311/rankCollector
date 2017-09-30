@@ -701,6 +701,9 @@ public class Calculator {
 				BasicDBList expL = explist.get(i);
 				DBObject latestexpdata = (DBObject)expL.get(expL.size()-1);
 				DBObject firstexpdata = getFirstExpData(expL);
+				if(firstexpdata==null){
+					break;
+				}
 				Date firstts = (Date)firstexpdata.get("ts");
 				Date lastts = (Date)latestexpdata.get("ts");
 				int subexp = Integer.valueOf(latestexpdata.get("d").toString())-Integer.valueOf(firstexpdata.get("d").toString());
