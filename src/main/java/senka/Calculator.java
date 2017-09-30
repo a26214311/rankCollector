@@ -36,14 +36,14 @@ public class Calculator {
 	}
 	
 	public static String calculateTask(int server){
-		JSONObject j = calculateRank(server);
+//		JSONObject j = calculateRank(server);
 //		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
 //		BasicDBObject save = new BasicDBObject();
 //		save.append("_id", server);
 //		save.append("d", j.toString());
 //		save.append("ts", new Date());
 //		cl_calculate_result.save(save);
-		return j.toString();
+		return "";
 	}
 	
 	private static Map<Integer, String> rankCache = new HashMap<>();
