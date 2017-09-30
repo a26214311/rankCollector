@@ -61,7 +61,7 @@ public class Calculator {
 		String cache = rankCache.get(server);
 		if(true){
 			System.out.println("cache miss,will calculate");
-			cache = calculateTask(server);
+			cache = calculateRank(server).toString();
 			rankCache.put(server,cache);
 			return cache;
 		}else{
