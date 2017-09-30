@@ -421,7 +421,7 @@ public class Calculator {
 			DBObject expdata = (DBObject)explist.get(i);
 			Date ts = (Date)expdata.get("ts");
 			if(ts.getMonth()==now.getMonth()){
-				if(ts.getDate()==1&&ts.getHours()<1){
+				if(ts.getDate()==1&&ts.getHours()<2){
 					
 				}else{
 					return expdata;
