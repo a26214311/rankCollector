@@ -206,7 +206,19 @@
             z=-1;
           }
           if(senka.ex<950){
-
+            if(exlist){
+              var zc = 0;
+              for(var i=0;i<exlist.length;i++){
+                var xex = parseInt(exlist[i]);
+                if(xex>420){
+                  zc=1;
+                }
+              }
+              if(zc==0){
+                zcleared=350;
+                z=-1;
+              }
+            }
           }
         }
         console.log(exlist,zcleared);
