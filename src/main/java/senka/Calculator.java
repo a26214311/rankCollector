@@ -645,7 +645,7 @@ public class Calculator {
 			int lastno = Integer.valueOf(jsenkaD.get("no").toString()); 
 			DBObject firstExpData  = getFirstExpData(expL);
 			if(firstExpData == null){
-				System.out.println(expL);
+				break;
 			}
 			int firstexp = Integer.valueOf(firstExpData.get("d").toString());
 			Date firstts = (Date)firstExpData.get("ts");
