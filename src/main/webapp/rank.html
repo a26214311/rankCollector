@@ -110,6 +110,7 @@
     var qsenka500 = u.d[499].senka;
     sortby(3,ignore);
     generateTable(3,ignore);
+    generateTable(3,ignore);
     var senka5 = u.d[4].max;
     var senka20 = u.d[19].max;
     var senka100 = u.d[99].max;
@@ -202,6 +203,15 @@
           if (Math.abs(expfrom - zexfrom) < 1200000 && Math.abs(expto - zexto) < 1200000 &&senka.ex<950) {
             zcleared=350;
             z=-1;
+          }
+          if(senka.ex<950){
+            var realuex = senka.max-senka.senka;
+            if(realuex<350){
+              zcleared=0;
+            }else{
+              zcleared=350;
+              z=-1;
+            }
           }
         }
         h = h + '<tr>';
