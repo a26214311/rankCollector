@@ -186,6 +186,7 @@
         var zcleared=0;
         var expfrom = senka.expfrom;
         var expto = senka.expto;
+        var exlist = senka.exlist;
         if(Math.floor((month+1)/3)==Math.floor((z+1)/3)){
           if(z>=0){
             zcleared=350;
@@ -208,6 +209,7 @@
 
           }
         }
+        console.log(exlist,zcleared);
         h = h + '<tr>';
         if (i == 5 || i == 20 || i == 100 || i == 500) {
           h = h + '<td colspan="3"> </td></tr><tr>';

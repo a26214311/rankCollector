@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -434,6 +434,26 @@ public class Calculator {
 	public static JSONObject getResultByPairlist(int latestexp,Date latestts,ArrayList<JSONObject> pairlist,String name)throws Exception{
 
 		if(pairlist.size()>0){
+			
+			JSONObject lastpair=new JSONObject();
+			JSONArray fexlist = new JSONArray();
+			for(int i=0;i<pairlist.size();i++){
+				JSONObject pair = pairlist.get(i);
+				int senka = pair.getInt("senka");
+				int exp = pair.getInt("exp");
+				if(i==0){
+					lastpair=pair;
+				}else{
+					int subexpk = exp-lastpair.getInt("exp");
+					int subsenkak = senka - lastpair.getInt("senka");
+					lastpair = pair;
+					int ex = subsenkak - (int)(subexpk/10000*7);
+					if(ex>70){
+						fexlist.put(ex);
+					}
+				}
+			}
+			
 			JSONObject latestpair = pairlist.get(pairlist.size()-1);
 			JSONObject firstpair = pairlist.get(0);
 			int senkasub = latestpair.getInt("senka")-firstpair.getInt("senka");
@@ -455,6 +475,7 @@ public class Calculator {
 			j.put("type", 1);
 			j.put("name",name);
 			j.put("ex", ex);
+			j.put("exlist", fexlist);
 			j.put("exfrom", firstpairts.getTime());
 			j.put("exto", latestpairts.getTime());
 			return j;
