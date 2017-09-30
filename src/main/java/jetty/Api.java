@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +46,8 @@ public class Api extends HttpServlet
 				System.out.println("==============");
 				System.out.println(path);
 				System.out.println(queryString);
+				System.out.println(new Date());
+				System.out.println(req.getRemoteAddr());
 				System.out.println("==============\n");
 				OutputStream output = null;
 				output = response.getOutputStream();
