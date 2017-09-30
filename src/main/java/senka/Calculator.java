@@ -644,6 +644,9 @@ public class Calculator {
 			int lsenkats = Integer.valueOf(jsenkaD.get("ts").toString()); 
 			int lastno = Integer.valueOf(jsenkaD.get("no").toString()); 
 			DBObject firstExpData  = getFirstExpData(expL);
+			if(firstExpData == null){
+				System.out.println(expL);
+			}
 			int firstexp = Integer.valueOf(firstExpData.get("d").toString());
 			Date firstts = (Date)firstExpData.get("ts");
 			int subsenka = (latestexp-firstexp)*7/10000;
