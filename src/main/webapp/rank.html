@@ -50,6 +50,8 @@
   function search(){
     var server = $('#server').val();
     var ignore = $('#ignorez')[0].checked;
+    $('#forecast').html('');
+    $('#main').html('查询中....请稍候');
     if(server==0){
       return;
     }else{
