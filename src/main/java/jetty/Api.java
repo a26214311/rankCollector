@@ -102,12 +102,12 @@ public class Api extends HttpServlet
 		}
 		if(path.equals("calz")){
 			int month = new Date().getMonth()-1;
-			resp.setCharacterEncoding("utf-8");
-			ret = Calculator.calculateZ(8,month);
-			ret = Calculator.calculateZ(15,month);
-			ret = Calculator.calculateZ(16,month);
-			ret = Calculator.calculateZ(18,month);
-			ret = Calculator.calculateZ(19,month);
+			Calculator.calculateZ(8,month);
+			Calculator.calculateZ(15,month);
+			Calculator.calculateZ(16,month);
+			Calculator.calculateZ(18,month);
+			Calculator.calculateZ(19,month);
+			ret = "z ok";
 		}
 		if(path.equals("rank.html")){
 			byte[] rk = toByteArray2("src/main/webapp/rank.html");
