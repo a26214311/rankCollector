@@ -100,6 +100,15 @@ public class Api extends HttpServlet
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			ret = Calculator.calculator(data);
 		}
+		if(path.equals("calz")){
+			int month = new Date().getMonth()-1;
+			resp.setCharacterEncoding("utf-8");
+			ret = Calculator.calculateZ(8,month);
+			ret = Calculator.calculateZ(15,month);
+			ret = Calculator.calculateZ(16,month);
+			ret = Calculator.calculateZ(18,month);
+			ret = Calculator.calculateZ(19,month);
+		}
 		if(path.equals("rank.html")){
 			byte[] rk = toByteArray2("src/main/webapp/rank.html");
 			resp.setContentType("text/html");
