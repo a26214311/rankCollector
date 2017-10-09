@@ -644,6 +644,9 @@ public class Calculator {
 			int lsenkats = Integer.valueOf(jsenkaD.get("ts").toString()); 
 			int lastno = Integer.valueOf(jsenkaD.get("no").toString()); 
 			DBObject firstExpData  = getFirstExpData(expL);
+			if(firstExpData == null){
+				break;
+			}
 			int firstexp = Integer.valueOf(firstExpData.get("d").toString());
 			Date firstts = (Date)firstExpData.get("ts");
 			int subsenka = (latestexp-firstexp)*7/10000;
@@ -698,6 +701,9 @@ public class Calculator {
 				BasicDBList expL = explist.get(i);
 				DBObject latestexpdata = (DBObject)expL.get(expL.size()-1);
 				DBObject firstexpdata = getFirstExpData(expL);
+				if(firstexpdata==null){
+					break;
+				}
 				Date firstts = (Date)firstexpdata.get("ts");
 				Date lastts = (Date)latestexpdata.get("ts");
 				int subexp = Integer.valueOf(latestexpdata.get("d").toString())-Integer.valueOf(firstexpdata.get("d").toString());
