@@ -262,7 +262,7 @@
             exstr = exstr + '('+(z+1)+'月已完成Z作战)';
           }
 
-          if (senka.fsenkats == 0 && getDateNo(senka.expfrom) == 0) {
+          if (senka.fsenkats == 0 && Math.abs(expfrom - zexpfrom) < 1200000) {
             data.d[i].except=senka.subsenka + senka.fsenka + 1380 - zcleared;
             data.d[i].max=data.d[i].except;
             data.d[i].min=data.d[i].except;
@@ -307,6 +307,7 @@
           var maxsenka2 = senka.senka + 1380 - senka.ex-zcleared;
           var maxsenka3 = senka.subsenka + senka.fsenka + 1380-zcleared;
           var maxsenka = 99999;
+
           if(maxsenka1<maxsenka){
             maxsenka=maxsenka1;
           }
@@ -320,6 +321,12 @@
             var maxsenka4 = senka.subsenka+senka.subbase+1380-zcleared;
             if(maxsenka4<maxsenka){
               maxsenka=maxsenka4;
+            }
+          }
+          if(firstExpDateNo==0){
+            minsenka = maxsenka1;
+            if(new Date(basets).getMonth()<month){
+              maxsenka = senka.subsenka+senka.subbase+1380-zcleared;
             }
           }
           data.d[i].max=maxsenka;
