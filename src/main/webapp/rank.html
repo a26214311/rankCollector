@@ -306,10 +306,15 @@
             if(senka.fsenkats==0){
               var max6 = Math.floor(senka.fsenka+senka.subsenka+(expfrom-zexfrom)*0.00001+1380-zcleared);
               if(max6<maxsenka){
-                console.log(senka);
                 maxsenka=max6;
               }
+            }else{
+              var max7 = Math.floor(minmap[firstExpDateNo]+senka.subsenka+(expfrom-zexfrom)*0.00001+1380-zcleared);
+              if(max7<maxsenka){
+                maxsenka=max7;
+              }
             }
+
             data.d[i].max=maxsenka;
             data.d[i].min=minsenka;
           }
