@@ -178,6 +178,7 @@
       h = h + '<td class="sort-sub"><div onclick="sortby(4);">最小'+(sorttype==4?'↓':'')+'</div></td>';
       h = h + '<td class="sort-sub"><div onclick="sortby(1);"> 经验  (' + new Date(zexpfrom).toLocaleString() + '----' + new Date(zexpto).toLocaleString() + ')'+(sorttype==1?'↓':'')+'</div></td>';
       h = h + '<td class="sort-disable"><div>ex  (' + new Date(zexfrom).toLocaleString() + '----' + new Date(zexto).toLocaleString() + ')</div></td>';
+      h = h + '<td class="sort-disable"><div>未完成ex</div></td>';
       h = h + '</thead>';
       for (var i = 0; i < data.d.length; i++) {
         var type = data.d[i].type;
@@ -475,6 +476,7 @@
         }
         h=h+'<td>'+subsenkastr+'</td>';
         h=h+'<td>'+exstr+'</td>';
+        h=h+'<td>'+(senka.max-senka.senka)+'</td>';
 
 
 
