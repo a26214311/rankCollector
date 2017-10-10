@@ -274,6 +274,10 @@
             if(max2<maxsenka){
               maxsenka=max2;
             }
+            var max3 = senka.senka + 1380 - senka.ex-zcleared;
+            if(max3<maxsenka){
+              maxsenka=max3;
+            }
             data.d[i].max=maxsenka;
             data.d[i].min=minsenka;
           }  else if (ensure) {
