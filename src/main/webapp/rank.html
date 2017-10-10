@@ -267,8 +267,12 @@
             data.d[i].max=data.d[i].except;
             data.d[i].min=data.d[i].except;
           }else if(senka.fsenkats == 0 && getDateNo(expfrom)==0 && new Date(basets).getMonth()<month){
-            minsenka = senka.fsenka+senka.subsenka+1380-zcleared;
-            maxsenka = senka.fsenka+senka.subsenka+senka.subbase+1380-zcleared;
+            var minsenka = senka.fsenka+senka.subsenka+1380-zcleared;
+            var maxsenka = senka.fsenka+senka.subsenka+senka.subbase+1380-zcleared;
+            var max2 = minsenka + (expfrom-zexfrom)*0.00001;
+            if(max2<maxsenka){
+              maxsenka=max2;
+            }
             data.d[i].max=maxsenka;
             data.d[i].min=minsenka;
           }  else if (ensure) {
