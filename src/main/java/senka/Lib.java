@@ -83,7 +83,7 @@ public class Lib {
 		} catch (Exception e) {
 			e.printStackTrace();
 			retryc++;
-			if(retryc>2){
+			if(retryc>4){
 				throw new Exception();
 			}else{
 				return ApiPost(path,param,token,server);
