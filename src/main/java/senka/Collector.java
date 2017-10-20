@@ -27,8 +27,8 @@ public class Collector {
 		System.out.println(123123);
 		long t1 = new Date().getTime();
 		try {
-			Collector.collectByLastSenka("b044e3c459c0be63f542df8664b54985370e0b43", 18);
-//			System.out.println(collectById(8045678, "723676cc8851b609d2c5739c26d5bc4f4cc56b0b", 8));
+			Collector.collectByLastSenka("7635b926fc539bbb0bc00feaf118bca17f1972fe", 8);
+//			System.out.println(collectById(19161718, "162ebccc78cb0c33676c3b107502515ffd013da5", 19));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,6 +97,8 @@ public class Collector {
 		}
 	}
 	
+	
+	private static int failed = 0;
 	public static JSONObject collectById(int id,String token,int server)throws Exception{
 		String path = "/kcsapi/api_req_member/get_practice_enemyinfo";
 		String param = "api%5Ftoken="+token+"&api%5Fmember%5Fid="+id+"&api%5Fverno=1";
@@ -109,8 +111,14 @@ public class Collector {
 				System.out.println(param);
 				System.out.print("\nfailed get info:"+id+"\n");
 				System.out.print(jd);
-				return null;
+				failed ++;
+				if(failed>4){
+					return null;
+				}else{
+					return collectById(id,token,server);
+				}
 			}else{
+				failed = 0;
 				return jd.getJSONObject("api_data");
 			}
 		} catch (Exception e) {
@@ -136,7 +144,6 @@ public class Collector {
 			dbc = cl_n_senka.find(new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore)))); //1000 min
 			int all=0;
 			while (dbc.hasNext()) {
-				
 				all++;
 				if(all%100==0){
 					System.out.println(all);
@@ -193,6 +200,7 @@ public class Collector {
 	public static int save(JSONObject j,String server)throws Exception{
 		int resultCode = j.getInt("api_result");
 		if(resultCode==1){
+			
 			Date now = new Date();
 			JSONObject data = j.getJSONObject("api_data");
 			String name = data.getString("api_nickname");
@@ -209,7 +217,7 @@ public class Collector {
 			BasicDBObject query = new BasicDBObject();
 			query.append("_id", id);
 			DBCollection cl_senka=Util.db.getCollection("cl_senka_"+server);
-			//System.out.println(update);
+			System.out.println("save name:"+name);
 			cl_senka.update(query, update,true,false);
 			return 0;
 		}else{

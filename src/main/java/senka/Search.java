@@ -22,7 +22,7 @@ public class Search {
 		try {
 //			System.out.println(searchByName("LAN", "df792139ccd86e27e61bd884e054f2fba13339eb", 8));
 			Date t = new Date(new Date().getTime()-3600000*19/2+60000*5);
-			System.out.println(isExpKeyTs(t));
+			System.out.println(123);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
