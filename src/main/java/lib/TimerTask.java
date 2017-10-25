@@ -86,6 +86,79 @@ public class TimerTask {
 		}, left3, 3600, TimeUnit.SECONDS);
 		System.out.println("--------------------------------");
 		
+		
+		int left4 = (int)(3600000-(now.getTime()+2000000)%3600000)/1000;
+		System.out.println("--------------------------------");
+		System.out.println("will do random task after "+left4/60+"minutes");
+		ScheduledThreadPoolExecutor stpe4 = new ScheduledThreadPoolExecutor(15);
+		stpe4.scheduleAtFixedRate(new Runnable() {
+			public void run() {
+				System.out.println("--------------------------------");
+				System.out.println("will do random collect task");
+				randomTask();
+			}
+		}, left4, 3600, TimeUnit.SECONDS);
+		System.out.println("--------------------------------");
+	}
+	
+	public static void randomTask(){
+		Date now = new Date(new Date().getTime()+(new Date().getTimezoneOffset()+480)*60000);
+		final int num;
+		if(now.getHours()>=3&&now.getHours()<=5){
+			num=666;
+		}else{
+			num=66;
+		}
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token = getToken(8);
+				if(token.length()>2){
+					Collector.randomCollect(token, 8, num);
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token = getToken(16);
+				if(token.length()>2){
+					Collector.randomCollect(token, 16, num);
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token = getToken(19);
+				if(token.length()>2){
+					Collector.randomCollect(token, 19, num);
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token = getToken(15);
+				if(token.length()>2){
+					Collector.randomCollect(token, 15, num);
+				}
+			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				String token = getToken(18);
+				if(token.length()>2){
+					Collector.randomCollect(token, 18, num);
+				}
+			}
+		}).start();
 	}
 	
 	public static void init(){
