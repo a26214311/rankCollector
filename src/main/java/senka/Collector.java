@@ -129,7 +129,7 @@ public class Collector {
 	}
 	
 	public static void randomCollect(String token,int server,int num){
-		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
+		DBCollection cl_n_senka = Util.db.getCollection("cl_senka_"+server);
 		try {
 			BasicDBObject query = new BasicDBObject("$sample",new BasicDBObject("size",num));
 			AggregationOutput ag = cl_n_senka.aggregate(query);
