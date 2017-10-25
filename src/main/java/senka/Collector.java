@@ -131,9 +131,8 @@ public class Collector {
 	public static void randomCollect(String token,int server,int num){
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		try {
-			BasicDBList dbl = new BasicDBList();
-			dbl.add(new BasicDBObject("$sample",new BasicDBObject("size",num)));
-			AggregationOutput ag = cl_n_senka.aggregate(dbl);
+			BasicDBObject query = new BasicDBObject("$sample",new BasicDBObject("size",num));
+			AggregationOutput ag = cl_n_senka.aggregate(query);
 			for (DBObject obj : ag.results()) {
 				int id = Integer.valueOf(obj.get("_id").toString());
 				System.out.println(id);
