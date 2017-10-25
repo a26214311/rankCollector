@@ -8,6 +8,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
+import java.util.Random;
+
+import javax.naming.ldap.Rdn;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,6 +50,7 @@ public class Collector {
 	}
 	
 	public static void runCollector(Map<String, String[]> data)throws Exception{
+		failed=0;
 		final String type = data.get("type")[0];
 		final String server = data.get("server")[0];
 		final String token = TimerTask.getToken(Integer.valueOf(server));
@@ -101,51 +105,49 @@ public class Collector {
 	
 	private static int failed = 0;
 	public static JSONObject collectById(int id,String token,int server)throws Exception{
+		if(failed>50){
+			return null;
+		}
 		String path = "/kcsapi/api_req_member/get_practice_enemyinfo";
 		String param = "api%5Ftoken="+token+"&api%5Fmember%5Fid="+id+"&api%5Fverno=1";
-		try {
-			String r = Lib.ApiPost(path, param, token, server);
-			if(r.startsWith("svdata="));
-			JSONObject jd = new JSONObject(r.substring(7));
-			int ret = save(jd,server+"");
-			if(ret == 1){
-				System.out.println(param);
-				System.out.print("\nfailed get info:"+id+"\n");
-				System.out.print(jd);
-				failed ++;
-				if(failed>4){
-					return null;
-				}else{
-					return collectById(id,token,server);
-				}
+		String r = Lib.ApiPost(path, param, token, server);
+		if(r.startsWith("svdata="));
+		JSONObject jd = new JSONObject(r.substring(7));
+		int ret = save(jd,server+"");
+		if(ret == 1){
+			System.out.println(param);
+			System.out.print("\nfailed get info:"+id+"\n");
+			System.out.print(jd);
+			failed ++;
+			if(failed>4){
+				return null;
 			}else{
-				failed = 0;
-				return jd.getJSONObject("api_data");
+				return collectById(id,token,server);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+		}else{
+			failed = 0;
+			return jd.getJSONObject("api_data");
 		}
 	}
 	
-	public static void randomCollect(String token,int server,int num){
-		DBCollection cl_n_senka = Util.db.getCollection("cl_senka_"+server);
-		try {
-			BasicDBObject query = new BasicDBObject("$sample",new BasicDBObject("size",num));
-			AggregationOutput ag = cl_n_senka.aggregate(query);
-			for (DBObject obj : ag.results()) {
-				int id = Integer.valueOf(obj.get("_id").toString());
-				System.out.println(id);
-				//collectById(id, token, server);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+	private static Random rd = new Random();
+	public static void randomCollect(String token,int server,int num)throws Exception{
+		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
+		long count = cl_senka.count();
+		if(server==8){
+			count=count-87306;
+		}
+		for(int i=0;i<num;i++){
+			int id = rd.nextInt((int)count)+server*1000000+1;
+			System.out.println(id);
+			collectById(id, token, server);
 		}
 	}
 	
 	
 	
 	public static void collectByLastSenka(String token,int server){
+		failed=0;
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		DBCursor dbc = null;
 		Date now = new Date();
