@@ -12,6 +12,7 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.mongodb.AggregationOutput;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
@@ -127,6 +128,23 @@ public class Collector {
 		}
 	}
 	
+	public static void randomCollect(String token,int server,int num){
+		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
+		try {
+			BasicDBList dbl = new BasicDBList();
+			dbl.add(new BasicDBObject("$sample",new BasicDBObject("size",num)));
+			AggregationOutput ag = cl_n_senka.aggregate(dbl);
+			for (DBObject obj : ag.results()) {
+				int id = Integer.valueOf(obj.get("_id").toString());
+				System.out.println(id);
+				//collectById(id, token, server);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public static void collectByLastSenka(String token,int server){
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
@@ -138,6 +156,7 @@ public class Collector {
 			searchBefore = 86400000L*28;
 			monthinit=true;
 		}
+	
 		int rankNo = Util.getRankDateNo(now);
 		try {
 			System.out.println("start collect");

@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 
 import lib.TimerTask;
 import senka.Calculator;
+import senka.Collector;
 import senka.Search;
 
 import java.io.File;
@@ -113,6 +114,10 @@ public class Api extends HttpServlet
 			byte[] rk = toByteArray2("src/main/webapp/rank.html");
 			resp.setContentType("text/html");
 			ret = new String(rk);
+		}
+		if(path.equals("test2")){
+			Collector.randomCollect("token", 8, 10);
+			ret = "ok";
 		}
 		return ret;
 	  }

@@ -180,6 +180,14 @@
       h = h + '<td class="sort-disable"><div>ex  (' + new Date(zexfrom).toLocaleString() + '----' + new Date(zexto).toLocaleString() + ')</div></td>';
       h = h + '<td class="sort-disable"><div>未完成ex</div></td>';
       h = h + '</thead>';
+
+      var calts = new Date(data.ts);
+      var month = calts.getMonth();
+      var days = monthOfDay[month];
+      var totalts = days*86400000-3600000*4;
+      var dur = tots-fromts;
+      var rate = totalts/dur;
+
       for (var i = 0; i < data.d.length; i++) {
         var type = data.d[i].type;
         var senka = data.d[i];
