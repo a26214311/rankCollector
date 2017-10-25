@@ -131,16 +131,20 @@ public class Collector {
 	}
 	
 	private static Random rd = new Random();
-	public static void randomCollect(String token,int server,int num)throws Exception{
+	public static void randomCollect(String token,int server,int num){
 		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
 		long count = cl_senka.count();
 		if(server==8){
 			count=count-87306;
 		}
-		for(int i=0;i<num;i++){
-			int id = rd.nextInt((int)count)+server*1000000+1;
-			System.out.println(id);
-			collectById(id, token, server);
+		try {
+			for(int i=0;i<num;i++){
+				int id = rd.nextInt((int)count)+server*1000000+1;
+				System.out.println(id);
+				collectById(id, token, server);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
