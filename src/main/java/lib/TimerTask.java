@@ -94,9 +94,11 @@ public class TimerTask {
 		ScheduledThreadPoolExecutor stpe4 = new ScheduledThreadPoolExecutor(15);
 		stpe4.scheduleAtFixedRate(new Runnable() {
 			public void run() {
-				System.out.println("--------------------------------");
-				System.out.println("will do random collect task");
-				randomTask();
+				if(now.getDate()<monthOfDay[now.getMonth()]){
+					System.out.println("--------------------------------");
+					System.out.println("will do random collect task");
+					randomTask();
+				}
 			}
 		}, left4, 3600, TimeUnit.SECONDS);
 		System.out.println("--------------------------------");
