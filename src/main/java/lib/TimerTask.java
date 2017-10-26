@@ -171,7 +171,9 @@ public class TimerTask {
 			public void run() {
 				String token8 = getToken(8);
 				if(token8.length()>2){
+					working++;
 					Collector.collectByLastSenka(token8, 8);
+					working--;
 				}
 			}
 		}).start();
@@ -180,7 +182,9 @@ public class TimerTask {
 			public void run() {
 				String token19 = getToken(19);
 				if(token19.length()>2){
+					working++;
 					Collector.collectByLastSenka(token19, 19);
+					working--;
 				}
 			}
 		}).start();
@@ -189,7 +193,9 @@ public class TimerTask {
 			public void run() {
 				String token16 = getToken(16);
 				if(token16.length()>2){
+					working++;
 					Collector.collectByLastSenka(token16, 16);
+					working--;
 				}
 			}
 		}).start();		
@@ -198,7 +204,9 @@ public class TimerTask {
 			public void run() {
 				String token18 = getToken(18);
 				if(token18.length()>2){
+					working++;
 					Collector.collectByLastSenka(token18, 18);
+					working--;
 				}
 			}
 		}).start();		
@@ -207,7 +215,9 @@ public class TimerTask {
 			public void run() {
 				String token15 = getToken(15);
 				if(token15.length()>2){
+					working++;
 					Collector.collectByLastSenka(token15, 15);
+					working--;
 				}
 			}
 		}).start();		
