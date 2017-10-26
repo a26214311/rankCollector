@@ -213,16 +213,19 @@ public class TimerTask {
 		}).start();		
 	}
 	
-
+	public static int working=0;
 	public static void rankTask(){
+		working=0;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
 					String token8 = getToken(8);
 					if(token8.length()>2){
+						working++;
 						Rank.runRankTask(token8, 8, id8);
 						Collector.collectByLastSenka(token8, 8);
+						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -236,8 +239,10 @@ public class TimerTask {
 				try {
 					String token19 = getToken(19);
 					if(token19.length()>2){
+						working++;
 						Rank.runRankTask(token19, 19, id19);
 						Collector.collectByLastSenka(token19, 19);
+						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -251,8 +256,10 @@ public class TimerTask {
 				try {
 					String token16 = getToken(16);
 					if(token16.length()>2){
+						working++;
 						Rank.runRankTask(token16, 16, id16);
 						Collector.collectByLastSenka(token16, 16);
+						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -266,8 +273,10 @@ public class TimerTask {
 				try {
 					String token18 = getToken(18);
 					if(token18.length()>2){
+						working++;
 						Rank.runRankTask(token18, 18, id18);
 						Collector.collectByLastSenka(token18, 18);
+						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -281,8 +290,10 @@ public class TimerTask {
 				try {
 					String token15 = getToken(15);
 					if(token15.length()>2){
+						working++;
 						Rank.runRankTask(token15, 15, id15);
 						Collector.collectByLastSenka(token15, 15);
+						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -17,6 +17,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
+import lib.TimerTask;
+
 
 public class Calculator {
 
@@ -59,13 +61,13 @@ public class Calculator {
 		}
 		*/
 		String cache = rankCache.get(server);
-		if(true){
+		if(TimerTask.working==0){
 			System.out.println("cache miss,will calculate");
 			cache = calculateRank(server).toString();
 			rankCache.put(server,cache);
 			return cache;
 		}else{
-			System.out.println("cache found");
+			System.out.println("now working:return cache");
 			return cache;
 		}
 		
