@@ -55,8 +55,8 @@ public class Lib {
 		        	 conn = (HttpURLConnection)url.openConnection();
 		         }
 		         conn.setRequestMethod("POST");
-		         conn.setConnectTimeout(10000);
-		         conn.setReadTimeout(12000);
+		         conn.setConnectTimeout(5000);
+		         conn.setReadTimeout(6000);
 		         conn.setDoInput(true);
 		         conn.setDoOutput(true);
 		         if(server==18){
