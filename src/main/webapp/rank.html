@@ -185,6 +185,8 @@
       var month = calts.getMonth();
       var days = monthOfDay[month];
       var totalts = days*86400000-3600000*4;
+      var fromts = u.expfrom;
+      var tots = u.expto;
       var dur = tots-fromts;
       var rate = totalts/dur;
 
