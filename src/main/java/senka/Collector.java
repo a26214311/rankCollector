@@ -140,8 +140,14 @@ public class Collector {
 		try {
 			for(int i=0;i<num;i++){
 				int id = rd.nextInt((int)count)+server*1000000+1;
-				System.out.println(id);
-				collectById(id, token, server);
+				DBObject user = cl_senka.findOne(new BasicDBObject("_id",id));
+				String info = user.get("info").toString();
+				JSONObject infoj = new JSONObject(info);
+				int rank = infoj.getInt("api_rank");
+				if(rank>1){
+					System.out.println(id);
+					collectById(id, token, server);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
