@@ -70,6 +70,7 @@ public class TimerTask {
 		ScheduledThreadPoolExecutor stpe3 = new ScheduledThreadPoolExecutor(15);
 		stpe3.scheduleAtFixedRate(new Runnable() {
 			public void run() {
+				working=0;
 				Date now = new Date(new Date().getTime()+(new Date().getTimezoneOffset()+480)*60000);
 				if(now.getDate()==monthOfDay[now.getMonth()]){
 					int hour = now.getHours();
@@ -166,6 +167,7 @@ public class TimerTask {
 	}
 	
 	public static void collectorTask(){
+		working=0;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
