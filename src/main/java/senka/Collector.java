@@ -155,6 +155,13 @@ public class Collector {
 	}
 	
 	
+	public static void collectByServer(Map<String, String[]> data){
+		int server = Integer.valueOf(data.get("server")[0]);
+		String token = TimerTask.getToken(server);
+		collectByLastSenka(token, server);
+	}
+	
+	
 	
 	public static void collectByLastSenka(String token,int server){
 		failed=0;

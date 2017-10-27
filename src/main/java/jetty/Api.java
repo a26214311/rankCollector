@@ -97,7 +97,11 @@ public class Api extends HttpServlet
 		}
 		if(path.equals("forcecollect")){
 			TimerTask.collectorTask();
-			ret = "will run rank task";
+			ret = "will run collect task";
+		}
+		if(path.equals("collects")){
+			Collector.collectByServer(data);
+			ret = "will run server collect task";
 		}
 		if(path.equals("calrank")){
 			resp.setCharacterEncoding("utf-8");
