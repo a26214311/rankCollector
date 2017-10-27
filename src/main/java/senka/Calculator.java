@@ -360,10 +360,10 @@ public class Calculator {
 			});
 			JSONObject j = new JSONObject();
 			j.put("ts", new Date(updatets).getTime());
-			j.put("exfrom", exfrom);
-			j.put("exto", exto);
-			j.put("expfrom", expfrom);
-			j.put("expto", expto);
+			j.put("zexfrom", exfrom);
+			j.put("zexto", exto);
+			j.put("zexpfrom", expfrom);
+			j.put("zexpto", expto);
 			j.put("rankts", latestsenkats);
 			j.put("d", resultlist);
 			j.put("min", minmap);
