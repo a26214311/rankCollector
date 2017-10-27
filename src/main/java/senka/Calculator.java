@@ -366,7 +366,7 @@ public class Calculator {
 			j.put("zexpto", expto);
 			j.put("rankts", latestsenkats);
 			j.put("d", resultlist);
-			j.put("min", minmap);
+			j.put("minmap", minmap);
 			j.put("front", frontmap);
 			j.put("tail", tailmap);
 			return j;
