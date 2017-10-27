@@ -1,6 +1,8 @@
 package lib;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -173,66 +175,109 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String token8 = getToken(8);
-				if(token8.length()>2){
-					working++;
-					Collector.collectByLastSenka(token8, 8);
-					working--;
+				int serverid = 18;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String token19 = getToken(19);
-				if(token19.length()>2){
-					working++;
-					Collector.collectByLastSenka(token19, 19);
-					working--;
+				int serverid = 19;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String token16 = getToken(16);
-				if(token16.length()>2){
-					working++;
-					Collector.collectByLastSenka(token16, 16);
-					working--;
+				int serverid = 16;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String token18 = getToken(18);
-				if(token18.length()>2){
-					working++;
-					Collector.collectByLastSenka(token18, 18);
-					working--;
+				int serverid = 18;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String token15 = getToken(15);
-				if(token15.length()>2){
-					working++;
-					Collector.collectByLastSenka(token15, 15);
-					working--;
+				int serverid = 15;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();		
 	}
 	
+	
+	public static Map<Integer, Integer> nowworking = new HashMap<>();
 	public static int working=0;
 	public static void rankTask(){
 		working=0;
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				nowworking.put(8, 1);
 				try {
 					String token8 = getToken(8);
 					if(token8.length()>2){
@@ -243,6 +288,8 @@ public class TimerTask {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					nowworking.remove(8);
 				}
 			}
 		}).start();
@@ -250,6 +297,7 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				nowworking.put(19, 1);
 				try {
 					String token19 = getToken(19);
 					if(token19.length()>2){
@@ -260,6 +308,8 @@ public class TimerTask {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					nowworking.remove(19);
 				}
 			}
 		}).start();
@@ -267,6 +317,7 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				nowworking.put(16, 1);
 				try {
 					String token16 = getToken(16);
 					if(token16.length()>2){
@@ -277,6 +328,8 @@ public class TimerTask {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					nowworking.remove(16);
 				}
 			}
 		}).start();
@@ -284,6 +337,7 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				nowworking.put(18, 1);
 				try {
 					String token18 = getToken(18);
 					if(token18.length()>2){
@@ -294,6 +348,8 @@ public class TimerTask {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					nowworking.remove(18);
 				}
 			}
 		}).start();
@@ -301,6 +357,7 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				nowworking.put(15, 1);
 				try {
 					String token15 = getToken(15);
 					if(token15.length()>2){
@@ -311,6 +368,8 @@ public class TimerTask {
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
+				}finally{
+					nowworking.remove(15);
 				}
 			}
 		}).start();

@@ -61,7 +61,8 @@ public class Calculator {
 		}
 		*/
 		String cache = rankCache.get(server);
-		if(true){
+		Object working = TimerTask.nowworking.get(server);
+		if(working==null){
 			System.out.println("cache miss,will calculate");
 			cache = calculateRank(server).toString();
 			rankCache.put(server,cache);
