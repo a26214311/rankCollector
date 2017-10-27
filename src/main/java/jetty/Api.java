@@ -75,7 +75,7 @@ public class Api extends HttpServlet
 		if(path.equals("test")){
 			ret = "{\"r\":110}";
 		}
-		if(path.equals("test2")){
+		if(path.equals("testw")){
 			ret = TimerTask.nowworking.toString();
 		}
 		if(path.equals("collect")){
