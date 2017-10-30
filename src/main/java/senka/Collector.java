@@ -177,7 +177,12 @@ public class Collector {
 		int rankNo = Util.getRankDateNo(now);
 		try {
 			System.out.println("start collect");
-			dbc = cl_n_senka.find(new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore)))); //1000 min
+			String key = "d"+now.getMonth();
+			BasicDBObject proj = new BasicDBObject();
+			proj.append(key, 1);
+			proj.append("id", 1);
+			proj.append("_id", 1);
+			dbc = cl_n_senka.find(new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore))),proj); //1000 min
 			int all=0;
 			while (dbc.hasNext()) {
 				all++;
@@ -187,7 +192,7 @@ public class Collector {
 				DBObject dbObject = (DBObject) dbc.next();
 				
 				String name = dbObject.get("_id").toString();
-				String key = "d"+now.getMonth();
+				
 				if(monthinit){
 					NameHandler.handleName(name,null,-1,1,server,token);
 					continue;
