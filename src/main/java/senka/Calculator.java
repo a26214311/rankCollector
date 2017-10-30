@@ -95,7 +95,15 @@ public class Calculator {
 		try {
 			ArrayList<JSONObject> resultlist = new ArrayList<>();
 			BasicDBList dbl = new BasicDBList(); 
-			dbc = cl_n_senka.find(); //1000 min
+			BasicDBObject query = new BasicDBObject();
+			BasicDBObject proj = new BasicDBObject();
+			String key = "d"+now.getMonth();
+			proj.append(key, 1);
+			proj.append("id", 1);
+			proj.append("_id", 1);
+			proj.append("ts", 1);
+			proj.append("c", 1);
+			dbc = cl_n_senka.find(query,proj); //1000 min
 			Map<Integer, DBObject> id2senka = new HashMap<>();
 			Map<Integer, Integer> minmap = new HashMap<>();
 			Map<Integer, Integer> frontmap = new HashMap<>();
