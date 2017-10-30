@@ -40,7 +40,6 @@ public class Lib {
 	}
 	
 	
-	private static int retryc = 0;
 	 public static String  ApiPost(String path,String param,String token,int server) throws Exception{
 		 try {
 			 String urlStr ="http://"+ips.get(server)+path;
@@ -78,16 +77,9 @@ public class Lib {
 		             result += line;
 		         }
 		         br.close();
-		         retryc = 0;
 		         return result;
 		} catch (Exception e) {
-			e.printStackTrace();
-			retryc++;
-			if(retryc>4){
-				throw new Exception();
-			}else{
-				return ApiPost(path,param,token,server);
-			}
+			throw new Exception();
 		}
 
      }

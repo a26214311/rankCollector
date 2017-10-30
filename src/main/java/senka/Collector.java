@@ -50,7 +50,6 @@ public class Collector {
 	}
 	
 	public static void runCollector(Map<String, String[]> data)throws Exception{
-		failed=0;
 		final String type = data.get("type")[0];
 		final String server = data.get("server")[0];
 		final String token = TimerTask.getToken(Integer.valueOf(server));
@@ -78,14 +77,15 @@ public class Collector {
 									if(j%100==0){
 										System.out.println(j);
 									}
-									int ret = save(jd,server);
-									if(ret == 1){
+									int resultCode = jd.getInt("api_result");
+									if(resultCode==1){
+										JSONObject data = jd.getJSONObject("api_data");
+										save(data,server+"");
+									}else{
 										f++;
 										System.out.println(param);
 										System.out.print("\nfailed get info:"+j+"\n");
 										System.out.print(jd);
-									}else{
-										f=0;
 									}
 									if(f>5){
 										break;
@@ -102,31 +102,31 @@ public class Collector {
 		}
 	}
 	
-	
-	private static int failed = 0;
 	public static JSONObject collectById(int id,String token,int server)throws Exception{
-		if(failed>50){
+		return collectById_D(id, token, server,0);
+	}
+	
+	public static JSONObject collectById_D(int id,String token,int server,int failedc)throws Exception{
+		if(failedc>1){
 			return null;
 		}
 		String path = "/kcsapi/api_req_member/get_practice_enemyinfo";
 		String param = "api%5Ftoken="+token+"&api%5Fmember%5Fid="+id+"&api%5Fverno=1";
-		String r = Lib.ApiPost(path, param, token, server);
-		if(r.startsWith("svdata="));
-		JSONObject jd = new JSONObject(r.substring(7));
-		int ret = save(jd,server+"");
-		if(ret == 1){
-			System.out.println(param);
-			System.out.print("\nfailed get info:"+id+"\n");
-			System.out.print(jd);
-			failed ++;
-			if(failed>4){
-				return null;
+		try {
+			String r = Lib.ApiPost(path, param, token, server);
+			if(r.startsWith("svdata="));
+			JSONObject jd = new JSONObject(r.substring(7));
+			int resultCode = jd.getInt("api_result");
+			if(resultCode==1){
+				JSONObject data = jd.getJSONObject("api_data");
+				save(data,server+"");
+				return data;
 			}else{
-				return collectById(id,token,server);
+				return collectById_D(id, token, server,failedc+1);
 			}
-		}else{
-			failed = 0;
-			return jd.getJSONObject("api_data");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return collectById_D(id, token, server,failedc+1);
 		}
 	}
 	
@@ -164,7 +164,6 @@ public class Collector {
 	
 	
 	public static void collectByLastSenka(String token,int server){
-		failed=0;
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		DBCursor dbc = null;
 		Date now = new Date();
@@ -234,32 +233,25 @@ public class Collector {
 	
 	
 	
-	public static int save(JSONObject j,String server)throws Exception{
-		int resultCode = j.getInt("api_result");
-		if(resultCode==1){
-			
-			Date now = new Date();
-			JSONObject data = j.getJSONObject("api_data");
-			String name = data.getString("api_nickname");
-			JSONArray expa = data.getJSONArray("api_experience");
-			int exp = expa.getInt(0);
-			int id = data.getInt("api_member_id");
-			BasicDBObject update = new BasicDBObject();
-			BasicDBObject expdata = new BasicDBObject();
-			expdata.append("d", exp);
-			expdata.append("ts",now);
-			int lv = data.getInt("api_level");
-			update.append("$set", new BasicDBObject("name", name).append("e", exp).append("lv", lv).append("info",data.toString()).append("ts", now));
-			update.append("$push", new BasicDBObject("exp",expdata));
-			BasicDBObject query = new BasicDBObject();
-			query.append("_id", id);
-			DBCollection cl_senka=Util.db.getCollection("cl_senka_"+server);
-			System.out.println("save name:"+name);
-			cl_senka.update(query, update,true,false);
-			return 0;
-		}else{
-			return 1;
-		}
+	public static int save(JSONObject data,String server)throws Exception{
+		Date now = new Date();
+		String name = data.getString("api_nickname");
+		JSONArray expa = data.getJSONArray("api_experience");
+		int exp = expa.getInt(0);
+		int id = data.getInt("api_member_id");
+		BasicDBObject update = new BasicDBObject();
+		BasicDBObject expdata = new BasicDBObject();
+		expdata.append("d", exp);
+		expdata.append("ts",now);
+		int lv = data.getInt("api_level");
+		update.append("$set", new BasicDBObject("name", name).append("e", exp).append("lv", lv).append("info",data.toString()).append("ts", now));
+		update.append("$push", new BasicDBObject("exp",expdata));
+		BasicDBObject query = new BasicDBObject();
+		query.append("_id", id);
+		DBCollection cl_senka=Util.db.getCollection("cl_senka_"+server);
+		System.out.println("save name:"+name);
+		cl_senka.update(query, update,true,false);
+		return 0;
 	}
 	
 	
