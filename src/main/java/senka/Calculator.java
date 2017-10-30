@@ -174,6 +174,7 @@ public class Calculator {
 			int latestsenkats = 0;
 			while (dbc2.hasNext()) {
 				DBObject userData = (DBObject) dbc2.next();
+				Clean.cleanExpIfNecessary(cl_senka, userData);
 				int id = Integer.valueOf(userData.get("_id").toString());
 				String name = userData.get("name").toString();
 

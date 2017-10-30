@@ -92,7 +92,12 @@ public class NameHandler {
 		int date = now.getDate();
 		DBCursor dbc = null;
 		try {
-			dbc = cl_senka.find(new BasicDBObject("name",name));
+			BasicDBObject projector = new BasicDBObject();
+			projector.append("name", 1);
+			projector.append("exp", 1);
+			projector.append("info", 1);
+			projector.append("_id", 1);
+			dbc = cl_senka.find(new BasicDBObject("name",name),projector);
 			ArrayList<DBObject> userlist = new ArrayList<>();
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
