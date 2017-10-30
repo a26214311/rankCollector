@@ -90,7 +90,7 @@ public class TimerTask {
 		System.out.println("--------------------------------");
 		
 		
-		int left4 = (int)(3600000-(now.getTime()+2000000)%3600000)/1000;
+		int left4 = (int)(3600000-(now.getTime()+1600000)%3600000)/1000;
 		System.out.println("--------------------------------");
 		System.out.println("will do random task after "+left4/60+"minutes");
 		ScheduledThreadPoolExecutor stpe4 = new ScheduledThreadPoolExecutor(15);

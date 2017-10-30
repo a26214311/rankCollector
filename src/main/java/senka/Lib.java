@@ -79,6 +79,7 @@ public class Lib {
 		         br.close();
 		         return result;
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new Exception();
 		}
 
