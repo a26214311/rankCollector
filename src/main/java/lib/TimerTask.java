@@ -175,7 +175,7 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				int serverid = 18;
+				int serverid = 8;
 				nowworking.put(serverid, 1);
 				try {
 					String token = getToken(serverid);
