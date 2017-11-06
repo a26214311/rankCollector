@@ -485,6 +485,10 @@
         var min = senka.min;
 
 
+        if(frontex>0){
+          exstr=exstr+"(+"+frontex+")"
+        }
+
 
         if(max==min){
           h=h+'<td colspan="2">'+max+'</td>';
