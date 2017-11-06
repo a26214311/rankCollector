@@ -22,12 +22,12 @@ import lib.TimerTask;
 
 public class Calculator {
 
-
+	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank(8);
+			calculateRank_D(15);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,7 +98,9 @@ public class Calculator {
 			BasicDBObject query = new BasicDBObject();
 			BasicDBObject proj = new BasicDBObject();
 			String key = "d"+now.getMonth();
+			String key2 = "d"+(now.getMonth()-1);
 			proj.append(key, 1);
+			proj.append(key2, 1);
 			proj.append("id", 1);
 			proj.append("_id", 1);
 			proj.append("ts", 1);
@@ -108,18 +110,80 @@ public class Calculator {
 			Map<Integer, Integer> minmap = new HashMap<>();
 			Map<Integer, Integer> frontmap = new HashMap<>();
 			Map<Integer, Integer> tailmap = new HashMap<>();
+			Map<Integer, JSONObject> id2bmap = new HashMap<>();
+			ArrayList<DBObject> senkaListArr = new ArrayList<>();
+			int lastMonthFrontSenka = 0;
+			int lastMonthBackSenka = 0;
 			while (dbc.hasNext()) {
 				DBObject senkaData = dbc.next();
+				senkaListArr.add(senkaData);
+				
+				Object lastMonthSenkaListObject = senkaData.get(key2);
+				if(lastMonthSenkaListObject==null){
+					continue;
+				}
+				BasicDBList senkaList = (BasicDBList)lastMonthSenkaListObject;
+				DBObject frontSenka = (DBObject)senkaList.get(0);
+				int no = Integer.valueOf(frontSenka.get("no").toString());
+				int ts = Integer.valueOf(frontSenka.get("ts").toString());
+				int senka = Integer.valueOf(frontSenka.get("senka").toString());
+				
+				
+				DBObject backSenka = (DBObject)senkaList.get(senkaList.size()-1);
+				int bno = Integer.valueOf(backSenka.get("no").toString());
+				int bts = Integer.valueOf(backSenka.get("ts").toString());
+				int bsenka = Integer.valueOf(backSenka.get("senka").toString());
+				
+				if(no>987&&ts==0){
+					lastMonthFrontSenka=senka;
+				}
+				if(bno>987&&bts==monthOfDay[new Date().getMonth()-1]*2-1){
+					lastMonthBackSenka=bsenka;
+				}
+			}
+			System.out.println("last month tail:"+lastMonthFrontSenka+","+lastMonthBackSenka);
+			for(int v=0;v<senkaListArr.size();v++){
+				DBObject senkaData = senkaListArr.get(v);
 				Object ido = senkaData.get("id");
 				Object senkaListObj = senkaData.get("d"+now.getMonth());
 				if(senkaListObj==null){
 					continue;
 				}
+				int lmfirst = lastMonthFrontSenka;
+				int lmlast = lastMonthBackSenka;
+				Object lastMonthSenkaListObject = senkaData.get(key2);
+				if(lastMonthSenkaListObject!=null){
+					BasicDBList lastMonthSenkaList = (BasicDBList)lastMonthSenkaListObject;
+					DBObject frontSenka = (DBObject)lastMonthSenkaList.get(0);
+					int no = Integer.valueOf(frontSenka.get("no").toString());
+					int ts = Integer.valueOf(frontSenka.get("ts").toString());
+					int senka = Integer.valueOf(frontSenka.get("senka").toString());
+					
+					DBObject backSenka = (DBObject)lastMonthSenkaList.get(lastMonthSenkaList.size()-1);
+					int bno = Integer.valueOf(backSenka.get("no").toString());
+					int bts = Integer.valueOf(backSenka.get("ts").toString());
+					int bsenka = Integer.valueOf(backSenka.get("senka").toString());
+					
+					if(ts==0){
+						lmfirst=senka;
+					}
+					if(bts==monthOfDay[new Date().getMonth()-1]*2-1){
+						lmlast=bsenka;
+					}
+				}
+				
 				BasicDBList senkaList = (BasicDBList)senkaListObj;
 				DBObject frontSenka = (DBObject)senkaList.get(0);
 				int no = Integer.valueOf(frontSenka.get("no").toString());
 				int ts = Integer.valueOf(frontSenka.get("ts").toString());
+				
+				
 				int senka = Integer.valueOf(frontSenka.get("senka").toString());
+				int maxadd = lmlast/35+lmfirst*34/35;
+				
+
+				
+				
 				if(minmap.get(ts)==null){
 					minmap.put(ts, senka);
 				}else{
@@ -154,8 +218,21 @@ public class Calculator {
 				if(idstr.equals("")){
 					continue;
 				}
+				
+
+				
 				String[] ida = idstr.split(",");
 				if(ida.length==1){
+					if(ts==0&&senka>maxadd+40){
+						JSONObject jb = new JSONObject();
+						jb.put("lf", lmfirst);
+						jb.put("ll", lmlast);
+						id2bmap.put(Integer.valueOf(ida[0]), jb);
+						System.out.println(frontSenka);
+						System.out.println(lmfirst+","+lmlast+","+ido);
+						System.out.println(lastMonthSenkaListObject);
+						System.out.println();
+					}
 					dbl.add(Integer.valueOf(ida[0]));
 					id2senka.put(Integer.valueOf(ida[0]), senkaData);
 				}else if(ida.length<5){
@@ -307,6 +384,14 @@ public class Calculator {
 					}
 					JSONObject retj = getResultByPairlist(latestexp,latestts, pairlist, name);
 					
+					JSONObject bmap = id2bmap.get(id);
+					int frontex=0;
+					if(bmap!=null){
+						int lmfirst = bmap.getInt("lf");
+						int lmlast = bmap.getInt("ll");
+						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF);
+					}
+					
 					if(retj!=null){
 						Date pairexfrom = (Date)pairlist.get(0).get("ts");
 						Date pairexto = (Date)pairlist.get(pairlist.size()-1).get("ts");
@@ -316,6 +401,7 @@ public class Calculator {
 						if(exto<pairexto.getTime()){
 							exto = pairexto.getTime();
 						}
+						retj.put("frontex", frontex);
 						retj.put("fsenka", fsenka);
 						retj.put("fsenkats", fsenkats);
 						retj.put("lsenka", senka);
@@ -336,6 +422,7 @@ public class Calculator {
 					}else{
 						JSONObject ret = new JSONObject();
 						ret.put("type", 3);
+						ret.put("frontex", frontex);
 						ret.put("fsenka", fsenka);
 						ret.put("fsenkats", fsenkats);
 						ret.put("name", name);
@@ -760,13 +847,105 @@ public class Calculator {
 		return result;
 	}
 	
+	public static int calMinFrontEx(int lmfirst,int lmlast,BasicDBList explist,DBObject senkaF){
+		Date now = new Date();
+		int lastMonth = now.getMonth()-1;
+		
+		Date then = new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
+		then.setMonth(lastMonth);
+		then.setDate(monthOfDay[lastMonth]);
+		then.setHours(21);
+		then.setMinutes(20);
+		then.setSeconds(0);
+		
+		
+		Date nz = new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
+		nz.setDate(1);
+		nz.setHours(1);
+		nz.setMinutes(0);
+		nz.setSeconds(0);
+		
+		int firstexp=0;
+		Date firstts=null;
+		int lastexp=0;
+		Date lastts=null;
+		int uexp=0;
+		Date uts=null;
+		
+		
+		for(int i=0;i<explist.size();i++){
+			DBObject expData = (DBObject)explist.get(i);
+			Date thents = (Date)expData.get("ts");
+			int thenexp = Integer.valueOf(expData.get("d").toString());
+			if(thents.getMonth()<lastMonth){
+				firstexp=thenexp;
+				firstts=thents;
+			}
+			if(thents.getTime()<then.getTime()){
+				lastexp=thenexp;
+				lastts=thents;
+			}
+			
+			if(uexp==0&&thents.getTime()>nz.getTime()){
+				uexp=thenexp;
+				uts = thents;
+			}
+		}
+		int fsenka = Integer.valueOf(senkaF.get("senka").toString());
+		if(then.getTime()-lastts.getTime()<2400000&&uts.getTime()-nz.getTime()<1200000){
+			
+			int subback = (uexp-lastexp)*7/10000;
+			int subfront = (lastexp-firstexp)*7/10000;
+			
+			int max = lmfirst*34/35+(subfront+1380)/35+subback;
+			
+			int frontex = fsenka-max;
+			return frontex;
+		}else{
+			int max = lmfirst*34/35+(lmlast+1500)/35;
+			int frontex = fsenka-max;
+			return frontex;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static void calculateZ(int server,int month){
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
 		DBCursor dbc = null;
+		DBCursor dbc2 = null;
 		Date now = new Date();
 		try {
 			dbc = cl_n_senka.find();
+			dbc2 = cl_n_senka.find();
+			Map<Integer, Integer> minmap = new HashMap<>();
+			while (dbc2.hasNext()) {
+				DBObject senkaData = dbc2.next();
+				Object senkaListObj = senkaData.get("d"+now.getMonth());
+				if(senkaListObj==null){
+					continue;
+				}
+				BasicDBList senkaList = (BasicDBList)senkaListObj;
+				DBObject frontSenka = (DBObject)senkaList.get(0);
+				int ts = Integer.valueOf(frontSenka.get("ts").toString());
+				int senka = Integer.valueOf(frontSenka.get("senka").toString());
+				if(minmap.get(ts)==null){
+					minmap.put(ts, senka);
+				}else{
+					if(senka<minmap.get(ts)){
+						minmap.put(ts, senka);
+					}
+				}
+			}
+			int fmin = minmap.get(0);
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
 				String key = "d"+month;
@@ -789,6 +968,7 @@ public class Calculator {
 						int pointer1=0;
 						int pointer2=0;
 						ArrayList<JSONObject> pairlist = new ArrayList<>();
+						int ex=0;
 						while(pointer1<expList.size()&&pointer2<senkaList.size()){
 							DBObject expData = (DBObject)expList.get(pointer1);
 							DBObject senkaData = (DBObject)senkaList.get(pointer2);
@@ -823,22 +1003,99 @@ public class Calculator {
 							}
 						}
 						if(pairlist.size()>1){
+							boolean zcleared = false;
 							JSONObject firstPair = pairlist.get(0);
 							JSONObject lastPair = pairlist.get(pairlist.size()-1);
-							int firstexp = firstPair.getInt("exp");
+							int firstexpA = firstPair.getInt("exp");
 							int lastexp = lastPair.getInt("exp");
-							int subexp = lastexp-firstexp;
+							int subexp = lastexp-firstexpA;
 							int firstsenka = firstPair.getInt("senka");
 							int lastsenka = lastPair.getInt("senka");
-							int subsenka = lastsenka-firstsenka;
-							int ex = subsenka-subexp*7/10000;
-							if(ex>1050){
-								System.out.println();
-								System.out.println(name+":"+ex);
-								System.out.println(pairlist);
-								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
+							int subsenkaA = lastsenka-firstsenka;
+							ex = subsenkaA-subexp*7/10000;
+							if(ex>1040){
+								zcleared = true;
 							}
+							
+							DBObject latestexpdata = (DBObject)expList.get(expList.size()-1);
+							int latestexp = Integer.valueOf(latestexpdata.get("d").toString());
+							Date latestts = (Date)latestexpdata.get("ts");
+
+							DBObject senkaD = (DBObject)senkaList.get(senkaList.size()-1);
+							DBObject senkaF = (DBObject)senkaList.get(0);
+							int fsenka = Integer.valueOf(senkaF.get("senka").toString());
+							int fsenkats = Integer.valueOf(senkaF.get("ts").toString()); 
+							int senka = Integer.valueOf(senkaD.get("senka").toString());
+							int senkats = Integer.valueOf(senkaD.get("ts").toString()); 
+							int lastno = Integer.valueOf(senkaD.get("no").toString()); 
+							DBObject firstExpData  = Zcal.getFirstExpData(expList,month);
+							DBObject baseExpData = Zcal.getBaseExpData(expList,month);
+							int firstexp = 0;
+							Date firstts = new Date(0);
+							if(firstExpData!=null){
+								firstexp = Integer.valueOf(firstExpData.get("d").toString());
+								firstts = (Date)firstExpData.get("ts");
+							}else{
+								System.out.println(name);
+								System.out.println(expList);
+							}
+							int baseexp = 0;
+							Date basets = new Date();
+							if(baseExpData!=null){
+								baseexp = Integer.valueOf(baseExpData.get("d").toString());
+								basets = (Date)baseExpData.get("ts");
+							}
+							int sub = (lastexp-baseexp)*7/10000;
+							
+							
+							if(fsenkats>0){
+								int max =sub+1380+fmin;
+								int maxuex = max - lastsenka;
+								if(maxuex<335){
+									zcleared=true;
+//									System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
+								}
+							}else{
+								int max =sub+1380+fsenka;
+								int maxuex = max - lastsenka;
+								if(maxuex<335){
+									if(zcleared==false){
+										zcleared=true;
+//										System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
+									}
+								}
+							}
+							
+							if(firstts.getTime()>0){
+								int subsenka = (lastexp-firstexp)*7/10000;
+								int max =  fsenka+subsenka+1380;
+								int maxuex = max - lastsenka;
+								if(maxuex<335){
+									if(zcleared==false){
+//										zcleared=true;
+										cl_senka.update(user, new BasicDBObject("$unset",new BasicDBObject("z",true)));
+										System.out.println(name+firstts+","+firstPair+","+senkaF+","+subsenka+","+lastPair+maxuex);
+									}
+								}
+							}
+							
+							if(zcleared){
+//								System.out.println(ids);
+								//cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
+							}
+							
+							
+							
+							
+							
+							
 						}
+						
+
+						
+						
+						
+
 					}else{
 						
 					}

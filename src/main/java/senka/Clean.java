@@ -24,7 +24,7 @@ public class Clean {
 			System.out.println("clear user data");
 			System.out.println(userData.get("name"));
 			Date now = new Date();
-			int limitmon = now.getYear()*12+now.getMonth()-1;
+			int limitmon = now.getYear()*12+now.getMonth()-2;
 			int maxerase = exp.size()-200;
 			int erase = 0;
 			BasicDBList expnew = new BasicDBList();

@@ -32,4 +32,16 @@ public class Util {
 		  int no = (date-1)*2+((hour>=14)?1:0);
 		  return no;
 	}
+	
+	public static int getDateNo(Date dat){
+		  Date now = new Date(dat.getTime()+(dat.getTimezoneOffset()+480)*60000);
+		  int date = now.getDate();
+		  int hour = now.getHours();
+		  if(hour<1){
+		    date = date -1;
+		    hour = hour + 24;
+		  }
+		  int no = (date-1)*2+((hour>=13)?1:0);
+		  return no;
+	}
 }
