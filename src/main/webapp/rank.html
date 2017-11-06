@@ -275,8 +275,8 @@
           }
 
           if (senka.fsenkats == 0 && Math.abs(expfrom - zexpfrom) < 1200000) {
-            data.d[i].except=senka.subsenka + senka.fsenka + 1380 - zcleared;
-            data.d[i].max=data.d[i].except-frontex;
+            data.d[i].except=senka.subsenka + senka.fsenka + 1380 - zcleared-frontex;
+            data.d[i].max=data.d[i].except;
             data.d[i].min=data.d[i].except;
           }else if(senka.fsenkats == 0 && getDateNo(expfrom)==0 && new Date(basets).getMonth()<month){
             var minsenka = senka.fsenka+senka.subsenka+1380-zcleared;
@@ -290,7 +290,7 @@
               maxsenka=max3;
             }
             data.d[i].max=maxsenka-frontex;
-            data.d[i].min=minsenka;
+            data.d[i].min=minsenka-frontex;
           }  else if (ensure) {
             data.d[i].except=senka.senka + 1380 - zcleared - senka.ex;
             data.d[i].max=data.d[i].except-frontex;
@@ -332,7 +332,7 @@
             }
 
             data.d[i].max=maxsenka-frontex;
-            data.d[i].min=minsenka;
+            data.d[i].min=minsenka-frontex;
           }
 
         } else if (type == 3) {
@@ -361,7 +361,7 @@
           }
 
           data.d[i].max=maxsenka-frontex;
-          data.d[i].min=minsenka;
+          data.d[i].min=minsenka-frontex;
         } else if (type == 2) {
           var senkalist = senka.senkalist;
           var maylist = senka.may;
