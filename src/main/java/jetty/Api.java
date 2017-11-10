@@ -64,8 +64,30 @@ public class Api extends HttpServlet
 	  
 	  
 	  @Override 
-	  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		  System.out.println(234);
+	  public void doPost(HttpServletRequest req, HttpServletResponse response) throws IOException{
+			String pathinfo = req.getPathInfo();
+			String path = pathinfo.substring(1);
+			String queryString = req.getQueryString();
+			Map<String, String[]> data = new HashMap<>();
+			if(queryString!=null){
+				data = ApiUtil.getParamsMap(queryString, "utf-8");
+			}
+			try {
+				String ret = handleData(path, data, req, response);
+				System.out.println("==============");
+				System.out.println(path);
+				System.out.println(queryString);
+				System.out.println(new Date());
+				System.out.println(req.getRemoteAddr());
+				System.out.println("==============\n");
+				OutputStream output = null;
+				output = response.getOutputStream();
+				IOUtils.write(ret.getBytes("utf-8"), output);
+				output.flush();
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.getOutputStream().print("error");
+			}
 	  }
 		
 	  public static String handleData(String path,Map<String, String[]> data,HttpServletRequest req, HttpServletResponse resp)throws Exception{
