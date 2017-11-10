@@ -40,6 +40,7 @@ public class Api extends HttpServlet
 			if(path.equals("rank.html")){
 				System.out.println("rank");
 				response.sendRedirect("http://flandrescarlet.gitee.io/tools/senka/");
+				return;
 			}else{
 				path=path.substring(4);
 			}
