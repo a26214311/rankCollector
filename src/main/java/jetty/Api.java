@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/api/*"}, loadOnStartup = 1)
+@WebServlet(urlPatterns = {"/*"}, loadOnStartup = 1)
 public class Api extends HttpServlet 
 {
 	
@@ -37,6 +37,12 @@ public class Api extends HttpServlet
 	  public void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException{
 			String pathinfo = req.getPathInfo();
 			String path = pathinfo.substring(1);
+			if(path.equals("rank.html")){
+				System.out.println("rank");
+				response.sendRedirect("http://flandrescarlet.gitee.io/tools/senka/");
+			}else{
+				path=path.substring(4);
+			}
 			String queryString = req.getQueryString();
 			Map<String, String[]> data = new HashMap<>();
 			if(queryString!=null){

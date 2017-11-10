@@ -31,7 +31,7 @@ public class Collector {
 		System.out.println(123123);
 		long t1 = new Date().getTime();
 		try {
-			Collector.collectByLastSenka("7635b926fc539bbb0bc00feaf118bca17f1972fe", 8);
+			Collector.collectById(8028255, "a6451846556b4aa1e8026fd123f0203b6adc65b8", 8);
 //			System.out.println(collectById(19161718, "162ebccc78cb0c33676c3b107502515ffd013da5", 19));
 		} catch (Exception e) {
 			e.printStackTrace();
