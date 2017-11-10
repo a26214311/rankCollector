@@ -1,0 +1,3 @@
+[submodule "src/main/webapp/antd-rank-list"]
+	path = src/main/webapp/antd-rank-list
+	url = git@github.com:Flandre/antd-rank-list.git
