@@ -566,10 +566,10 @@ public class Calculator {
 			if(latestts.getTime()>latestpairts.getTime()){
 				int senkanow = (latestexp-latestpairexp)*7/10000+latestpairsenka;
 				j.put("senka", senkanow);
-				j.put("ts", latestts);
+				//j.put("ts", latestts.getTime());
 			}else{
 				j.put("senka", latestpairsenka);
-				j.put("ts", latestpairts);
+				//j.put("ts", latestpairts.getTime());
 			}
 			j.put("type", 1);
 			j.put("name",name);
