@@ -136,6 +136,7 @@ public class Api extends HttpServlet
 			resp.setCharacterEncoding("utf-8");
 			resp.setHeader("Access-Control-Allow-Origin", "*");
 			ret = Calculator.calculator(data);
+			resp.setContentLength(ret.getBytes("utf-8").length);
 		}
 		if(path.equals("calz")){
 			int month = new Date().getMonth()-1;
