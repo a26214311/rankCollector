@@ -197,13 +197,17 @@ public class Calculator {
 					}
 				}
 				
-				DBObject backSenka = (DBObject)senkaList.get(senkaList.size()-1);
-				int backno = Integer.valueOf(backSenka.get("no").toString());
-				int backts = Integer.valueOf(backSenka.get("ts").toString());
-				int backsenka = Integer.valueOf(backSenka.get("senka").toString());
-				if(backts==rankNo){
-					if(backno==5||backno==20||backno==100||backno==500){
-						tailmap.put(backno,backsenka);
+				for(int i=senkaList.size()-1;i>=0;i--){
+					DBObject backSenka = (DBObject)senkaList.get(i);
+					int backno = Integer.valueOf(backSenka.get("no").toString());
+					int backts = Integer.valueOf(backSenka.get("ts").toString());
+					int backsenka = Integer.valueOf(backSenka.get("senka").toString());
+					if(backts==rankNo){
+						if(backno==5||backno==20||backno==100||backno==500){
+							tailmap.put(backno,backsenka);
+						}
+					}else{
+						break;
 					}
 				}
 				
