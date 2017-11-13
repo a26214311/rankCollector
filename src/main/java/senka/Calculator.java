@@ -111,6 +111,7 @@ public class Calculator {
 			Map<Integer, Integer> frontmap = new HashMap<>();
 			Map<Integer, Integer> tailmap = new HashMap<>();
 			Map<Integer, JSONObject> id2bmap = new HashMap<>();
+			Map<Integer, HashMap<Integer, Integer>> linemap= new HashMap<>();
 			ArrayList<DBObject> senkaListArr = new ArrayList<>();
 			int lastMonthFrontSenka = 0;
 			int lastMonthBackSenka = 0;
@@ -191,25 +192,50 @@ public class Calculator {
 						minmap.put(ts, senka);
 					}
 				}
-				if(ts==0){
-					if(no==5||no==20||no==100||no==500){
-						frontmap.put(no, senka);
-					}
-				}
+//				if(ts==0){
+//					if(no==5||no==20||no==100||no==500){
+//						frontmap.put(no, senka);
+//					}
+//				}
 				
-				for(int i=senkaList.size()-1;i>=0;i--){
+//				for(int i=senkaList.size()-1;i>=0;i--){
+//					DBObject backSenka = (DBObject)senkaList.get(i);
+//					int backno = Integer.valueOf(backSenka.get("no").toString());
+//					int backts = Integer.valueOf(backSenka.get("ts").toString());
+//					int backsenka = Integer.valueOf(backSenka.get("senka").toString());
+//					if(backts==rankNo){
+//						if(backno==5||backno==20||backno==100||backno==500){
+//							tailmap.put(backno,backsenka);
+//						}
+//					}else{
+//						break;
+//					}
+//				}
+				
+				for(int i=0;i<senkaList.size();i++){
 					DBObject backSenka = (DBObject)senkaList.get(i);
 					int backno = Integer.valueOf(backSenka.get("no").toString());
 					int backts = Integer.valueOf(backSenka.get("ts").toString());
 					int backsenka = Integer.valueOf(backSenka.get("senka").toString());
-					if(backts==rankNo){
-						if(backno==5||backno==20||backno==100||backno==500){
+					if(backno==5||backno==20||backno==100||backno==500){
+						HashMap<Integer, Integer> oldLineMap = linemap.get(backno);
+						if(oldLineMap==null){
+							oldLineMap = new HashMap<Integer, Integer>();
+						}
+						oldLineMap.put(backts, backsenka);
+						if(backts==rankNo){
 							tailmap.put(backno,backsenka);
 						}
-					}else{
-						break;
+						if(backts==0){
+							frontmap.put(backno, backsenka);
+						}
+						linemap.put(backno, oldLineMap);
 					}
 				}
+//				System.out.println(111);
+//				System.out.println(linemap);
+//				System.out.println(frontmap);
+//				System.out.println(tailmap);
 				
 				Date lastupdatets = (Date)senkaData.get("ts");
 				if(now.getTime()-lastupdatets.getTime()>60000000L){
@@ -232,10 +258,10 @@ public class Calculator {
 						jb.put("lf", lmfirst);
 						jb.put("ll", lmlast);
 						id2bmap.put(Integer.valueOf(ida[0]), jb);
-						System.out.println(frontSenka);
-						System.out.println(lmfirst+","+lmlast+","+ido);
-						System.out.println(lastMonthSenkaListObject);
-						System.out.println();
+//						System.out.println(frontSenka);
+//						System.out.println(lmfirst+","+lmlast+","+ido);
+//						System.out.println(lastMonthSenkaListObject);
+//						System.out.println();
 					}
 					dbl.add(Integer.valueOf(ida[0]));
 					id2senka.put(Integer.valueOf(ida[0]), senkaData);
