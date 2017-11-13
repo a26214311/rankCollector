@@ -485,6 +485,7 @@ public class Calculator {
 				}
 			});
 			JSONObject j = new JSONObject();
+			j.put("keymap", linemap);
 			j.put("ts", new Date(updatets).getTime());
 			j.put("zexfrom", exfrom);
 			j.put("zexto", exto);
