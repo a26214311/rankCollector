@@ -238,7 +238,7 @@ public class Calculator {
 //				System.out.println(tailmap);
 				
 				Date lastupdatets = (Date)senkaData.get("ts");
-				if(now.getTime()-lastupdatets.getTime()>60000000L){
+				if(now.getTime()-lastupdatets.getTime()>77000000L){
 					continue;
 				}
 				if(ido==null){
