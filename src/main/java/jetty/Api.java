@@ -41,8 +41,10 @@ public class Api extends HttpServlet
 				System.out.println("rank");
 				response.sendRedirect("http://flandrescarlet.gitee.io/tools/senka/");
 				return;
-			}else{
+			}else if(path.startsWith("api")){
 				path=path.substring(4);
+			}else{
+				
 			}
 			String queryString = req.getQueryString();
 			Map<String, String[]> data = new HashMap<>();

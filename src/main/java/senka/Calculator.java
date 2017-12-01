@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(15);
+			calculateRank_D(8);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -169,7 +169,9 @@ public class Calculator {
 						lmfirst=senka;
 					}
 					if(bts==monthOfDay[new Date().getMonth()-1]*2-1){
-						lmlast=bsenka;
+						if(lmlast<bsenka){
+							lmlast=bsenka;
+						}
 					}
 				}
 				
@@ -181,6 +183,13 @@ public class Calculator {
 				
 				int senka = Integer.valueOf(frontSenka.get("senka").toString());
 				int maxadd = lmlast/35+lmfirst*34/35;
+				
+				if(ido.toString().equals("750797")){
+					System.out.println(senka);
+					System.out.println(lmfirst);
+					System.out.println(lmlast);
+					System.out.println(maxadd);
+				}
 				
 
 				
@@ -357,11 +366,6 @@ public class Calculator {
 						}
 					}
 				}
-				if(name.equals("ヘスペラス")){
-					System.out.println(1111231);
-					System.out.println(pairlist);
-				}
-
 				if(drop==0){
 					DBObject latestexpdata = (DBObject)explist.get(explist.size()-1);
 					int latestexp = Integer.valueOf(latestexpdata.get("d").toString());
@@ -922,6 +926,8 @@ public class Calculator {
 				uts = thents;
 			}
 		}
+
+		
 		int fsenka = Integer.valueOf(senkaF.get("senka").toString());
 		if(then.getTime()-lastts.getTime()<2400000&&uts.getTime()-nz.getTime()<1200000){
 			
