@@ -169,7 +169,7 @@ public class Calculator {
 						lmfirst=senka;
 					}
 					if(bts==monthOfDay[new Date().getMonth()-1]*2-1){
-						if(lmlast<bsenka){
+						if(lmlast>bsenka){
 							lmlast=bsenka;
 						}
 					}
