@@ -156,23 +156,30 @@ public class Calculator {
 				if(lastMonthSenkaListObject!=null){
 					BasicDBList lastMonthSenkaList = (BasicDBList)lastMonthSenkaListObject;
 					DBObject frontSenka = (DBObject)lastMonthSenkaList.get(0);
-					int no = Integer.valueOf(frontSenka.get("no").toString());
 					int ts = Integer.valueOf(frontSenka.get("ts").toString());
 					int senka = Integer.valueOf(frontSenka.get("senka").toString());
-					
-					DBObject backSenka = (DBObject)lastMonthSenkaList.get(lastMonthSenkaList.size()-1);
-					int bno = Integer.valueOf(backSenka.get("no").toString());
-					int bts = Integer.valueOf(backSenka.get("ts").toString());
-					int bsenka = Integer.valueOf(backSenka.get("senka").toString());
-					
-					if(ts==0){
-						lmfirst=senka;
+					for(int y=0;y<3;y++){
+						int index = lastMonthSenkaList.size()-1-y;
+						if(index<0){
+							break;
+						}
+						DBObject backSenka = (DBObject)lastMonthSenkaList.get(index);
+						int bts = Integer.valueOf(backSenka.get("ts").toString());
+						int bsenka = Integer.valueOf(backSenka.get("senka").toString());
+						if(ts==0){
+							lmfirst=senka;
+						}
+						if(bts==monthOfDay[new Date().getMonth()-1]*2-1){
+							if(lmlast<bsenka){
+								lmlast=bsenka;
+							}
+						}
 					}
-					if(bts==monthOfDay[new Date().getMonth()-1]*2-1){
-						
-							lmlast=bsenka;
-						
-					}
+				}
+				if(ido.toString().equals("750797")){
+					System.out.println(33333333);
+					System.out.println(lmfirst);
+					System.out.println(lmlast);
 				}
 				
 				BasicDBList senkaList = (BasicDBList)senkaListObj;
