@@ -176,17 +176,18 @@ public class Calculator {
 						}
 					}
 				}
-				if(ido.toString().equals("750797")){
-					System.out.println(33333333);
-					System.out.println(lmfirst);
-					System.out.println(lmlast);
-				}
+
 				
 				BasicDBList senkaList = (BasicDBList)senkaListObj;
 				DBObject frontSenka = (DBObject)senkaList.get(0);
 				int no = Integer.valueOf(frontSenka.get("no").toString());
 				int ts = Integer.valueOf(frontSenka.get("ts").toString());
-				
+				if(ido.toString().equals("762316")){
+					System.out.println(33333333);
+					System.out.println(lmfirst);
+					System.out.println(lmlast);
+					System.out.println(frontSenka);
+				}
 				
 				int senka = Integer.valueOf(frontSenka.get("senka").toString());
 				int maxadd = lmlast/35+lmfirst*34/35;
@@ -933,6 +934,15 @@ public class Calculator {
 				uts = thents;
 			}
 		}
+		
+		if(lmfirst==569&&lmlast==3105){
+			System.out.println(firstexp);
+			System.out.println(firstts);
+			System.out.println(lastexp);
+			System.out.println(lastts);
+			System.out.println(uexp);
+			System.out.println(uts);
+		}
 
 		
 		int fsenka = Integer.valueOf(senkaF.get("senka").toString());
@@ -944,7 +954,7 @@ public class Calculator {
 			int max = lmfirst*34/35+(subfront+1380)/35+subback;
 			
 			int frontex = fsenka-max;
-			return frontex;
+			return frontex>0?frontex:0;
 		}else{
 			int max = lmfirst*34/35+(lmlast+1500)/35;
 			int frontex = fsenka-max;
