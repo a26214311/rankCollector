@@ -27,7 +27,7 @@ public class TimerTask {
 	private static String user18 = "bot3@rewards.msharebox.com";
 	private static String user16 = "bot4@rewards.msharebox.com";
 	private static String user15 = "bot5@rewards.msharebox.com";
-	private static String pass8 = "987654321";
+	private static String pass8 = "9876543210";
 	private static String pass19 = "987654321";
 	private static String pass20 = "9876543210";
 	private static String pass18 = "987654321";
