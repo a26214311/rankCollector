@@ -21,6 +21,7 @@ public class TimerTask {
 	public static int id16 = 16118483;
 	public static int id18 = 18158245;
 	public static int id15 = 15155022;
+	public static int id20 = 20601245;
 	private static String user8 = "1127805853@qq.com";
 	private static String user19 = "bot1@rewards.msharebox.com";
 	private static String user20 = "bot2@rewards.msharebox.com";
