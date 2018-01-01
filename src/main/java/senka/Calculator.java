@@ -894,7 +894,7 @@ public class Calculator {
 		Date now = new Date();
 		int lastMonth = now.getMonth()-1;
 		if(lastMonth==-1){
-			lastMonth=lastMonth+12
+			lastMonth=lastMonth+12;
 		}
 		
 		Date then = new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
