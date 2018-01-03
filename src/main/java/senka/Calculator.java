@@ -546,10 +546,11 @@ public class Calculator {
 	public static DBObject getBaseExpData(BasicDBList explist){
 		Date now = new Date();
 		int month = now.getMonth();
+		int year = now.getYear();
 		for(int i=0;i<explist.size();i++){
 			DBObject expdata = (DBObject)explist.get(explist.size()-i-1);
 			Date ts = (Date)expdata.get("ts");
-			if(ts.getMonth()<month){
+			if(ts.getYear()*12+ts.getMonth()<month+year*12){
 				return expdata;
 			}
 		}
@@ -562,7 +563,7 @@ public class Calculator {
 		for(int i=0;i<explist.size();i++){
 			DBObject expdata = (DBObject)explist.get(i);
 			Date ts = (Date)expdata.get("ts");
-			if(ts.getMonth()==now.getMonth()){
+			if(ts.getYear()*12+ts.getMonth()==now.getYear()*12+now.getMonth()){
 				if(ts.getDate()==1&&ts.getHours()<1){
 					
 				}else{
