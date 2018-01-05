@@ -562,7 +562,10 @@ public class Calculator {
 	}
 	
 	public static JSONObject getResultByPairlist(int latestexp,Date latestts,ArrayList<JSONObject> pairlist,String name)throws Exception{
-
+		if(name.equals("ヒロ")){
+			System.out.println(pairlist);
+			System.out.println(latestexp);
+		}
 		if(pairlist.size()>0){
 			
 			JSONObject lastpair=new JSONObject();
@@ -700,7 +703,7 @@ public class Calculator {
 				}else{
 					int expno = Util.getRankDateNo(new Date(expts.getTime()+3600000*2));
 					int senkano = Integer.valueOf(senka.get("ts").toString());
-					if(expts.getMonth()<now.getMonth()){
+					if(expts.getYear()*12+expts.getMonth()<now.getYear()*12+now.getMonth()){
 						pointer1++;
 					}else if(expno>senkano){
 						pointer2++;
@@ -935,7 +938,7 @@ public class Calculator {
 			if(fsenka<73){
 				return 0;
 			}else{
-				if(fsenka==276){
+				if(fsenka==395){
 					System.out.println(111);
 					System.out.println(senkaF);
 					System.out.println(uexp);
@@ -1034,7 +1037,7 @@ public class Calculator {
 							DBObject senkaData = (DBObject)senkaList.get(pointer2);
 							Date expts = (Date)expData.get("ts");
 							
-							if(expts.getMonth()<month){
+							if(expts.getYear()*12+expts.getMonth()<month+now.getYear()*12){
 								pointer1++;
 							}else if(expts.getMonth()>month||(month==11&&expts.getMonth()==0)){
 								break;
