@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(16);
+			calculateRank_D(8);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -891,6 +891,9 @@ public class Calculator {
 		then.setHours(21);
 		then.setMinutes(20);
 		then.setSeconds(0);
+		if(lastMonth==11){
+			then.setYear(now.getYear()-1);
+		}
 		
 		
 		Date nz = new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
@@ -932,7 +935,14 @@ public class Calculator {
 			if(fsenka<73){
 				return 0;
 			}else{
-				return fsenka-(uexp-lastexp)*7/10000;
+				if(fsenka==276){
+					System.out.println(111);
+					System.out.println(senkaF);
+					System.out.println(uexp);
+					System.out.println(lastexp);
+					System.out.println(uts);
+					System.out.println(lastts);
+				}
 			}
 		}
 		
