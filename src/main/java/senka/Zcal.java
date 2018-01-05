@@ -12,9 +12,16 @@ public class Zcal {
 		for(int i=0;i<explist.size();i++){
 			DBObject expdata = (DBObject)explist.get(explist.size()-i-1);
 			Date ts = (Date)expdata.get("ts");
-			if(ts.getMonth()<month){
-				return expdata;
+			if(month==11){
+				if(ts.getMonth()>0&&ts.getMonth()<month){
+					return expdata;
+				}
+			}else{
+				if(ts.getMonth()<month){
+					return expdata;
+				}
 			}
+			
 		}
 		return null;
 	}

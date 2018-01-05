@@ -142,6 +142,9 @@ public class Api extends HttpServlet
 		}
 		if(path.equals("calz")){
 			int month = new Date().getMonth()-1;
+			if(month==-1){
+				month=month+12;
+			}
 			Calculator.calculateZ(8,month);
 			Calculator.calculateZ(15,month);
 			Calculator.calculateZ(16,month);

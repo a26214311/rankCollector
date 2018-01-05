@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(8);
+			calculateRank_D(16);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -182,22 +182,9 @@ public class Calculator {
 				DBObject frontSenka = (DBObject)senkaList.get(0);
 				int no = Integer.valueOf(frontSenka.get("no").toString());
 				int ts = Integer.valueOf(frontSenka.get("ts").toString());
-				if(ido.toString().equals("762316")){
-					System.out.println(33333333);
-					System.out.println(lmfirst);
-					System.out.println(lmlast);
-					System.out.println(frontSenka);
-				}
 				
 				int senka = Integer.valueOf(frontSenka.get("senka").toString());
 				int maxadd = lmlast/35+lmfirst*34/35;
-				
-				if(ido.toString().equals("750797")){
-					System.out.println(senka);
-					System.out.println(lmfirst);
-					System.out.println(lmlast);
-					System.out.println(maxadd);
-				}
 				
 
 				
@@ -939,17 +926,16 @@ public class Calculator {
 			}
 		}
 		
-		if(lmfirst==569&&lmlast==3105){
-			System.out.println(firstexp);
-			System.out.println(firstts);
-			System.out.println(lastexp);
-			System.out.println(lastts);
-			System.out.println(uexp);
-			System.out.println(uts);
-		}
-
 		
 		int fsenka = Integer.valueOf(senkaF.get("senka").toString());
+		if(now.getMonth()==0){
+			if(fsenka<73){
+				return 0;
+			}else{
+				return fsenka-(uexp-lastexp)*7/10000;
+			}
+		}
+		
 		if(then.getTime()-lastts.getTime()<2400000&&uts.getTime()-nz.getTime()<1200000){
 			
 			int subback = (uexp-lastexp)*7/10000;
@@ -1003,6 +989,7 @@ public class Calculator {
 					}
 				}
 			}
+			System.out.println(minmap);
 			int fmin = minmap.get(0);
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
@@ -1034,7 +1021,7 @@ public class Calculator {
 							
 							if(expts.getMonth()<month){
 								pointer1++;
-							}else if(expts.getMonth()>month){
+							}else if(expts.getMonth()>month||(month==11&&expts.getMonth()==0)){
 								break;
 							}else{
 								int rankts = Integer.valueOf(senkaData.get("ts").toString());
@@ -1138,8 +1125,8 @@ public class Calculator {
 							}
 							
 							if(zcleared){
-//								System.out.println(ids);
-								//cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
+								System.out.println(ids);
+								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
 							
 							
