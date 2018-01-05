@@ -943,9 +943,11 @@ public class Calculator {
 					System.out.println(uts);
 					System.out.println(lastts);
 				}
-				if(uexp>0&&lastexp>0){
-					return fsenka-(uexp-lastexp)*7/10000;
+				int frontex=fsenka-(uexp-lastexp)*7/10000;
+				if(frontex<0){
+					frontex=0;
 				}
+				return frontex;
 			}
 		}
 		
