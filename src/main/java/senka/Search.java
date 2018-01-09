@@ -22,7 +22,7 @@ public class Search {
 			
 	public static void main(String[] args) {
 		try {
-			System.out.println(searchByName("羽瀬川桂", "0c0d990446e660d713c3b69088052a658893f75e", 8));
+			System.out.println(searchByName("環", "0c0d990446e660d713c3b69088052a658893f75e", 8));
 //			Date t = new Date(new Date().getTime()-3600000*19/2+60000*5);
 //			System.out.println(123);
 		} catch (Exception e) {
@@ -48,6 +48,7 @@ public class Search {
 			if(ido!=null){
 				String ids = ido.toString();
 				String[] ida = ids.split(",");
+				System.out.println(ido);
 				if(ida.length==1){
 					return getUserInfoById(ida[0], token, server, senkalist);
 				}else if(ida.length<5){
@@ -57,6 +58,7 @@ public class Search {
 						c=Integer.valueOf(co.toString());
 					}
 					String ret = "";
+					System.out.println(co);
 					if(c==1){
 						for(int i=0;i<ida.length;i++){
 							ret = ret + getUserInfoById(ida[i], token, server, senkalist)+"\n\n";
@@ -238,8 +240,8 @@ public class Search {
 				        	int add2=j2==null?0:(j2.getInt("exp")-j1.getInt("exp"))*7/10000;
 				        	r=r+"<td><table border=0>";
 				        	r=r+"<tr colspan=\"2\"><td><div style=\"text-align:center;font-size:40px\"><b>"+day+"</b></div></td></tr>";
-				        	r=r+"<tr><td>"+(j0==null?"":j0.getInt("senka"))+"</td><td>"+(j1==null?"":j1.getInt("senka"))+"</td></tr>";
-				        	r=r+"<tr><td>"+add1+"</td><td>"+add2+"</td></tr>";
+				        	r=r+"<tr><td>"+(j0==null?"--":j0.getInt("senka"))+"</td><td>"+(j1==null?"--":j1.getInt("senka"))+"</td></tr>";
+				        	r=r+"<tr><td>+"+add1+"</td><td>+"+add2+"</td></tr>";
 				        	r=r+"</table></td>";
 			        }
 			}
