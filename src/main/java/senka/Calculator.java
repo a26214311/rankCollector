@@ -817,7 +817,7 @@ public class Calculator {
 				retj.put("pair", 1);
 				retj.put("basets", basets.getTime());
 				retj.put("subbase", subbase);
-				
+				//calMinFrontEx(lmfirst, lmlast, explist, senkaF);
 				retj.put("z", -1);
 				System.out.println(retj);
 				result.add(retj);
@@ -843,6 +843,10 @@ public class Calculator {
 				int subsenka = subexp*7/10000;
 				if(subsenka>maxexpsenka){
 					maxexpsenka=subsenka;
+				}
+				BasicDBList expLN = new BasicDBList();
+				for(int m=0;m<expL.size();m++){
+					
 				}
 				JSONObject ret = new JSONObject();
 				ret.put("expfrom", firstts.getTime());
@@ -887,6 +891,15 @@ public class Calculator {
 		if(lastMonth==-1){
 			lastMonth=lastMonth+12;
 		}
+		Date y0 = new Date();
+		y0.setMonth(0);
+		y0.setDate(0);
+		y0.setHours(0);
+		y0.setMinutes(0);
+		y0.setSeconds(0);
+		Date yb = new Date(y0.getTime()-60000*160);
+		Date ym = null;
+		int ymexp=0;
 		
 		Date then = new Date(now.getTime()+(now.getTimezoneOffset()+480)*60000);
 		then.setMonth(lastMonth);
@@ -930,6 +943,11 @@ public class Calculator {
 				uexp=thenexp;
 				uts = thents;
 			}
+			if(thents.getTime()<yb.getTime()){
+				ym=thents;
+				ymexp = thenexp;
+			}
+			
 		}
 		
 		
@@ -962,6 +980,10 @@ public class Calculator {
 			int max = lmfirst*34/35+(subfront+1380)/35+subback;
 			
 			int frontex = fsenka-max;
+//			int yfrontex = fsenka-(lastexp-ymexp)*7/10000-subfront;
+//			if(yfrontex<frontex){
+//				frontex=yfrontex;
+//			}
 			return frontex>0?frontex:0;
 		}else{
 			int max = lmfirst*34/35+(lmlast+1500)/35;

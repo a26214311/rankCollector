@@ -119,7 +119,7 @@ public class Api extends HttpServlet
 		}
 		if(path.equals("seek")){
 			resp.setCharacterEncoding("utf-8");
-			resp.setContentType("text/plain");
+			resp.setContentType("text/html");
 			ret = Search.seekByName(data);
 		}
 		if(path.equals("ranktask")){

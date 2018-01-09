@@ -21,7 +21,7 @@ public class Search {
 	private static String[] shipid2name = new String[]{"null","睦月","如月","null","null","null","長月","三日月","null","吹雪","白雪","深雪","磯波","綾波","敷波","曙","潮","陽炎","不知火","黒潮","雪風","長良","五十鈴","由良","大井","北上","扶桑","山城","皐月","文月","菊月","望月","初雪","叢雲","暁","響","雷","電","初春","子日","若葉","初霜","白露","時雨","村雨","夕立","五月雨","涼風","霰","霞","島風","天龍","龍田","名取","川内","神通","那珂","大井改","北上改","古鷹","加古","青葉","妙高","那智","足柄","羽黒","高雄","愛宕","摩耶","鳥海","最上","利根","筑摩","最上改","祥鳳","飛鷹","龍驤","伊勢","金剛","榛名","長門","陸奥","伊勢改","赤城","加賀","霧島","比叡","日向","日向改","鳳翔","蒼龍","飛龍","隼鷹","朧","漣","朝潮","大潮","満潮","荒潮","球磨","多摩","木曾","千歳","千代田","千歳改","千代田改","千歳甲","千代田甲","千歳航","千代田航","翔鶴","瑞鶴","瑞鶴改","鬼怒","阿武隈","夕張","瑞鳳","瑞鳳改","大井改二","北上改二","三隈","三隈改","舞風","衣笠","鈴谷","熊野","伊168","伊58","伊8","鈴谷改","熊野改","大和","秋雲","夕雲","巻雲","長波","大和改","阿賀野","能代","矢矧","酒匂","五十鈴改二","衣笠改二","武蔵","夕立改二","時雨改二","木曾改二","Верный","武蔵改","金剛改二","比叡改二","榛名改二","霧島改二","大鳳","香取","伊401","大鳳改","龍驤改二","川内改二","神通改二","那珂改二","あきつ丸","神威","まるゆ","弥生","卯月","あきつ丸改","磯風","浦風","谷風","浜風","Bismarck","Bismarck改","Bismarck zwei","Z1","Z3","Prinz Eugen","Prinz Eugen改","Bismarck drei","Z1 zwei","Z3 zwei","天津風","明石","大淀","大鯨","龍鳳","時津風","明石改","利根改二","筑摩改二","初風","伊19","那智改二","足柄改二","羽黒改二","綾波改二","飛龍改二","蒼龍改二","null","大潮改二","阿武隈改二","吹雪改","白雪改","初雪改","深雪改","叢雲改","磯波改","綾波改","敷波改","金剛改","比叡改","榛名改","霧島改","天龍改","龍田改","球磨改","多摩改","木曾改","長良改","五十鈴改","由良改","名取改","川内改","神通改","那珂改","陽炎改","不知火改","黒潮改","雪風改","島風改","朧改","曙改","漣改","潮改","暁改","響改","雷改","電改","初春改","子日改","若葉改","初霜改","白露改","時雨改","村雨改","夕立改","五月雨改","涼風改","朝潮改","大潮改","満潮改","荒潮改","霰改","霞改","睦月改","如月改","皐月改","文月改","長月改","菊月改","三日月改","望月改","古鷹改","加古改","青葉改","妙高改","那智改","足柄改","羽黒改","高雄改","愛宕改","摩耶改","鳥海改","利根改","筑摩改","長門改","陸奥改","赤城改","加賀改","蒼龍改","飛龍改","龍驤改","祥鳳改","飛鷹改","隼鷹改","鳳翔改","扶桑改","山城改","翔鶴改","鬼怒改","阿武隈改","千歳航改","千代田航改","夕張改","舞風改","衣笠改","千歳航改二","千代田航改二","null","null","初風改","秋雲改","夕雲改","巻雲改","長波改","阿賀野改","能代改","矢矧改","弥生改","卯月改","Z1改","Z3改","浜風改","谷風改","酒匂改","null","天津風改","浦風改","龍鳳改","妙高改二","磯風改","大淀改","時津風改","春雨改","早霜改","清霜改","初春改二","朝雲改","山雲改","野分改","秋月改","天城","葛城","null","U-511改","null","null","null","null","null","null","null","null","香取改","朝霜改","高波改","照月改","Libeccio改","瑞穂改","風雲改","海風改","江風改","速吸改","Graf Zeppelin改","嵐改","萩風改","鹿島改","初月改","Zara改","沖波改","Iowa改","Pola改","親潮改","春風改","Warspite改","Aquila改","水無月改","伊26改","浦波改","山風改","朝風改","松風改","Commandant Teste改","藤波改","伊13改","伊14改","占守改","国後改","null","null","大鷹改","null","null","択捉改","松輪改","null","null","旗風改","null","null","天霧改","狭霧改","Richelieu改","Ark Royal改","null","null","null","null","伊168改","伊58改","伊8改","伊19改","まるゆ改","伊401改","雲龍","春雨","雲龍改","潮改二","隼鷹改二","早霜","清霜","扶桑改二","山城改二","朝雲","山雲","野分","古鷹改二","加古改二","皐月改二","初霜改二","叢雲改二","秋月","照月","初月","高波","朝霜","吹雪改二","鳥海改二","摩耶改二","天城改","葛城改","U-511","Graf Zeppelin","Saratoga","睦月改二","如月改二","呂500","暁改二","Saratoga改","Warspite","Iowa","Littorio","Roma","Libeccio","Aquila","秋津洲","Italia","Roma改","Zara","Pola","秋津洲改","瑞穂","沖波","風雲","嵐","萩風","親潮","山風","海風","江風","速吸","翔鶴改二","瑞鶴改二","朝潮改二","霞改二","鹿島","翔鶴改二甲","瑞鶴改二甲","朝潮改二丁","江風改二","霞改二乙","神風","朝風","春風","松風","旗風","神風改","null","null","天霧","狭霧","水無月","null","伊26","null","藤波","浦波","鬼怒改二","由良改二","満潮改二","荒潮改二","Commandant Teste","Richelieu","null","伊13","伊14","Zara due","null","null","神威改","神威改母","null","null","鈴谷改二","熊野改二","null","null","null","鈴谷航改二","熊野航改二","null","Гангут","Октябрьская революция","Гангут два","null","Ark Royal","null","占守","国後","null","null","春日丸","null","null","択捉","松輪","大鷹","null","null","大鷹改二","伊504","null","null","null","null","Luigi Torelli","null","null","null","UIT-25","null","長門改二","null","null","null","Saratoga Mk.II","null","null","文月改二","null","Saratoga Mk.II Mod.2","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","Luigi Torelli改","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null"};
 	public static void main(String[] args) {
 		try {
-			System.out.println(searchByName("紫はバカ233", "4e1e7476e8ae6265d64d1a8417bd475e8aa9f173", 16));
+			System.out.println(searchByName("羽瀬川桂", "0c0d990446e660d713c3b69088052a658893f75e", 8));
 //			Date t = new Date(new Date().getTime()-3600000*19/2+60000*5);
 //			System.out.println(123);
 		} catch (Exception e) {
@@ -117,10 +117,6 @@ public class Search {
 		while(pointer1<explist.size()&&pointer2<senkalist.size()){
 			DBObject expdata = (DBObject)explist.get(explist.size()-1-pointer1);
 			DBObject senkadata = (DBObject)senkalist.get(senkalist.size()-1-pointer2);
-			System.out.println(expdata);
-			System.out.println(senkadata);
-			System.out.println(pointer1);
-			System.out.println(pointer2);
 			int exp = Integer.valueOf(expdata.get("d").toString());
 			int senka = Integer.valueOf(senkadata.get("senka").toString());
 			Date expts = (Date)expdata.get("ts");
@@ -170,9 +166,89 @@ public class Search {
 				deckinfo = deckinfo + "lv."+lv+" "+shipid2name[shipid]+";";
 			}
 		}
-		return addsenka+"\n"+deckinfo;
+		pointer1 = 0;
+		pointer2 = 0;
+		JSONArray ja = new JSONArray();
+		while(pointer1<explist.size()&&pointer2<senkalist.size()){
+			DBObject expdata = (DBObject)explist.get(pointer1);
+			DBObject senkadata = (DBObject)senkalist.get(pointer2);
+			int exp = Integer.valueOf(expdata.get("d").toString());
+			int senka = Integer.valueOf(senkadata.get("senka").toString());
+			Date expts = (Date)expdata.get("ts");
+			int senkano = Integer.valueOf(senkadata.get("ts").toString());
+			if(isExpKeyTs(expts)){
+				int expno = Util.getRankDateNo(new Date(expts.getTime()+3600000*2));
+				if(expts.getYear()*12+expts.getMonth()<now.getYear()*12+now.getMonth()){
+					pointer1++;
+				}else if(expno==senkano){
+					JSONObject seekdata = new JSONObject();
+					seekdata.put("ts", expts);
+					seekdata.put("senka", senka);
+					seekdata.put("exp", exp);
+					ja.put(seekdata);
+					pointer1++;
+					pointer2++;
+				}else if(expno>senkano){
+					pointer2++;
+				}else{
+					pointer1++;
+				}
+			}else{
+				pointer1++;
+			}
+		}
+		System.out.println(123123111);
+		System.out.println(ja);
+		String r = "<table border=4>";
+		Date firstDate = new Date();
+		firstDate.setDate(1);
+		int firstdayofWeek = firstDate.getDay();
+		int frontblanknum=(6+firstdayofWeek)%7;
+		int days = monthOfDay[firstDate.getMonth()];
+		int lines = (int)Math.ceil((double)(days+frontblanknum)/7);
+		int len=ja.length();
+		for(int i=0;i<lines;i++){
+			r=r+"<tr>";
+			for(int j=1;j<=7;j++){
+				int day = i*7+j-frontblanknum;
+				if(day<1){
+					r=r+"<td><div></div><div></div></td>";
+				}else if(day>days){
+					r=r+"<td><div></div><div></div></td>";
+			        }else if(day>ja.length()*2){
+					r=r+"<td><div></div><div></div></td>";
+			        }else{
+			        	JSONObject j0=null;
+			        	JSONObject j1=null;
+			        	JSONObject j2=null;
+			        	if(day*2-2<len){
+			        		j0 = ja.getJSONObject(day*2-2);
+			        	}
+			        	if(day*2-1<len){
+			        		j1 = ja.getJSONObject(day*2-1);
+			        	}
+			        	if(day*2<len){
+			        		j2 = ja.getJSONObject(day*2);
+			        	}
+				        	System.out.println(j0);
+				        	System.out.println(j1);
+				        	System.out.println(j2);
+				        	int add1=j1==null?0:(j1.getInt("exp")-j0.getInt("exp"))*7/10000;
+				        	int add2=j2==null?0:(j2.getInt("exp")-j1.getInt("exp"))*7/10000;
+				        	r=r+"<td><table border=0>";
+				        	r=r+"<tr colspan=\"2\"><td><div style=\"text-align:center;font-size:40px\"><b>"+day+"</b></div></td></tr>";
+				        	r=r+"<tr><td>"+(j0==null?"":j0.getInt("senka"))+"</td><td>"+(j1==null?"":j1.getInt("senka"))+"</td></tr>";
+				        	r=r+"<tr><td>"+add1+"</td><td>"+add2+"</td></tr>";
+				        	r=r+"</table></td>";
+			        }
+			}
+			r=r+"</tr>";
+			
+		}
+		r=r+"</table>";
+		return addsenka+"\n"+deckinfo+"\n\n"+r;
 	}
-	
+	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 	
 	public static String getUserInfoByIdMulti(String ids,String token,int server,BasicDBList senkalist,int c)throws Exception{
 		Date now = new Date();
