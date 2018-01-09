@@ -59,7 +59,7 @@ public class Search {
 					}
 					String ret = "";
 					System.out.println(co);
-					if(c==1){
+					if(c<=2){
 						for(int i=0;i<ida.length;i++){
 							ret = ret + getUserInfoById(ida[i], token, server, senkalist)+"\n\n";
 						}
