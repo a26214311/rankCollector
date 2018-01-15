@@ -252,7 +252,16 @@ public class Calculator {
 				if(idstr.equals("")){
 					continue;
 				}
-				
+
+				if(senkaData.get("_id").toString().equals("環")){
+					System.out.println(111111111);
+					System.out.println(senkaData);
+					System.out.println(senkaData.get("_id").toString());
+					System.out.println(frontSenka);
+					System.out.println(lmfirst+","+lmlast+","+ido);
+					System.out.println(lastMonthSenkaListObject);
+					System.out.println();
+				}
 
 				
 				String[] ida = idstr.split(",");
@@ -272,11 +281,35 @@ public class Calculator {
 				}else if(ida.length<5){
 					int c = Integer.valueOf(senkaData.get("c").toString());
 					if(c==1){
+						
+						if(senkaData.get("_id").toString().equals("環")){
+							System.out.println(111111111);
+							System.out.println(senkaData);
+							System.out.println(senkaData.get("_id").toString());
+							System.out.println(frontSenka);
+							System.out.println(lmfirst+","+lmlast+","+ido);
+							System.out.println(lastMonthSenkaListObject);
+							System.out.println();
+						}
+						
 						for(int i=0;i<ida.length;i++){
+							
+							if(ts==0&&senka>maxadd+40){
+								JSONObject jb = new JSONObject();
+								jb.put("lf", lmfirst);
+								jb.put("ll", lmlast);
+								id2bmap.put(Integer.valueOf(ida[0]), jb);
+//								System.out.println(frontSenka);
+//								System.out.println(lmfirst+","+lmlast+","+ido);
+//								System.out.println(lastMonthSenkaListObject);
+//								System.out.println();
+							}
+							
 							dbl.add(Integer.valueOf(ida[i]));
 							id2senka.put(Integer.valueOf(ida[i]), senkaData);
 						}
 					}else{
+						
 						ArrayList<JSONObject> dupNameResult = handleDuplicateNames(senkaData,server);
 						resultlist.addAll(dupNameResult);
 					}
