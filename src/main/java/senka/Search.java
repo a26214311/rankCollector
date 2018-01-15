@@ -3,6 +3,7 @@ package senka;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -22,7 +23,7 @@ public class Search {
 			
 	public static void main(String[] args) {
 		try {
-			System.out.println(searchByName("環", "0c0d990446e660d713c3b69088052a658893f75e", 8));
+			System.out.println(searchByName("ぺんちゃん", "29bf3ccb7a96dd585f4b0fcd09823ded279dc8bc", 8));
 //			Date t = new Date(new Date().getTime()-3600000*19/2+60000*5);
 //			System.out.println(123);
 		} catch (Exception e) {
@@ -172,6 +173,7 @@ public class Search {
 		pointer1 = 0;
 		pointer2 = 0;
 		JSONArray ja = new JSONArray();
+		Map<Integer, JSONObject> m2j = new HashMap<>();
 		while(pointer1<explist.size()&&pointer2<senkalist.size()){
 			DBObject expdata = (DBObject)explist.get(pointer1);
 			DBObject senkadata = (DBObject)senkalist.get(pointer2);
@@ -189,6 +191,7 @@ public class Search {
 					seekdata.put("senka", senka);
 					seekdata.put("exp", exp);
 					ja.put(seekdata);
+					m2j.put(expno, seekdata);
 					pointer1++;
 					pointer2++;
 				}else if(expno>senkano){
@@ -224,19 +227,15 @@ public class Search {
 			        	JSONObject j0=null;
 			        	JSONObject j1=null;
 			        	JSONObject j2=null;
-			        	if(day*2-2<len){
-			        		j0 = ja.getJSONObject(day*2-2);
-			        	}
-			        	if(day*2-1<len){
-			        		j1 = ja.getJSONObject(day*2-1);
-			        	}
-			        	if(day*2<len){
-			        		j2 = ja.getJSONObject(day*2);
-			        	}
+			        	
+			        		j0 = m2j.get(day*2-2);
+			        		j1 = m2j.get(day*2-1);
+			        		j2 = m2j.get(day*2);
+			        	
 				        	System.out.println(j0);
 				        	System.out.println(j1);
 				        	System.out.println(j2);
-				        	int add1=j1==null?0:(j1.getInt("exp")-j0.getInt("exp"))*7/10000;
+				        	int add1=(j0==null||j1==null)?0:(j1.getInt("exp")-j0.getInt("exp"))*7/10000;
 				        	int add2=j2==null?0:(j2.getInt("exp")-j1.getInt("exp"))*7/10000;
 				        	r=r+"<td><table border=0>";
 				        	r=r+"<tr colspan=\"2\"><td><div style=\"text-align:center;font-size:40px\"><b>"+day+"</b></div></td></tr>";
