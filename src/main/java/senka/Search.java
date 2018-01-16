@@ -33,9 +33,6 @@ public class Search {
 	
 	public static String seekByName(Map<String, String[]> data)throws Exception{
 		String name = URLDecoder.decode(data.get("name")[0],"utf-8");
-		if(name.equals("大丈夫")){
-			return "hidden";
-		}
 		int server = Integer.valueOf(data.get("server")[0]);
 		String token = TimerTask.getToken(server);
 		String ret = searchByName(name, token, server);
@@ -172,6 +169,9 @@ public class Search {
 				int lv = deck.getJSONObject(i).getInt("api_level");
 				deckinfo = deckinfo + "lv."+lv+" "+shipid2name[shipid]+";";
 			}
+		}
+		if(id.equals("8020460")){
+			deckinfo="hidden";
 		}
 		pointer1 = 0;
 		pointer2 = 0;
