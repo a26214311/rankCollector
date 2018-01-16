@@ -77,7 +77,7 @@ public class TimerTask {
 				Date now = new Date(new Date().getTime()+(new Date().getTimezoneOffset()+480)*60000);
 				if(now.getDate()==monthOfDay[now.getMonth()]){
 					int hour = now.getHours();
-					if(hour>=15&&hour<=23){
+					if(hour>=14&&hour<=23){
 						System.out.println(new Date());
 						System.out.println("-----------------will do hourly collect exp now------------");
 						collectorTask();
