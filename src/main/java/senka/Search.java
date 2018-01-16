@@ -239,7 +239,7 @@ public class Search {
 				        	System.out.println(j1);
 				        	System.out.println(j2);
 				        	int add1=(j0==null||j1==null)?0:(j1.getInt("exp")-j0.getInt("exp"))*7/10000;
-				        	int add2=j2==null?0:(j2.getInt("exp")-j1.getInt("exp"))*7/10000;
+				        	int add2=(j2==null||j1==null)?0:(j2.getInt("exp")-j1.getInt("exp"))*7/10000;
 				        	r=r+"<td><table border=0>";
 				        	r=r+"<tr colspan=\"2\"><td><div style=\"text-align:center;font-size:40px\"><b>"+day+"</b></div></td></tr>";
 				        	r=r+"<tr><td>"+(j0==null?"--":j0.getInt("senka"))+"</td><td>"+(j1==null?"--":j1.getInt("senka"))+"</td></tr>";
