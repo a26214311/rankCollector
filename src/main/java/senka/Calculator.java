@@ -253,17 +253,7 @@ public class Calculator {
 					continue;
 				}
 
-				if(senkaData.get("_id").toString().equals("環")){
-					System.out.println(111111111);
-					System.out.println(senkaData);
-					System.out.println(senkaData.get("_id").toString());
-					System.out.println(frontSenka);
-					System.out.println(lmfirst+","+lmlast+","+ido);
-					System.out.println(lastMonthSenkaListObject);
-					System.out.println();
-				}
-
-				
+			
 				String[] ida = idstr.split(",");
 				if(ida.length==1){
 					if(ts==0&&senka>maxadd+40){
@@ -595,10 +585,7 @@ public class Calculator {
 	}
 	
 	public static JSONObject getResultByPairlist(int latestexp,Date latestts,ArrayList<JSONObject> pairlist,String name)throws Exception{
-		if(name.equals("ヒロ")){
-			System.out.println(pairlist);
-			System.out.println(latestexp);
-		}
+		
 		if(pairlist.size()>0){
 			
 			JSONObject lastpair=new JSONObject();
@@ -613,13 +600,21 @@ public class Calculator {
 					int subexpk = exp-lastpair.getInt("exp");
 					int subsenkak = senka - lastpair.getInt("senka");
 					lastpair = pair;
-					int ex = subsenkak - (int)(subexpk/10000*7);
+					int ex = subsenkak - (int)(subexpk*7/10000);
+//					if(name.equals("アサギ")){
+//					System.out.print(ex+","+lastpair.getInt("subexp")+","+subexpk*7+"::");
+//					
+//					}
 					if(ex>70){
 						fexlist.put(ex);
 					}
 				}
 			}
-			
+			if(name.equals("アサギ")){
+				System.out.println(name);
+				System.out.println(pairlist);
+				System.out.println(latestexp);
+			}
 			JSONObject latestpair = pairlist.get(pairlist.size()-1);
 			JSONObject firstpair = pairlist.get(0);
 			int senkasub = latestpair.getInt("senka")-firstpair.getInt("senka");
@@ -1046,7 +1041,7 @@ public class Calculator {
 			Map<Integer, Integer> minmap = new HashMap<>();
 			while (dbc2.hasNext()) {
 				DBObject senkaData = dbc2.next();
-				Object senkaListObj = senkaData.get("d"+now.getMonth());
+				Object senkaListObj = senkaData.get("d"+month);
 				if(senkaListObj==null){
 					continue;
 				}
@@ -1091,8 +1086,8 @@ public class Calculator {
 							DBObject expData = (DBObject)expList.get(pointer1);
 							DBObject senkaData = (DBObject)senkaList.get(pointer2);
 							Date expts = (Date)expData.get("ts");
-							
-							if(expts.getYear()*12+expts.getMonth()<month+now.getYear()*12){
+							int upto = (month==11?month+now.getYear()*12-12:month+now.getYear());
+							if(expts.getYear()*12+expts.getMonth()<upto){
 								pointer1++;
 							}else if(expts.getMonth()>month||(month==11&&expts.getMonth()==0)){
 								break;
@@ -1166,10 +1161,20 @@ public class Calculator {
 							int sub = (lastexp-baseexp)*7/10000;
 							
 							
+							
 							if(fsenkats>0){
 								int max =sub+1380+fmin;
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
+									if(name.equals("まーちん")){
+										System.out.println("name1:"+name);
+										System.out.println(fsenkats);
+										System.out.println(sub);
+										System.out.println(fmin);
+										System.out.println(lastsenka);
+										System.out.println(max);
+										System.out.println(maxuex);
+									}
 									zcleared=true;
 //									System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
 								}
@@ -1178,6 +1183,9 @@ public class Calculator {
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
 									if(zcleared==false){
+										if(name.equals("まーちん")){
+											System.out.println("name2:"+name);
+										}
 										zcleared=true;
 //										System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
 									}
@@ -1201,10 +1209,6 @@ public class Calculator {
 								System.out.println(ids);
 								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
-							
-							
-							
-							
 							
 							
 						}

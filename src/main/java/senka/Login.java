@@ -6,6 +6,19 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import org.bson.BSON;
+import org.bson.BsonArray;
+import org.bson.Document;
+
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCollection;
 
 
 
@@ -13,7 +26,28 @@ public class Login {
 	public static void main(String[] args){
 		System.out.println("start");
 		try {
-			login("bot4@rewards.msharebox.com","987654321");
+			//login("bot4@rewards.msharebox.com","987654321");
+			MongoCollection<Document> cl_senka = Util.database.getCollection("cl_senka_"+20);
+			long t1 = new Date().getTime();
+			for(int i=0;i<1;i++){
+				if(i%10==0){
+					System.out.println(i);
+				}
+				Document ag = new Document("$sample", new Document("size",1));
+				AggregateIterable<Document> output = cl_senka.aggregate(Arrays.asList(
+						ag
+					        ));
+				Document doc = output.first();
+				System.out.println(doc.toJson());
+//				System.out.println(doc.get("name"));
+				for (Document dbObject : output)
+				{
+				    //System.out.println(dbObject);
+				}
+			}
+
+			long t2 = new Date().getTime();
+			System.out.println("time cost:"+(t2-t1));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

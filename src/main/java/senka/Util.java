@@ -5,9 +5,11 @@ import java.util.Date;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoDatabase;
 
 public class Util {
 	public static DB db=null;
+	public static MongoDatabase database = null;
 	static{
 		init();
 	}
@@ -16,6 +18,7 @@ public class Util {
 		try {
 			MongoClient mongoClient = new MongoClient(new MongoClientURI(mongouri));
 			db = mongoClient.getDB("db_senka");
+			database = mongoClient.getDatabase("db_senka");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
