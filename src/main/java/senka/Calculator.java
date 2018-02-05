@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(8);
+			calculateRank_D(8, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,7 +50,7 @@ public class Calculator {
 	
 	private static Map<Integer, String> rankCache = new HashMap<>();
 	
-	public static String getRank(int server){
+	public static String getRank(int server,int targetMonth){
 		/*
 		DBCollection cl_calculate_result = Util.db.getCollection("cl_calculate_result");
 		DBObject rankData = cl_calculate_result.findOne(new BasicDBObject("_id",server));
@@ -64,7 +64,7 @@ public class Calculator {
 		Object working = TimerTask.nowworking.get(server);
 		if(working==null){
 			System.out.println("cache miss,will calculate");
-			cache = calculateRank(server).toString();
+			cache = calculateRank(server,targetMonth).toString();
 			rankCache.put(server,cache);
 			return cache;
 		}else{
@@ -77,19 +77,29 @@ public class Calculator {
 	
 	public static String calculator(Map<String, String[]> data)throws Exception{
 		int server = Integer.valueOf(data.get("server")[0]);
-		return getRank(server);
+		return getRank(server,0);
 	}
 
-	public static JSONObject calculateRank(int server){
-		return calculateRank_D(server);
+	public static JSONObject calculateRank(int server,int targetMonth){
+		return calculateRank_D(server,targetMonth);
 	}
 	
-	public static JSONObject calculateRank_D(int server){
+	public static JSONObject calculateRank_D(int server,int targetMonth){
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
 		DBCursor dbc = null;
 		DBCursor dbc2 = null;
-		Date now = new Date();
+		Date truenow = new Date();
+		Date now;
+		if(truenow.getMonth()==targetMonth){
+			now = truenow;
+		}else{
+			now = new Date();
+			now.setMonth(targetMonth);
+			now.setHours(21);
+			now.setMinutes(20);
+			now.setDate(monthOfDay[targetMonth]);
+		}
 		int rankNo = Util.getRankDateNo(now);
 		long updatets = 0;
 		try {
@@ -441,7 +451,7 @@ public class Calculator {
 					if(bmap!=null){
 						int lmfirst = bmap.getInt("lf");
 						int lmlast = bmap.getInt("ll");
-						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF);
+						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF,name);
 					}
 					
 					if(retj!=null){
@@ -601,10 +611,10 @@ public class Calculator {
 					int subsenkak = senka - lastpair.getInt("senka");
 					lastpair = pair;
 					int ex = subsenkak - (int)(subexpk*7/10000);
-//					if(name.equals("アサギ")){
-//					System.out.print(ex+","+lastpair.getInt("subexp")+","+subexpk*7+"::");
-//					
-//					}
+					if(name.equals("アサギ")){
+					System.out.print(ex+"::");
+					
+					}
 					if(ex>70){
 						fexlist.put(ex);
 					}
@@ -913,7 +923,7 @@ public class Calculator {
 		return result;
 	}
 	
-	public static int calMinFrontEx(int lmfirst,int lmlast,BasicDBList explist,DBObject senkaF){
+	public static int calMinFrontEx(int lmfirst,int lmlast,BasicDBList explist,DBObject senkaF,String name){
 		Date now = new Date();
 		int lastMonth = now.getMonth()-1;
 		if(lastMonth==-1){
@@ -958,7 +968,7 @@ public class Calculator {
 			DBObject expData = (DBObject)explist.get(i);
 			Date thents = (Date)expData.get("ts");
 			int thenexp = Integer.valueOf(expData.get("d").toString());
-			if(thents.getMonth()<lastMonth){
+			if(thents.getYear()*12+thents.getMonth()<now.getYear()*12+lastMonth){
 				firstexp=thenexp;
 				firstts=thents;
 			}
@@ -980,21 +990,17 @@ public class Calculator {
 		
 		
 		int fsenka = Integer.valueOf(senkaF.get("senka").toString());
+		int maxu = (lastexp-ymexp)/50000+1380/35;
 		if(now.getMonth()==0){
 			if(fsenka<73){
 				return 0;
 			}else{
-				if(fsenka==395){
-					System.out.println(111);
-					System.out.println(senkaF);
-					System.out.println(uexp);
-					System.out.println(lastexp);
-					System.out.println(uts);
-					System.out.println(lastts);
-				}
-				int frontex=fsenka-(uexp-lastexp)*7/10000;
-				if(frontex<0){
-					frontex=0;
+
+				int subback = (uexp-lastexp)*7/10000;
+				int frontex=fsenka-subback;
+				int ufrontex = lmfirst-maxu-subback;
+				if(frontex<ufrontex){
+					frontex=ufrontex;
 				}
 				return frontex;
 			}
@@ -1002,9 +1008,9 @@ public class Calculator {
 		
 		if(then.getTime()-lastts.getTime()<2400000&&uts.getTime()-nz.getTime()<1200000){
 			
-			int subback = (uexp-lastexp)*7/10000;
-			int subfront = (lastexp-firstexp)*7/10000;
 			
+			int subfront = (lastexp-firstexp)*7/10000;
+			int subback = (uexp-lastexp)*7/10000;
 			int max = lmfirst*34/35+(subfront+1380)/35+subback;
 			
 			int frontex = fsenka-max;
@@ -1012,6 +1018,32 @@ public class Calculator {
 //			if(yfrontex<frontex){
 //				frontex=yfrontex;
 //			}
+			
+
+			
+			int ufrontex = fsenka-maxu-subback;
+			if(name.equals("かのK")){
+				System.out.println(name);
+				System.out.println(senkaF);
+				System.out.println(uexp);
+				System.out.println(lastexp);
+				System.out.println(uts);
+				System.out.println(firstts);
+				System.out.println(lastts);
+				System.out.println(ymexp);
+				System.out.println(ym);
+				System.out.println(maxu);
+				System.out.println(ufrontex);
+				System.out.println(frontex);
+				System.out.println(subfront);
+				System.out.println(subback);
+				System.out.println(lmfirst);
+				System.out.println(lmlast);
+			}
+			if(frontex<ufrontex){
+				frontex=ufrontex;
+			}
+
 			return frontex>0?frontex:0;
 		}else{
 			int max = lmfirst*34/35+(lmlast+1500)/35;
@@ -1082,16 +1114,22 @@ public class Calculator {
 						int pointer2=0;
 						ArrayList<JSONObject> pairlist = new ArrayList<>();
 						int ex=0;
+						int upto = ((month==11)?(month+now.getYear()*12-12):(month+now.getYear()*12));
 						while(pointer1<expList.size()&&pointer2<senkaList.size()){
 							DBObject expData = (DBObject)expList.get(pointer1);
 							DBObject senkaData = (DBObject)senkaList.get(pointer2);
 							Date expts = (Date)expData.get("ts");
-							int upto = (month==11?month+now.getYear()*12-12:month+now.getYear());
+//							if(name.equals("Metatron")){
+//								System.out.println(expts);
+//								System.out.println(expts.getYear()*12+expts.getMonth());
+//							}
+//							System.out.println(expts);
 							if(expts.getYear()*12+expts.getMonth()<upto){
 								pointer1++;
-							}else if(expts.getMonth()>month||(month==11&&expts.getMonth()==0)){
+							}else if(expts.getYear()*12+expts.getMonth()>now.getYear()*12+month||(month==11&&expts.getMonth()==0)){
 								break;
 							}else{
+								
 								int rankts = Integer.valueOf(senkaData.get("ts").toString());
 								int expno = Util.getRankDateNo(new Date(expts.getTime()+3600000*2));
 								if(expno<rankts){
@@ -1160,21 +1198,25 @@ public class Calculator {
 							}
 							int sub = (lastexp-baseexp)*7/10000;
 							
-							
+							if(name.equals("Metatron")){
+								System.out.println("name1:"+name);
+								System.out.println(fsenkats);
+								System.out.println(firstExpData);
+								System.out.println(baseExpData);
+								System.out.println(sub);
+								System.out.println(fmin);
+								System.out.println(lastsenka);
+								System.out.println(firstPair);
+								System.out.println(lastPair);
+//								System.out.println(max);
+//								System.out.println(maxuex);
+							}
 							
 							if(fsenkats>0){
 								int max =sub+1380+fmin;
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
-									if(name.equals("まーちん")){
-										System.out.println("name1:"+name);
-										System.out.println(fsenkats);
-										System.out.println(sub);
-										System.out.println(fmin);
-										System.out.println(lastsenka);
-										System.out.println(max);
-										System.out.println(maxuex);
-									}
+
 									zcleared=true;
 //									System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
 								}
@@ -1183,9 +1225,6 @@ public class Calculator {
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
 									if(zcleared==false){
-										if(name.equals("まーちん")){
-											System.out.println("name2:"+name);
-										}
 										zcleared=true;
 //										System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
 									}
@@ -1200,13 +1239,13 @@ public class Calculator {
 									if(zcleared==false){
 //										zcleared=true;
 										cl_senka.update(user, new BasicDBObject("$unset",new BasicDBObject("z",true)));
-										System.out.println(name+firstts+","+firstPair+","+senkaF+","+subsenka+","+lastPair+maxuex);
+										//System.out.println(name+firstts+","+firstPair+","+senkaF+","+subsenka+","+lastPair+maxuex);
 									}
 								}
 							}
 							
 							if(zcleared){
-								System.out.println(ids);
+								System.out.println("z cleared:"+ids);
 								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
 							

@@ -9,6 +9,7 @@ public class Zcal {
 
 	
 	public static DBObject getBaseExpData(BasicDBList explist,int month){
+		Date now = new Date();
 		for(int i=0;i<explist.size();i++){
 			DBObject expdata = (DBObject)explist.get(explist.size()-i-1);
 			Date ts = (Date)expdata.get("ts");
@@ -17,7 +18,7 @@ public class Zcal {
 					return expdata;
 				}
 			}else{
-				if(ts.getMonth()<month){
+				if(ts.getYear()*12+ts.getMonth()<now.getYear()*12+month){
 					return expdata;
 				}
 			}
