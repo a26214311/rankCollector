@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(8, 1);
+			getRank(8, 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -77,7 +77,13 @@ public class Calculator {
 	
 	public static String calculator(Map<String, String[]> data)throws Exception{
 		int server = Integer.valueOf(data.get("server")[0]);
-		return getRank(server,0);
+		int month;
+		if(data.containsKey("m")){
+			month=Integer.valueOf(data.get("m")[0]);
+		}else{
+			month=new Date().getMonth();
+		}
+		return getRank(server,month);
 	}
 
 	public static JSONObject calculateRank(int server,int targetMonth){
