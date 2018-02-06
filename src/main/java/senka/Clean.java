@@ -34,7 +34,7 @@ public class Clean {
 				Date ts = (Date)expd.get("ts");
 				int mon = ts.getYear()*12+ts.getMonth();
 				Object d = monmap.get(mon);
-				if(d!=null&&erase<maxerase&&mon<limitmon){
+				if(!isKeyExpTs(ts)&&d!=null&&erase<maxerase&&mon<limitmon){
 					erase++;
 					//erase
 				}else{
@@ -46,5 +46,24 @@ public class Clean {
 			update.append("exp", expnew);
 			cl_senka.update(userData, new BasicDBObject("$set",update));
 		}
+	}
+	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
+	public static boolean isKeyExpTs(Date ts){
+		int mon = ts.getMonth();
+		int date = ts.getDate();
+		int hour = ts.getHours();
+		int min = ts.getMinutes();
+		if(date==monthOfDay[mon]){
+			
+			if((hour==8&&min>30)||(hour==9&&min<30)){
+				return true;
+			}
+		}
+		if(date==1){
+			if((hour==0&&min>30)||(hour==1&&min<30)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

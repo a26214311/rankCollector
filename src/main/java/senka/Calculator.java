@@ -457,7 +457,7 @@ public class Calculator {
 					if(bmap!=null){
 						int lmfirst = bmap.getInt("lf");
 						int lmlast = bmap.getInt("ll");
-						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF,name);
+						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF,name,z);
 					}
 					
 					if(retj!=null){
@@ -929,7 +929,7 @@ public class Calculator {
 		return result;
 	}
 	
-	public static int calMinFrontEx(int lmfirst,int lmlast,BasicDBList explist,DBObject senkaF,String name){
+	public static int calMinFrontEx(int lmfirst,int lmlast,BasicDBList explist,DBObject senkaF,String name,int z){
 		Date now = new Date();
 		int lastMonth = now.getMonth()-1;
 		if(lastMonth==-1){
