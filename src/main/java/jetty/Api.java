@@ -68,6 +68,7 @@ public class Api extends HttpServlet
 				String ret;
 				if(req.getRemoteAddr().equals("113.251.34.96")||path.equals("forbidtest")){
 					response.setCharacterEncoding("utf-8");
+					response.setContentType("text/plain");
 					ret = "你是谁，快告诉我";
 				}else{
 					ret = handleData(path, data, req, response);
