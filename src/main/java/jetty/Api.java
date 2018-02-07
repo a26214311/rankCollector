@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +59,11 @@ public class Api extends HttpServlet
 				System.out.println(queryString);
 				System.out.println(new Date());
 				System.out.println(req.getRemoteAddr());
+				Enumeration<String> header = req.getHeaderNames();
+				while (header.hasMoreElements()) {
+					String headername = (String) header.nextElement();
+					System.out.println(headername+":"+req.getHeader(headername));
+				}
 				System.out.println("==============\n");
 				OutputStream output = null;
 				output = response.getOutputStream();
@@ -88,7 +94,11 @@ public class Api extends HttpServlet
 				System.out.println(queryString);
 				System.out.println(new Date());
 				System.out.println(req.getRemoteAddr());
-				System.out.println(req.getHeader("User-Agent"));
+				Enumeration<String> header = req.getHeaderNames();
+				while (header.hasMoreElements()) {
+					String headername = (String) header.nextElement();
+					System.out.println(headername+":"+req.getHeader(headername));
+				}
 				System.out.println("==============\n");
 				OutputStream output = null;
 				output = response.getOutputStream();
