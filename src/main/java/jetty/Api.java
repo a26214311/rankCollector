@@ -65,6 +65,9 @@ public class Api extends HttpServlet
 					System.out.println(headername+":"+req.getHeader(headername));
 				}
 				System.out.println("==============\n");
+				if(req.getRemoteAddr().equals("115.239.182.86")){
+					ret = "你是谁，快告诉我";
+				}
 				OutputStream output = null;
 				output = response.getOutputStream();
 				IOUtils.write(ret.getBytes("utf-8"), output);
