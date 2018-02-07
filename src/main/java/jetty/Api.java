@@ -88,6 +88,7 @@ public class Api extends HttpServlet
 				System.out.println(queryString);
 				System.out.println(new Date());
 				System.out.println(req.getRemoteAddr());
+				System.out.println(req.getHeader("User-Agent"));
 				System.out.println("==============\n");
 				OutputStream output = null;
 				output = response.getOutputStream();
