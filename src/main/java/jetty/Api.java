@@ -138,6 +138,11 @@ public class Api extends HttpServlet
 		}
 		if(path.equals("seek")){
 			resp.setCharacterEncoding("utf-8");
+			resp.setContentType("text/plain");
+			ret = "此地址关闭，新地址找我要";
+		}
+		if(path.equals("peek")){
+			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html");
 			ret = Search.seekByName(data).replaceAll("\n", "<br>");
 		}
