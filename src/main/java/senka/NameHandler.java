@@ -102,6 +102,7 @@ public class NameHandler {
 			BasicDBList rankquery = new BasicDBList();
 			rankquery.add(new BasicDBObject("rank",1));
 			rankquery.add(new BasicDBObject("rank",new BasicDBObject("$exists",false)));
+			query.append("lv", new BasicDBObject("$gt",30));
 			//query.append("$or", rankquery);
 			dbc = cl_senka.find(query,projector);
 			ArrayList<DBObject> userlist = new ArrayList<>();
