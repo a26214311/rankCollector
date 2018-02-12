@@ -97,7 +97,13 @@ public class NameHandler {
 			projector.append("exp", 1);
 			projector.append("info", 1);
 			projector.append("_id", 1);
-			dbc = cl_senka.find(new BasicDBObject("name",name),projector);
+			BasicDBObject query = new BasicDBObject();
+			query.append("name", name);
+			BasicDBList rankquery = new BasicDBList();
+			rankquery.add(new BasicDBObject("rank",1));
+			rankquery.add(new BasicDBObject("rank",new BasicDBObject("$exists",false)));
+			query.append("$or", rankquery);
+			dbc = cl_senka.find(query,projector);
 			ArrayList<DBObject> userlist = new ArrayList<>();
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
