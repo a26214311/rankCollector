@@ -132,9 +132,9 @@ public class NameHandler {
 						DBObject expdata = (DBObject)exp.get(k);
 						int expn = Integer.valueOf(expdata.get("d").toString());
 						Date then = (Date) expdata.get("ts");
-						System.out.println(id+":"+k+":"+exp.size()+":"+then+":"+then.after(last)+":"+then.getYear()*12+then.getMonth()+":"+now.getYear()*12+month);
-						System.out.println(then+":"+then.getYear()+":"+then.getMonth());
-						System.out.println(now+":"+now.getYear()+":"+now.getMonth());
+						//System.out.println(id+":"+k+":"+exp.size()+":"+then+":"+then.after(last)+":"+then.getYear()*12+then.getMonth()+":"+now.getYear()*12+month);
+						//System.out.println(then+":"+then.getYear()+":"+then.getMonth());
+						//System.out.println(now+":"+now.getYear()+":"+now.getMonth());
 
 						if(then.getYear()*12+then.getMonth()==now.getYear()*12+month){
 							explist.add(expdata);
@@ -144,7 +144,7 @@ public class NameHandler {
 						}else{
 							
 						}
-						System.out.println(id+":"+k+":"+exp.size());
+						//System.out.println(id+":"+k+":"+exp.size());
 					}
 					String info = user.get("info").toString();
 					JSONObject infoj = new JSONObject(info);
