@@ -184,7 +184,7 @@ public class Collector {
 			proj.append("id", 1);
 			proj.append("_id", 1);
 			BasicDBObject query = new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore)));
-			query.append("_id", "　");
+			//query.append("_id", "　");
 			dbc = cl_n_senka.find(query,proj); //1000 min
 			int all=0;
 			while (dbc.hasNext()) {
