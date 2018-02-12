@@ -249,7 +249,8 @@ public class Collector {
 		expdata.append("d", exp);
 		expdata.append("ts",now);
 		int lv = data.getInt("api_level");
-		update.append("$set", new BasicDBObject("name", name).append("e", exp).append("lv", lv).append("info",data.toString()).append("ts", now));
+		int rank = data.getInt("api_rank");
+		update.append("$set", new BasicDBObject("name", name).append("e", exp).append("lv", lv).append("rank", rank).append("info",data.toString()).append("ts", now));
 		update.append("$push", new BasicDBObject("exp",expdata));
 		BasicDBObject query = new BasicDBObject();
 		query.append("_id", id);
