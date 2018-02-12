@@ -102,7 +102,7 @@ public class NameHandler {
 			BasicDBList rankquery = new BasicDBList();
 			rankquery.add(new BasicDBObject("rank",1));
 			rankquery.add(new BasicDBObject("rank",new BasicDBObject("$exists",false)));
-			query.append("$or", rankquery);
+			//query.append("$or", rankquery);
 			dbc = cl_senka.find(query,projector);
 			ArrayList<DBObject> userlist = new ArrayList<>();
 			while (dbc.hasNext()) {
@@ -132,7 +132,11 @@ public class NameHandler {
 						DBObject expdata = (DBObject)exp.get(k);
 						int expn = Integer.valueOf(expdata.get("d").toString());
 						Date then = (Date) expdata.get("ts");
-						if(then.getMonth()==month){
+						System.out.println(id+":"+k+":"+exp.size()+":"+then+":"+then.after(last)+":"+then.getYear()*12+then.getMonth()+":"+now.getYear()*12+month);
+						System.out.println(then+":"+then.getYear()+":"+then.getMonth());
+						System.out.println(now+":"+now.getYear()+":"+now.getMonth());
+
+						if(then.getYear()*12+then.getMonth()==now.getYear()*12+month){
 							explist.add(expdata);
 							if(then.after(last)){
 								last = then;
@@ -156,8 +160,11 @@ public class NameHandler {
 							mayfetchranklist.add(rank);
 						}
 					}
+					System.out.println(id+":"+last);
 				}
+				
 				if(fetchidlist.size()>=count){
+					System.out.println("name:"+name+",count:"+count+",fetch:"+fetchidlist.size());
 					totalcount+=fetchidlist.size();
 					if(fetchidlist.size()==1){
 						cl_n_senka.update(new BasicDBObject("_id",name),new BasicDBObject("$set",new BasicDBObject("id",""+fetchidlist.get(0)).append("c", count)));
@@ -223,9 +230,6 @@ public class NameHandler {
 	
 	
 	public static void main(String[] args){
-		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+8);
-		DBObject senkaData = cl_n_senka.findOne(new BasicDBObject("_id","雅"));
-		DBObject senkaUser = (DBObject)((BasicDBList)senkaData.get("d5")).get(0);
-		handleName("雅", senkaUser, 0, 1, 8, "8c3f8fa5533a18f92ac54c65022491eb2900125e");
+		Collector.main(args);
 	}
 }

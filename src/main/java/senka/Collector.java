@@ -31,7 +31,8 @@ public class Collector {
 		System.out.println(123123);
 		long t1 = new Date().getTime();
 		try {
-			System.out.println(Collector.collectById(19119783, "ccfd764d5e639a567a4157ef01210a61998918f7", 19));
+//			System.out.println(Collector.collectById(19119783, "ccfd764d5e639a567a4157ef01210a61998918f7", 19));
+			collectByLastSenka("b5913e972dcc5ddc20396e908afcbec5e9dd6e8c", 20);
 //			System.out.println(collectById(19161718, "162ebccc78cb0c33676c3b107502515ffd013da5", 19));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,7 +183,9 @@ public class Collector {
 			proj.append(key, 1);
 			proj.append("id", 1);
 			proj.append("_id", 1);
-			dbc = cl_n_senka.find(new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore))),proj); //1000 min
+			BasicDBObject query = new BasicDBObject("ts",new BasicDBObject("$gt",new Date(now.getTime()-searchBefore)));
+			//query.append("_id", "　");
+			dbc = cl_n_senka.find(query,proj); //1000 min
 			int all=0;
 			while (dbc.hasNext()) {
 				all++;
