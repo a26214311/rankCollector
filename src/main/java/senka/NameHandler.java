@@ -141,12 +141,10 @@ public class NameHandler {
 							if(then.after(last)){
 								last = then;
 							}
-						}else if(now.getTime()-then.getTime()>86400000L*30){
-							exp.remove(k);
-							willupdate = true;
 						}else{
 							
 						}
+						System.out.println(id+":"+k+":"+exp.size());
 					}
 					String info = user.get("info").toString();
 					JSONObject infoj = new JSONObject(info);
