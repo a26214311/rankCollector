@@ -31,7 +31,7 @@ public class Collector {
 		System.out.println(123123);
 		long t1 = new Date().getTime();
 		try {
-			Collector.collectById(8028255, "a6451846556b4aa1e8026fd123f0203b6adc65b8", 8);
+			System.out.println(Collector.collectById(19119783, "ccfd764d5e639a567a4157ef01210a61998918f7", 19));
 //			System.out.println(collectById(19161718, "162ebccc78cb0c33676c3b107502515ffd013da5", 19));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -267,6 +267,26 @@ public class TimerTask {
 					nowworking.remove(serverid);
 				}
 			}
+		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int serverid = 20;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
+				}
+			}
 		}).start();		
 	}
 	
@@ -374,6 +394,27 @@ public class TimerTask {
 				}
 			}
 		}).start();
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				nowworking.put(20, 1);
+				try {
+					String token20 = getToken(20);
+					if(token20.length()>2){
+						working++;
+						Rank.runRankTask(token20, 20, id20);
+						Collector.collectByLastSenka(token20, 20);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					nowworking.remove(20);
+				}
+			}
+		}).start();
+		
 	}
 	
 	

@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			getRank(8, 1);
+			calculateZ(16, 0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1204,20 +1204,26 @@ public class Calculator {
 							}
 							int sub = (lastexp-baseexp)*7/10000;
 							
-							if(name.equals("Metatron")){
+							if(name.equals("大丈夫")){
 								System.out.println("name1:"+name);
 								System.out.println(fsenkats);
 								System.out.println(firstExpData);
 								System.out.println(baseExpData);
+								System.out.println(expList);
 								System.out.println(sub);
 								System.out.println(fmin);
 								System.out.println(lastsenka);
 								System.out.println(firstPair);
 								System.out.println(lastPair);
+								
 //								System.out.println(max);
 //								System.out.println(maxuex);
 							}
-							
+							int zex = Zcal.getFullSub(expList, month, lastPair);
+							if(zex>1050){
+								zcleared=true;
+								System.out.println(name);
+							}
 							if(fsenkats>0){
 								int max =sub+1380+fmin;
 								int maxuex = max - lastsenka;
