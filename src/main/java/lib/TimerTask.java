@@ -398,6 +398,7 @@ public class TimerTask {
 			}
 		}).start();
 		
+		if(new Date().getDate()%5==0){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -417,6 +418,7 @@ public class TimerTask {
 				}
 			}
 		}).start();
+		}
 		
 	}
 	
