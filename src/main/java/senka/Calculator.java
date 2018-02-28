@@ -27,7 +27,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateZ(16, 0);
+			calculateRank_D(8, new Date().getMonth());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1028,7 +1028,7 @@ public class Calculator {
 
 			
 			int ufrontex = fsenka-maxu-subback;
-			if(name.equals("かのK")){
+			if(name.equals("紫はバカ233")){
 				System.out.println(name);
 				System.out.println(senkaF);
 				System.out.println(uexp);

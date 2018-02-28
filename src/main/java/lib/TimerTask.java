@@ -269,7 +269,8 @@ public class TimerTask {
 			}
 		}).start();
 		
-		if(new Date().getDate()%5==0){
+		int date = new Date().getDate();
+		if(date<5||date%5==0||date>28){
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
