@@ -1,5 +1,6 @@
 package senka;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -87,7 +88,15 @@ public class Calculator {
 	}
 
 	public static JSONObject calculateRank(int server,int targetMonth){
-		return calculateRank_D(server,targetMonth);
+		JSONObject ret = calculateRank_D(server,targetMonth);
+		try {
+			FileWriter fw = new FileWriter("senka.txt");
+			fw.write(ret.toString());
+			fw.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ret;
 	}
 	
 	public static JSONObject calculateRank_D(int server,int targetMonth){
@@ -272,7 +281,11 @@ public class Calculator {
 			
 				String[] ida = idstr.split(",");
 				if(ida.length==1){
-					if(ts==0&&senka>maxadd+40){
+//					if(ts==0&&senka>maxadd+40){
+					if(true){
+						if(senkaData.get("_id").toString().equals("litre")){
+							System.out.println("litre"+lmfirst+":"+lmlast);
+						}
 						JSONObject jb = new JSONObject();
 						jb.put("lf", lmfirst);
 						jb.put("ll", lmlast);
@@ -457,6 +470,9 @@ public class Calculator {
 					if(bmap!=null){
 						int lmfirst = bmap.getInt("lf");
 						int lmlast = bmap.getInt("ll");
+//						if(name.equals("litre")){
+//							System.out.println("litre:"+lmlast+":"+lmfirst);
+//						}
 						frontex = calMinFrontEx(lmfirst,lmlast,explist,senkaF,name,z);
 					}
 					
@@ -1011,7 +1027,13 @@ public class Calculator {
 				return frontex;
 			}
 		}
-		
+		if(name.equals("litre")){
+			System.out.println(name);
+			System.out.println(then);
+			System.out.println(lastts);
+			System.out.println(uts);
+			System.out.println(nz);
+		}
 		if(then.getTime()-lastts.getTime()<2400000&&uts.getTime()-nz.getTime()<1200000){
 			
 			
@@ -1028,7 +1050,7 @@ public class Calculator {
 
 			
 			int ufrontex = fsenka-maxu-subback;
-			if(name.equals("紫はバカ233")){
+			if(name.equals("litre")){
 				System.out.println(name);
 				System.out.println(senkaF);
 				System.out.println(uexp);
