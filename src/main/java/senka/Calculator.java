@@ -281,8 +281,8 @@ public class Calculator {
 			
 				String[] ida = idstr.split(",");
 				if(ida.length==1){
-//					if(ts==0&&senka>maxadd+40){
-					if(true){
+					if(ts==0&&senka>maxadd+40){
+//					if(true){
 						if(senkaData.get("_id").toString().equals("litre")){
 							System.out.println("litre"+lmfirst+":"+lmlast);
 						}
