@@ -164,6 +164,12 @@ public class Api extends HttpServlet
 			ret = Calculator.calculator(data);
 			resp.setContentLength(ret.getBytes("utf-8").length);
 		}
+		if(path.equals("ca2")){
+			resp.setCharacterEncoding("utf-8");
+			resp.setHeader("Access-Control-Allow-Origin", "*");
+			ret = "ok";
+			resp.setContentLength(ret.getBytes("utf-8").length);
+		}
 		if(path.equals("calz")){
 			int month = new Date().getMonth()-1;
 			if(month==-1){
