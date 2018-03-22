@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -167,6 +168,14 @@ public class Api extends HttpServlet
 		if(path.equals("ca2")){
 			resp.setCharacterEncoding("utf-8");
 			resp.setHeader("Access-Control-Allow-Origin", "*");
+			ret = Calculator.calculator(data);
+			try {
+				FileWriter fw = new FileWriter("senka.txt");
+				fw.write(ret.toString());
+				fw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			ret = "ok";
 			resp.setContentLength(ret.getBytes("utf-8").length);
 		}

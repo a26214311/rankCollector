@@ -89,13 +89,7 @@ public class Calculator {
 
 	public static JSONObject calculateRank(int server,int targetMonth){
 		JSONObject ret = calculateRank_D(server,targetMonth);
-		try {
-			FileWriter fw = new FileWriter("senka.txt");
-			fw.write(ret.toString());
-			fw.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 		return ret;
 	}
 	
