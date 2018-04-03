@@ -28,7 +28,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateRank_D(8, new Date().getMonth());
+			calculateZ(8, 2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1220,7 +1220,7 @@ public class Calculator {
 							}
 							int sub = (lastexp-baseexp)*7/10000;
 							
-							if(name.equals("大丈夫")){
+							if(name.equals("かのK")){
 								System.out.println("name1:"+name);
 								System.out.println(fsenkats);
 								System.out.println(firstExpData);

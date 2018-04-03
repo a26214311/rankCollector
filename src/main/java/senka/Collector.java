@@ -165,6 +165,9 @@ public class Collector {
 	
 	
 	public static void collectByLastSenka(String token,int server){
+		if(server==20){
+			return;
+		}
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
 		DBCursor dbc = null;
 		Date now = new Date();
