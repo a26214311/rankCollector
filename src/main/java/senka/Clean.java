@@ -12,9 +12,13 @@ import com.mongodb.DBObject;
 public class Clean {
 	public static void main(String[] args){
 		System.out.println(111);
-		DBCollection cl_senka = Util.db.getCollection("cl_senka_19");
-		DBObject user = cl_senka.findOne(new BasicDBObject("name","片翼の堕天使"));
-		cleanExpIfNecessary(cl_senka,user);
+		Date d = new Date();
+		d.setMonth(0);
+		d.setDate(1);
+		d.setHours(1);
+		d.setMinutes(5);
+		System.out.println(d);
+		System.out.println(isKeyExpTs(d));
 	}
 	
 	public static void cleanExpIfNecessary(DBCollection cl_senka,DBObject userData){
@@ -54,7 +58,6 @@ public class Clean {
 		int hour = ts.getHours();
 		int min = ts.getMinutes();
 		if(date==monthOfDay[mon]){
-			
 			if((hour==8&&min>30)||(hour==9&&min<30)){
 				return true;
 			}
@@ -66,4 +69,6 @@ public class Clean {
 		}
 		return false;
 	}
+	
+
 }

@@ -32,7 +32,7 @@ public class Collector {
 		long t1 = new Date().getTime();
 		try {
 //			System.out.println(Collector.collectById(19119783, "ccfd764d5e639a567a4157ef01210a61998918f7", 19));
-			collectByLastSenka("b5913e972dcc5ddc20396e908afcbec5e9dd6e8c", 20);
+			collectById(8081106, "2805578c33a6f5ee81609d8ce77d32b9257d3c34", 8);
 //			System.out.println(collectById(19161718, "162ebccc78cb0c33676c3b107502515ffd013da5", 19));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,6 +120,7 @@ public class Collector {
 			int resultCode = jd.getInt("api_result");
 			if(resultCode==1){
 				JSONObject data = jd.getJSONObject("api_data");
+				System.out.println(data);
 				save(data,server+"");
 				return data;
 			}else{

@@ -20,7 +20,7 @@ public class Rank {
 	public static void main(String[] args) {
 		System.out.println("start1");
 		try {
-			Rank.runRankTask("8191b0e1a4ff04bd73a21be61991dbb70b679f2b", 20, TimerTask.id20);
+			getRank();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -31,7 +31,7 @@ public class Rank {
 	public static void getRank()throws Exception{
 		String path = "/kcsapi/api_req_ranking/mxltvkpyuklh";
 		int page=1;
-		String token = "b52888440ff00b091aacdf570f6f581464336656";
+		String token = "7bbcbf0e7a62591b58ed89d4d4f5229c614559f9";
 		int server = 8;
 		int userid = 8156938;
 		String ranking = generateRankKey(userid);

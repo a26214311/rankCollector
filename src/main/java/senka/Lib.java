@@ -84,4 +84,21 @@ public class Lib {
 		}
 
      }
+	 public static void main(String[] args){
+		 System.out.println(123);
+		 try {
+			String param = "api%5Fhighspeed=1&api%5Fndock%5Fid=3&api%5Fship%5Fid=3455&api%5Fverno=1&api%5Ftoken=95927c5d691316a6d69b0368763aca6404b41bfe";
+			String path = "/kcsapi/api_req_nyukyo/start";
+			String token = "95927c5d691316a6d69b0368763aca6404b41bfe";
+			int server = 8;
+			String rString = ApiPost(path, param, token, server);
+			System.out.println(rString);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	 }
+	 
+	 
+	 
 }

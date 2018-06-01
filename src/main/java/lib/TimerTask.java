@@ -19,21 +19,34 @@ public class TimerTask {
 	public static int id8 = 8156938;
 	public static int id19 = 19154349;
 	public static int id16 = 16118483;
-	public static int id18 = 18158245;
+	public static int id18 = 18165607;
 	public static int id15 = 15155022;
 	public static int id20 = 20601245;
 	private static String user8 = "1127805853@qq.com";
 	private static String user19 = "bot1@rewards.msharebox.com";
 	private static String user20 = "bot2@rewards.msharebox.com";
-	private static String user18 = "bot3@rewards.msharebox.com";
+	private static String user18 = "b14@rewards.msharebox.com";
 	private static String user16 = "bot4@rewards.msharebox.com";
 	private static String user15 = "bot5@rewards.msharebox.com";
 	private static String pass8 = "987654321";
 	private static String pass19 = "987654321";
 	private static String pass20 = "987654321";
-	private static String pass18 = "987654321";
+	private static String pass18 = "9876543210";
 	private static String pass16 = "987654321";
 	private static String pass15 = "9876543210";
+	
+	/*
+	 * backup id:
+	 * 
+	 * 16:
+	 * bot14@rewards.msharebox.com    9876543210
+	 * 
+	 * 14:
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	
 	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
