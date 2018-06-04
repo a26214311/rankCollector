@@ -58,7 +58,7 @@ public class ResultSenka {
 			dbc = cl_result_senka.find(query);
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
-				System.out.println(dbObject);
+				ja.put(dbObject);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
