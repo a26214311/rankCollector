@@ -27,7 +27,7 @@ public class Login {
 	public static void main(String[] args){
 		System.out.println("start");
 		try {
-			login("bot3@rewards.msharebox.com", "987654321");
+			login("b14@rewards.msharebox.com", "9876543210");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

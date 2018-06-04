@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import lib.TimerTask;
 import senka.Calculator;
 import senka.Collector;
+import senka.ResultSenka;
 import senka.Search;
 
 import java.io.File;
@@ -177,6 +178,13 @@ public class Api extends HttpServlet
 				e.printStackTrace();
 			}
 			ret = "ok";
+			resp.setContentLength(ret.getBytes("utf-8").length);
+		}
+		if(path.equals("rs")){
+			resp.setCharacterEncoding("utf-8");
+			resp.setHeader("Access-Control-Allow-Origin", "*");
+			ret = ResultSenka.handleResultApi(data);
+			resp.setContentLength(ret.getBytes("utf-8").length);
 			resp.setContentLength(ret.getBytes("utf-8").length);
 		}
 		if(path.equals("calz")){

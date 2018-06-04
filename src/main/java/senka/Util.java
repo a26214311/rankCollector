@@ -10,6 +10,7 @@ import com.mongodb.client.MongoDatabase;
 public class Util {
 	public static DB db=null;
 	public static MongoDatabase database = null;
+	public static DB dbr=null;
 	static{
 		init();
 	}
@@ -19,6 +20,7 @@ public class Util {
 			MongoClient mongoClient = new MongoClient(new MongoClientURI(mongouri));
 			db = mongoClient.getDB("db_senka");
 			database = mongoClient.getDatabase("db_senka");
+			dbr = mongoClient.getDB("db_bot");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
