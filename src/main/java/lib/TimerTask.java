@@ -22,18 +22,21 @@ public class TimerTask {
 	public static int id18 = 18165607;
 	public static int id15 = 15155022;
 	public static int id20 = 20601245;
+	public static int id14 = 14161524;
 	private static String user8 = "1127805853@qq.com";
 	private static String user19 = "bot1@rewards.msharebox.com";
 	private static String user20 = "bot2@rewards.msharebox.com";
 	private static String user18 = "b14@rewards.msharebox.com";
 	private static String user16 = "bot4@rewards.msharebox.com";
 	private static String user15 = "bot5@rewards.msharebox.com";
+	private static String user14 = "b04@rewards.msharebox.com";
 	private static String pass8 = "987654321";
 	private static String pass19 = "987654321";
 	private static String pass20 = "987654321";
 	private static String pass18 = "9876543210";
 	private static String pass16 = "987654321";
 	private static String pass15 = "9876543210";
+	private static String pass14 = "9876543210";
 	
 	/*
 	 * backup id:
@@ -480,6 +483,8 @@ public class TimerTask {
 			token=Login.login(user16,pass16);
 		}else if(server==15){
 			token=Login.login(user15,pass15);
+		}else if(server==14){
+			token=Login.login(user14,pass14);
 		}
 		return token;
 	}
