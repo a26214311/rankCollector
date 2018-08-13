@@ -1277,7 +1277,7 @@ public class Calculator {
 							
 							if(zcleared){
 								System.out.println("z cleared:"+ids);
-								//cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
+								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
 							
 							
