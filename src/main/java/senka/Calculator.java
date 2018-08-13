@@ -28,7 +28,7 @@ public class Calculator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			calculateZ(8, 2);
+			calculateZ(8, 6);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1112,7 +1112,10 @@ public class Calculator {
 				}
 			}
 			System.out.println(minmap);
-			int fmin = minmap.get(0);
+			int fmin=0;
+			if(minmap.containsKey(0)){
+				fmin = minmap.get(0);
+			}
 			while (dbc.hasNext()) {
 				DBObject dbObject = (DBObject) dbc.next();
 				String key = "d"+month;
@@ -1186,7 +1189,7 @@ public class Calculator {
 							int lastsenka = lastPair.getInt("senka");
 							int subsenkaA = lastsenka-firstsenka;
 							ex = subsenkaA-subexp*7/10000;
-							if(ex>1040){
+							if(ex>1237){
 								zcleared = true;
 							}
 							
@@ -1241,7 +1244,7 @@ public class Calculator {
 								System.out.println(name);
 							}
 							if(fsenkats>0){
-								int max =sub+1380+fmin;
+								int max =sub+1580+fmin;
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
 
@@ -1249,7 +1252,7 @@ public class Calculator {
 //									System.out.println(name+":"+maxuex+","+sub+","+lastsenka+","+baseExpData+","+lastPair);
 								}
 							}else{
-								int max =sub+1380+fsenka;
+								int max =sub+1580+fsenka;
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
 									if(zcleared==false){
@@ -1261,12 +1264,12 @@ public class Calculator {
 							
 							if(firstts.getTime()>0){
 								int subsenka = (lastexp-firstexp)*7/10000;
-								int max =  fsenka+subsenka+1380;
+								int max =  fsenka+subsenka+1580;
 								int maxuex = max - lastsenka;
 								if(maxuex<335){
 									if(zcleared==false){
 //										zcleared=true;
-										cl_senka.update(user, new BasicDBObject("$unset",new BasicDBObject("z",true)));
+										//cl_senka.update(user, new BasicDBObject("$unset",new BasicDBObject("z",true)));
 										//System.out.println(name+firstts+","+firstPair+","+senkaF+","+subsenka+","+lastPair+maxuex);
 									}
 								}
@@ -1274,7 +1277,7 @@ public class Calculator {
 							
 							if(zcleared){
 								System.out.println("z cleared:"+ids);
-								cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
+								//cl_senka.update(user, new BasicDBObject("$set",new BasicDBObject("z",month)));
 							}
 							
 							
