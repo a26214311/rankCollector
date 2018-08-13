@@ -193,6 +193,7 @@ public class Api extends HttpServlet
 				month=month+12;
 			}
 			Calculator.calculateZ(8,month);
+			Calculator.calculateZ(14,month);
 			Calculator.calculateZ(15,month);
 			Calculator.calculateZ(16,month);
 			Calculator.calculateZ(18,month);
