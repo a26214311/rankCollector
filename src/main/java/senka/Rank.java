@@ -31,7 +31,7 @@ public class Rank {
 	public static void getRank()throws Exception{
 		String path = "/kcsapi/api_req_ranking/mxltvkpyuklh";
 		int page=1;
-		String token = "97a00114145aebffbcbc87c5a3e87c22f09c625e";
+		String token = "8edbad0cf84ae3fe9b96828c86c2ebd57c4c7ff4";
 		int server = 8;
 		int userid = 8156938;
 		String ranking = generateRankKey(userid);
@@ -235,7 +235,7 @@ public class Rank {
 	private static long[] Il = new long[]{6496, 4829, 7323, 2139, 2361, 4132653, 1033183, 2137, 6013, 7597, 13, 5122, 3791, 10, 7877, 3732, 1000, 1875979};
 	//private static long[] Il = new long[]{2979, 2906, 2043, 2139, 9521, 4132653, 1033183, 2744, 8632, 8175, 13, 4564, 3791, 10, 3830, 4887, 1000, 1875979};
 	private static int[] I1 = new int[]{3, 7, 8, 0, 11, 4, 2, 9, 15, 14};
-	private static String generateRankKey(int userid){
+	private static String generateRankKey1(int userid){
 		String ret = "";
 		long s3 = 32768L+rd.nextInt(32767);
 		long frontuserid = Long.valueOf((userid+"").substring(0, 4));
@@ -245,6 +245,38 @@ public class Rank {
 		String f = f1+f2+f3;
 		ret = rd.nextInt(10)+f.substring(0, 7)+rd.nextInt(10)+f.substring(7, 16)+rd.nextInt(10)+f.substring(16)+s3;
 		return ret;
+	}
+	
+	private static long[] PORT_API_SEED = new long[]{2024, 2887, 9142, 5455, 2801, 4507, 4694, 1823, 4557, 5154};
+	
+	private static long getSeed(int t){
+		    return PORT_API_SEED[t % 10];
+		}
+	
+
+	private static String generateRankKey(int userid){
+		int t=userid;
+		    long e = getSeed(t);
+		    long i = new Date().getTime()/ 1000;
+		    long n = 1000 * (rd.nextInt(9) + 1) + t % 1000;
+		    long o = rd.nextInt(8999) + 1000;
+		    long r = rd.nextInt(32767) + 32768;
+		    long s = rd.nextInt(10);
+		    long a = rd.nextInt(10);
+		    long _ = rd.nextInt(10);
+		    long u = Integer.valueOf((t+"").substring(0, 4));
+		    long l = (4132653 + r) * (u + 1000) - i + (1875979 + 9 * r);
+		    long c = l - t;
+		    long h = c * e;
+		    String p = ""+n + ""+h+"" + o;
+		    p = s+"" + p;
+		    String d = p.substring(0, 8);
+		    String f = p.substring(8);
+		    p = d + a + f;
+		    d = p.substring(0, 18);
+		    f = p.substring(18);
+		    p = d + _ + f;
+		    return p + r;
 	}
 
 }
