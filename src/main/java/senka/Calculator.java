@@ -616,6 +616,7 @@ public class Calculator {
 			
 			JSONObject lastpair=new JSONObject();
 			JSONArray fexlist = new JSONArray();
+			JSONArray hexlist = new JSONArray();
 			for(int i=0;i<pairlist.size();i++){
 				JSONObject pair = pairlist.get(i);
 				int senka = pair.getInt("senka");
@@ -633,6 +634,10 @@ public class Calculator {
 					}
 					if(ex>70){
 						fexlist.put(ex);
+						Date mts = (Date)pair.get("ts");
+						if(mts.getTime()<1534402197547L){
+							hexlist.put(ex);
+						}
 					}
 				}
 			}
@@ -663,6 +668,7 @@ public class Calculator {
 			j.put("name",name);
 			j.put("ex", ex);
 			j.put("exlist", fexlist);
+			j.put("hhex", hexlist);
 			j.put("exfrom", firstpairts.getTime());
 			j.put("exto", latestpairts.getTime());
 			return j;
