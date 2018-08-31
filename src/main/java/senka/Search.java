@@ -152,7 +152,7 @@ public class Search {
 		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 		System.out.println(tail);
 		String addsenka = "("+tail.getInt("no")+"位)   "+tail.getInt("senka")+"+"+Math.round((nowexp-tail.getInt("exp"))/1000.0*7.0)/10.0
-				+"   ("+sdf.format(tailts)+"----"+sdf.format(now)+")\n";
+				+"="+(tail.getInt("senka")+Math.round((nowexp-tail.getInt("exp"))/1000.0*7.0)/10.0)+"   ("+sdf.format(tailts)+"----"+sdf.format(now)+")\n";
 		Date frontts = (Date)front.get("ts");
 		
 		if(tailts.getTime()-frontts.getTime()>40000000){
