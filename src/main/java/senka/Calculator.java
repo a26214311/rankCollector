@@ -374,6 +374,14 @@ public class Calculator {
 						pointer1++;
 					}else{
 						int expno = Util.getRankDateNo(new Date(expts.getTime()+3600000*2));
+						if(name.equals("张斌")){
+							System.out.println("111111111111111111");
+							System.out.println(expno);
+							System.out.println(expts.getYear());
+							System.out.println(expts.getMonth());
+							System.out.println(now.getYear());
+							System.out.println(now.getMonth());
+						}
 						int senkano = Integer.valueOf(senka.get("ts").toString());
 						if(expts.getYear()*12+expts.getMonth()<now.getYear()*12+now.getMonth()){
 							pointer1++;
