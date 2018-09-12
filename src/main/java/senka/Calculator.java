@@ -1324,7 +1324,7 @@ public class Calculator {
 		if(dat.getTime()>1524484623698L&&dat.getTime()<1524484623698L+3600000){
 			return true;	
 		}
-		Date  n1 = new Date();
+		Date  n1 = new Date(dat.getTime());
 		int left = (int)(43200000-(n1.getTime()-18000000)%43200000)/1000;
 		if(left<1200||left>43200-1200){
 			return true;
