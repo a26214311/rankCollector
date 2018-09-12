@@ -68,13 +68,7 @@ public class Api extends HttpServlet
 				}
 				System.out.println("==============\n");
 				String ret;
-				if((path.equals("seek")&&req.getRemoteAddr().equals("113.251.37.232"))||path.equals("forbidtest")){
-					response.setCharacterEncoding("utf-8");
-					response.setContentType("text/plain");
-					ret = "快告诉我你是谁！！";
-				}else{
-					ret = handleData(path, data, req, response);
-				}
+				ret = handleData(path, data, req, response);
 				OutputStream output = null;
 				output = response.getOutputStream();
 				IOUtils.write(ret.getBytes("utf-8"), output);
