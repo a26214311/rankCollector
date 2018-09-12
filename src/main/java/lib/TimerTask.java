@@ -54,7 +54,7 @@ public class TimerTask {
 	private static int[] monthOfDay = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
 
 	static{
-		Date  now = new Date(new Date().getTime()+(new Date().getTimezoneOffset()+480)*60000);
+		Date  now = new Date();
 		int left1 = (int)(43200000-(now.getTime()-18002000)%43200000)/1000;
 		System.out.println("--------------------------------");
 		System.out.println("will get exp after "+left1/60+"minutes");
