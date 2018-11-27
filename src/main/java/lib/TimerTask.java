@@ -30,7 +30,7 @@ public class TimerTask {
 	private static String user16 = "bot4@rewards.msharebox.com";
 	private static String user15 = "bot5@rewards.msharebox.com";
 	private static String user14 = "b04@rewards.msharebox.com";
-	private static String pass8 = "987654321";
+	private static String pass8 = "9876543210";
 	private static String pass19 = "987654321";
 	private static String pass20 = "987654321";
 	private static String pass18 = "9876543210";
@@ -172,6 +172,26 @@ public class TimerTask {
 		}).start();		
 		
 		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int serverid = 8;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
+				}
+			}
+		}).start();		
+		
 
 	
 	}
@@ -186,19 +206,42 @@ public class TimerTask {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				nowworking.put(18, 1);
+				int serverid = 18;
+				nowworking.put(serverid, 1);
 				try {
-					String token18 = getToken(18);
-					if(token18.length()>2){
+					String token = getToken(serverid);
+					if(token.length()>2){
 						working++;
-						Rank.runRankTask(token18, 18, id18);
-						Collector.collectByLastSenka(token18, 18);
+						Rank.runRankTask(token, serverid, id18);
+						Collector.collectByLastSenka(token, serverid);
 						working--;
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}finally{
-					nowworking.remove(18);
+					nowworking.remove(serverid);
+				}
+			}
+		}).start();
+		
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int serverid = 8;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Rank.runRankTask(token, serverid, id8);
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					nowworking.remove(serverid);
 				}
 			}
 		}).start();

@@ -31,7 +31,7 @@ public class Rank {
 	public static void getRank()throws Exception{
 		String path = "/kcsapi/api_req_ranking/mxltvkpyuklh";
 		int page=1;
-		String token = "8edbad0cf84ae3fe9b96828c86c2ebd57c4c7ff4";
+		String token = "4087e4d577c505789ef4e600e20237ee08255e41";
 		int server = 8;
 		int userid = 8156938;
 		String ranking = generateRankKey(userid);
@@ -247,7 +247,7 @@ public class Rank {
 		return ret;
 	}
 	
-	private static long[] PORT_API_SEED = new long[]{4583,3631,6192,8185,7092,2698,4035,6921,6596,2989};
+	private static long[] PORT_API_SEED = new long[]{4581,3094,2263,3872,8100,3701,5947,6929,3185,7753};
 	
 	private static long getSeed(int t){
 		    return PORT_API_SEED[t % 10];
