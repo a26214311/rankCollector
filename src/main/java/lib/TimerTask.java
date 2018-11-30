@@ -34,7 +34,7 @@ public class TimerTask {
 	private static String pass19 = "987654321";
 	private static String pass20 = "987654321";
 	private static String pass18 = "9876543210";
-	private static String pass16 = "987654321";
+	private static String pass16 = "9876543210";
 	private static String pass15 = "9876543210";
 	private static String pass14 = "9876543210";
 	
@@ -212,6 +212,26 @@ public class TimerTask {
 			}
 		}).start();		
 	
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int serverid = 16;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					nowworking.remove(serverid);
+				}
+			}
+		}).start();		
 	}
 	
 	
@@ -285,7 +305,26 @@ public class TimerTask {
 			}
 		}).start();
 		
-	
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				int serverid = 16;
+				nowworking.put(serverid, 1);
+				try {
+					String token = getToken(serverid);
+					if(token.length()>2){
+						working++;
+						Rank.runRankTask(token, serverid, id16);
+						Collector.collectByLastSenka(token, serverid);
+						working--;
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally{
+					nowworking.remove(serverid);
+				}
+			}
+		}).start();
 	}
 	
 	
