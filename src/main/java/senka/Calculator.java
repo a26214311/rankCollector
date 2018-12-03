@@ -487,7 +487,7 @@ public class Calculator {
 						if(exto<pairexto.getTime()){
 							exto = pairexto.getTime();
 						}
-						retj.put("frontex", frontex);
+						//retj.put("frontex", frontex);
 						retj.put("fsenka", fsenka);
 						retj.put("fsenkats", fsenkats);
 						retj.put("lsenka", senka);
@@ -508,7 +508,7 @@ public class Calculator {
 					}else{
 						JSONObject ret = new JSONObject();
 						ret.put("type", 3);
-						ret.put("frontex", frontex);
+						//ret.put("frontex", frontex);
 						ret.put("fsenka", fsenka);
 						ret.put("fsenkats", fsenkats);
 						ret.put("name", name);

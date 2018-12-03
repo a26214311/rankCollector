@@ -20,7 +20,6 @@ public class Rank {
 	public static void main(String[] args) {
 		System.out.println("start1");
 		try {
-			getRank();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
