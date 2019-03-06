@@ -247,7 +247,7 @@ public class Rank {
 		return ret;
 	}
 	
-	private static long[] PORT_API_SEED = new long[]{7309,7396,3023,8342,9125,3860,7366,4909,2925,6561};
+	private static long[] PORT_API_SEED = new long[]{4774,7148,2846,8073,3688,5468,2940,5299,9712,7493};
 	
 	private static long getSeed(int t){
 		    return PORT_API_SEED[t % 10];
