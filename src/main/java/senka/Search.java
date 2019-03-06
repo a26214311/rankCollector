@@ -170,9 +170,6 @@ public class Search {
 				deckinfo = deckinfo + "lv."+lv+" "+shipid2name[shipid]+";";
 			}
 		}
-		if(id.equals("8020460")){
-			deckinfo="hidden";
-		}
 		pointer1 = 0;
 		pointer2 = 0;
 		JSONArray ja = new JSONArray();
