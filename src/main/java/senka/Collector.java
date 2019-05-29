@@ -134,6 +134,9 @@ public class Collector {
 	
 	private static Random rd = new Random();
 	public static void randomCollect(String token,int server,int num){
+		if(server!=8){
+			return;
+		}
 		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
 		long count = cl_senka.count();
 		if(server==8){
