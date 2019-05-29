@@ -134,7 +134,7 @@ public class Collector {
 	
 	private static Random rd = new Random();
 	public static void randomCollect(String token,int server,int num){
-		if(server!=8){
+		if(server!=8&&server!=18){
 			return;
 		}
 		DBCollection cl_senka = Util.db.getCollection("cl_senka_"+server);
@@ -169,7 +169,7 @@ public class Collector {
 	
 	
 	public static void collectByLastSenka(String token,int server){
-		if(server!=8){
+		if(server!=8&&server!=18){
 			return;
 		}
 		DBCollection cl_n_senka = Util.db.getCollection("cl_n_senka_"+server);
