@@ -241,26 +241,26 @@ public class TimerTask {
 		working=0;
 
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				int serverid = 18;
-				nowworking.put(serverid, 1);
-				try {
-					String token = getToken(serverid);
-					if(token.length()>2){
-						working++;
-						Rank.runRankTask(token, serverid, id18);
-						Collector.collectByLastSenka(token, serverid);
-						working--;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					nowworking.remove(serverid);
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				int serverid = 18;
+//				nowworking.put(serverid, 1);
+//				try {
+//					String token = getToken(serverid);
+//					if(token.length()>2){
+//						working++;
+//						Rank.runRankTask(token, serverid, id18);
+//						Collector.collectByLastSenka(token, serverid);
+//						working--;
+//					}
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}finally{
+//					nowworking.remove(serverid);
+//				}
+//			}
+//		}).start();
 		
 		
 		new Thread(new Runnable() {
@@ -284,47 +284,47 @@ public class TimerTask {
 			}
 		}).start();
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				int serverid = 14;
-				nowworking.put(serverid, 1);
-				try {
-					String token = getToken(serverid);
-					if(token.length()>2){
-						working++;
-						Rank.runRankTask(token, serverid, id14);
-						Collector.collectByLastSenka(token, serverid);
-						working--;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					nowworking.remove(serverid);
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				int serverid = 14;
+//				nowworking.put(serverid, 1);
+//				try {
+//					String token = getToken(serverid);
+//					if(token.length()>2){
+//						working++;
+//						Rank.runRankTask(token, serverid, id14);
+//						Collector.collectByLastSenka(token, serverid);
+//						working--;
+//					}
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}finally{
+//					nowworking.remove(serverid);
+//				}
+//			}
+//		}).start();
 		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				int serverid = 16;
-				nowworking.put(serverid, 1);
-				try {
-					String token = getToken(serverid);
-					if(token.length()>2){
-						working++;
-						Rank.runRankTask(token, serverid, id16);
-						Collector.collectByLastSenka(token, serverid);
-						working--;
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}finally{
-					nowworking.remove(serverid);
-				}
-			}
-		}).start();
+//		new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				int serverid = 16;
+//				nowworking.put(serverid, 1);
+//				try {
+//					String token = getToken(serverid);
+//					if(token.length()>2){
+//						working++;
+//						Rank.runRankTask(token, serverid, id16);
+//						Collector.collectByLastSenka(token, serverid);
+//						working--;
+//					}
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}finally{
+//					nowworking.remove(serverid);
+//				}
+//			}
+//		}).start();
 	}
 	
 	
