@@ -8,7 +8,7 @@
   <name>test-server Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <jetty.version>9.4.11.v20180605</jetty.version>
+    <jetty.version>10.0.10</jetty.version>
   </properties>
   <dependencies>
     <dependency>
